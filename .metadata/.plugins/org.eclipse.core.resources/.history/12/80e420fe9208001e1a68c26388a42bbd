@@ -1,0 +1,29 @@
+package arreglos;
+
+import java.util.ArrayList;
+
+import clases.ClasePiqueo;
+
+public class Piqueos {
+
+	
+	private ArrayList <ClasePiqueo> piqueo;
+
+	public Piqueos() {
+		
+		piqueo = new ArrayList <ClasePiqueo> ();
+	}
+	
+	public void adicionar(ClasePiqueo x) {
+		
+		piqueo.add(x);
+	}
+	
+	public int tamano() {
+		return piqueo.size();
+	}
+	
+	public ClasePiqueo obtener(int i) {
+		return piqueo.get(i);
+	}
+}
