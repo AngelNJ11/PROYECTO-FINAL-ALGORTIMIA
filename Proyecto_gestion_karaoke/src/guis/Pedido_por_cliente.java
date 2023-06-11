@@ -1,0 +1,77 @@
+package guis;
+
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JComboBox;
+
+public class Pedido_por_cliente extends JDialog {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JTable table;
+	private JLabel lblIdCliente;
+	private JTextField txtIdCliente;
+	private JComboBox<String> comboBox;
+	private JScrollPane scrollPane;
+	private JButton btnNewButton;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			Pedido_por_cliente dialog = new Pedido_por_cliente();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Pedido_por_cliente() {
+		setBounds(100, 100, 730, 410);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		
+		lblIdCliente = new JLabel("Id Cliente");
+		lblIdCliente.setBounds(10, 11, 46, 14);
+		contentPanel.add(lblIdCliente);
+		
+		txtIdCliente = new JTextField();
+		txtIdCliente.setEditable(false);
+		txtIdCliente.setBounds(80, 8, 110, 20);
+		contentPanel.add(txtIdCliente);
+		txtIdCliente.setColumns(10);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 100, 694, 260);
+		contentPanel.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		
+		btnNewButton = new JButton("Aceptar");
+		btnNewButton.setBounds(615, 7, 89, 23);
+		contentPanel.add(btnNewButton);
+		
+		comboBox = new JComboBox<String>();
+		comboBox.setBounds(200, 8, 110, 20);
+		contentPanel.add(comboBox);
+	}
+
+}
