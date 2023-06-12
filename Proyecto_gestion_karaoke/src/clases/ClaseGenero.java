@@ -1,12 +1,10 @@
 package clases;
 
-public class ClaseGenero {
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-	
-	
-	
-	
-	private  String idGenero = "GEN01";
+public class ClaseGenero {
+	private  String idGenero;
 	private  String descripcion;
 	private  int epoca = 2012;
 	private  boolean estado = true;
@@ -16,9 +14,9 @@ public class ClaseGenero {
 	public ClaseGenero() {
 		
 	}
-
+	
 	public ClaseGenero(String idGenero, String descripcion, int epoca, boolean estado) {
-		super();
+
 		this.idGenero = idGenero;
 		this.descripcion = descripcion;
 		this.epoca = epoca;
@@ -56,9 +54,32 @@ public class ClaseGenero {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+
+	public String correlativoGenero(int codigo){
+		String cod = "GEN" + String.format("%03d", codigo);
+		return cod;
+	}
 	
+	public String ObsEstado(){	
+		if (estado) {
+			return "Habilitado";	
+		}
+		else{
+			return "Inhabilitado";
+		}
+	}
 	
+	public static SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/YYYY");
 	
+	public void fechaEpoca(){
+		Date fechaActual = new Date();
+		System.out.print(DateString(fechaActual));
+	}
+	
+	public static String DateString(Date fecha){
+		String fechaCadena = sdf.format(fecha);
+		return fechaCadena;
+	}
 	
 
 }

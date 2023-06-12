@@ -48,6 +48,7 @@ public class Menu extends JFrame implements ActionListener {
 				try {
 					Menu frame = new Menu();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -65,10 +66,11 @@ public class Menu extends JFrame implements ActionListener {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		mnArchivo = new JMenu("Archivo");
+		mnArchivo = new JMenu("ARCHIVO");
 		menuBar.add(mnArchivo);
 		
 		mntmSalir = new JMenuItem("Salir");
+		mntmSalir.addActionListener(this);
 		mnArchivo.add(mntmSalir);
 		
 		mnMantenimiento = new JMenu("MANTENIMIENTO");
@@ -191,6 +193,10 @@ public class Menu extends JFrame implements ActionListener {
 	    	actionPerformedConsumoRegistrado(e);
 	    }
 	    
+	    if(e.getSource() == mntmSalir){
+	    	actionPerformedSalir(e);
+	    }
+	    
 	}
 	
 	public void actionPerformedUsuario(ActionEvent e) {
@@ -264,7 +270,9 @@ public class Menu extends JFrame implements ActionListener {
 	}
 	
 	
-	
+	public void actionPerformedSalir(ActionEvent e) {
+		System.exit(0);
+	}
 	
 	
 	

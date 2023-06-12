@@ -2,86 +2,30 @@ package clases;
 
 import java.util.Date;
 
+import arreglos.ArreBebidas;
+import arreglos.ArreCanciones;
+import arreglos.ArrePiqueos;
+
 
 
 public class ClasePedidos {
 
 	
-	ClaseUsuarios usuario = new ClaseUsuarios();
-	ClaseCliente cliente = new ClaseCliente();
-	ClaseBebida bebidas = new ClaseBebida();
-	ClasePiqueo piqueos = new ClasePiqueo();
+	ClaseUsuarios idusuario = new ClaseUsuarios();
+	ClaseCliente idcliente = new ClaseCliente();
+	ArreCanciones canciones = new ArreCanciones();
+	ArreBebidas bebidas = new ArreBebidas();
+	ArrePiqueos piqueos = new ArrePiqueos();
+	
+	private String idPedido;
+	private Date fechaPedido;
+	private int idUsuario = idusuario.getIdUsuario();
+	private String idCliente = idcliente.getIdCliente();
+	private int estado;
+
+
+
 
 	
-					//PED0001
-	private Date fechaPedido;
-	private  String idPiqueo;
-	private final int idUsuario = usuario.getIdUsuario();
-	private final String idCliente = cliente.getIdCliente();
-						 //0 = Pendiente  1 = Atendido  2 = Anulado
-	private  int estado = 0;
-
-
-
-
-	public ClasePedidos() {
-
-	}
-
-
-
-
-	public Date getFechaPedido() {
-		return fechaPedido;
-	}
-
-
-
-
-	public void setFechaPedido(Date fechaPedido) {
-		this.fechaPedido = fechaPedido;
-	}
-
-
-
-
-	public String getIdPiqueo() {
-		return idPiqueo;
-	}
-
-
-
-
-	public void setIdPiqueo(String idPiqueo) {
-		this.idPiqueo = idPiqueo;
-	}
-
-
-
-
-	public int getIdUsuario() {
-		return idUsuario;
-	}
-
-
-
-
-	public String getIdCliente() {
-		return idCliente;
-	}
-
-
-
-
-	public int getEstado() {
-		return estado;
-	}
-
-
-
-
-	public void setEstado(int estado) {
-		this.estado = estado;
-	}
 	
 }
