@@ -157,7 +157,6 @@ public class Usuario extends JDialog implements ActionListener {
 		if (arg0.getSource() == bntListar) {
 			actionPerformedBtnNuevo(arg0);
 		}
-		
 	}
 
 	protected void actionPerformedBtnNuevo(ActionEvent arg0) {
