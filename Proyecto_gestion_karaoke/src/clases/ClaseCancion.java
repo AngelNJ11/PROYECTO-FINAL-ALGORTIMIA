@@ -3,10 +3,6 @@ package clases;
 import java.sql.Date;
 
 public class ClaseCancion {
-
-	
-	
-	
 					//CAN0001
 	private  String idCancion;
 	private  String nombre;
@@ -98,7 +94,19 @@ public class ClaseCancion {
 		return idArtista;
 	}
 	
+	public String correlativo(int codigo) {
+		String newPedido = "CAN" + String.format("%03d", codigo);
+		return newPedido;
+	}
 	
+	public String ObsEstado(int estado){	
+		switch (estado) {
+			case 1:
+				return "Habilitado";
+			default:
+				return "Inhabilitado";
+		}
+	}
 	
 	
 	

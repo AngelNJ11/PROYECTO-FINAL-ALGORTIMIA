@@ -9,17 +9,14 @@ public class ClaseCliente {
 	private  String nombres;
 	private  String apellidoPaterno;
 	private  String apellidoMaternoo;
-	private  String dni = "72081959";
+	private  String dni;
 	private  Date fechaNacimiento;
 	private  Date fechaAfilacion;
-								  //S = soltero  C = Casado  V = Viudo 
-								  //D = Divorciado  N = No especificada 
-	private  String estadoCivil = "S";
-	private  String telefono = "968055619";
-
-			  				//0 = Estandar  1 = Bronce  2 = Plata
-							//3 = Oro  4 = Diamante
-	private int tipoDelCliente = 0;
+	//S = soltero  C = Casado  V = Viudo D = Divorciado  N = No especificada 
+	private  String estadoCivil;
+	private  String telefono;
+	//0 = Estandar  1 = Bronce  2 = Plata 3 = Oro  4 = Diamante
+	private int tipoDelCliente;
 	
 	
 	
@@ -125,9 +122,40 @@ public class ClaseCliente {
 		this.tipoDelCliente = tipoDelCliente;
 	}
 	
+	public String correlativo(int codigo) {
+		String newcodigos = "CLI" + String.format("%03d", codigo);
+		return newcodigos;
+	}
 	
-	
+	public String obsCivil(int estado){
+	    switch (estado) {
+	        case 1:
+	        	return "S";
+	        case 2:
+	            return  "C";
+	        case 3:
+	            return "V";
+	        case 4:
+	            return "D";
+	        default:
+	        	return "No especifica";
+	    }
+	}
+	public int obsTipoCli(int tipo){
 
+	    switch (tipo) {
+	        case 0:
+	            return 0;
+	        case 1:
+	        	return 1;
+	        case 2:
+	        	return 2;
+	        case 3:
+	        	return  3;
+	        default:
+	        	return 4;
+	    }
+	}
 	
 	
 }
