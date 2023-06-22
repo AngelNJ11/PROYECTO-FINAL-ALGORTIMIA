@@ -3,6 +3,7 @@ package arreglos;
 import java.util.ArrayList;
 
 import clases.ClaseCancion;
+import clases.ClasePiqueo;
 
 public class ArreCanciones {
 
@@ -25,6 +26,15 @@ public class ArreCanciones {
 	
 	public ClaseCancion obtener(int i) {
 		return cancion.get(i);
+	}
+	
+	public ClaseCancion buscacod(String codigo){
+		for(ClaseCancion cancion : cancion){
+			if(cancion.getIdCancion().equals(codigo)){
+				return cancion;
+			}
+		}
+		return null;
 	}
 	
 	

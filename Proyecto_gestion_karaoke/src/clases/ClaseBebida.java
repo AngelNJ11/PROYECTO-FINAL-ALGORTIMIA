@@ -6,14 +6,13 @@ public class ClaseBebida {
 	private int tipoBebida;
 	private String marca;
 	private double precio;
-	private boolean estado = true;
+	private boolean estado;
 
 	public ClaseBebida() {
 
 	}
 
 	public ClaseBebida(String idBebida, String nombre, int tipoBebida, String marca, double precio, boolean estado) {
-		super();
 		this.idBebida = idBebida;
 		this.nombre = nombre;
 		this.tipoBebida = tipoBebida;
@@ -70,8 +69,8 @@ public class ClaseBebida {
 		this.estado = estado;
 	}
 
-	public String correlativ(int pos) {
-		String bebid = "BEB" + String.format("%03d", pos);
+	public String correlativ(int codigo) {
+		String bebid = "BEB" + String.format("%02d", codigo);
 		return bebid;
 	}
 
@@ -88,7 +87,7 @@ public class ClaseBebida {
 		case 4:
 			return "Frutado";
 		case 5:
-			return "Combinación preparada";
+			return "Combinaciï¿½n preparada";
 		default:
 			return "Agua embotellada";
 		}

@@ -11,9 +11,11 @@ public class ClaseUsuarios {
 	private  String password;		
 	private  int turno;
 	
+	public ClaseUsuarios() {
+	}
+	
 	public ClaseUsuarios(int idUsuario, String nombres, String apellidoPaterno, String apellidoMaternoo, int tipoEmpleado,
 			String login, String password, int turno) {
-		super();
 		this.idUsuario = idUsuario;
 		this.nombres = nombres;
 		this.apellidoPaterno = apellidoPaterno;
@@ -24,9 +26,6 @@ public class ClaseUsuarios {
 		this.turno = turno;
 	}
 
-	public ClaseUsuarios() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public int getIdUsuario() {
 		return idUsuario;

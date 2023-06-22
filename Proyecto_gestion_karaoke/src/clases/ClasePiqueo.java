@@ -2,15 +2,13 @@ package clases;
 
 public class ClasePiqueo {
 
-	
-	
 					//PIQ001
 	private  String idPiqueo;
 	private  String nombre;
 							//0 = Frios  1 = Calientes  2 = Snaks
-	private  int tipoPiqueo = 0;
+	private  int tipoPiqueo;
 	private  double precio;
-	private  boolean estado = true;
+	private  boolean estado;
 
 
 
@@ -89,6 +87,30 @@ public class ClasePiqueo {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+	
+	public String tipoPiqueo(int tipo){
+		switch(tipo){
+		case 0:
+			return "Frios";
+		case 1:
+			return "Calientes";
+		case 2: 
+			return "Snaks";
+		default:
+			return null;
+		}
+	}
+	
+	public String obsEstado(){
+		if (estado) {
+			return "Habilitado";
+		}
+		else {
+			return "Inhabilitado";
+		}
+	}
+	
+
 
 
 }

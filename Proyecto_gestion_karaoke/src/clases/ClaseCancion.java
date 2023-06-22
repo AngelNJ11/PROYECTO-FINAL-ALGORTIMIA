@@ -16,7 +16,6 @@ public class ClaseCancion {
 
 	public ClaseCancion (String idArtista, String idCancion, String nombre, String album, Date fechaRegistro,
 			int numeroReproduciones, boolean estado) {
-		super();
 		this.idArtista = idArtista;
 		this.idCancion = idCancion;
 		this.nombre = nombre;

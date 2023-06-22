@@ -18,25 +18,31 @@ public class Bebidas extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final JPanel contentPanel = new JPanel();
-	private JTextField txtIdBebida;
-	private JTextField txtNombre;
-	private JTextField txtMarca;
-	private JTable table;
+	private JPanel contentPane;
 	private JLabel lblIdBebida;
-	private JLabel lblNombre;
-	private JLabel lblIdTipoBebida;
-	private JLabel lblMarca;
-	private JLabel lblPrecio;
-	private JScrollPane scrollPane;
+	private JLabel lblApellidoMaterno;
+	private JLabel lblApellidoPaterno;
+	private JLabel lblNombres;
+	private JLabel lblTipoDeEmpleado;
+	private JLabel lblLogin;
+	private JLabel lblPassword;
+	private JLabel lblTurno;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JComboBox<String> cmbEmpleado;
+	private JComboBox<String> cmbTurno;
+	private JButton btnBuscar;
 	private JButton btnAceptar;
-	private JComboBox<String> cbmEstado;
-	private JButton btnListar;
+	private JButton btnOpciones;
+	private JButton btnNuevo;
+	private JButton btnConsultar;
 	private JButton btnModificar;
 	private JButton btnEliminar;
-	private JLabel label;
-	private JTextField txtPrecio;
-	private JComboBox<String> cmbTipoBebida;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -56,89 +62,125 @@ public class Bebidas extends JDialog {
 	 */
 	public Bebidas() {
 		setTitle("Bebida");
-		setBounds(100, 100, 740, 404);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		setBounds(100, 100, 797, 450);
 		
-		lblIdBebida = new JLabel("Id Bebida:");
-		lblIdBebida.setBounds(10, 11, 134, 14);
-		contentPanel.add(lblIdBebida);
+		contentPane = new JPanel();
+		contentPane.setLayout(null);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPane, BorderLayout.CENTER);
 		
-		lblNombre = new JLabel("Nombre :");
-		lblNombre.setBounds(10, 36, 134, 14);
-		contentPanel.add(lblNombre);
+		lblIdBebida = new JLabel("ID Bebida :");
+		lblIdBebida.setBounds(10, 11, 120, 14);
+		contentPane.add(lblIdBebida);
 		
-		lblIdTipoBebida = new JLabel("Tipo Bebida:");
-		lblIdTipoBebida.setBounds(10, 61, 134, 14);
-		contentPanel.add(lblIdTipoBebida);
+		lblApellidoMaterno = new JLabel("Apellido Materno :");
+		lblApellidoMaterno.setBounds(10, 61, 120, 14);
+		contentPane.add(lblApellidoMaterno);
 		
-		lblMarca = new JLabel("Marca :");
-		lblMarca.setBounds(295, 11, 134, 14);
-		contentPanel.add(lblMarca);
+		lblApellidoPaterno = new JLabel("Apellido Paterno :");
+		lblApellidoPaterno.setBounds(10, 36, 120, 14);
+		contentPane.add(lblApellidoPaterno);
 		
-		lblPrecio = new JLabel("Precio:");
-		lblPrecio.setBounds(295, 36, 134, 14);
-		contentPanel.add(lblPrecio);
+		lblNombres = new JLabel("Nombres :");
+		lblNombres.setBounds(10, 86, 120, 14);
+		contentPane.add(lblNombres);
 		
-		txtIdBebida = new JTextField();
-		txtIdBebida.setEditable(false);
-		txtIdBebida.setBounds(117, 8, 168, 20);
-		contentPanel.add(txtIdBebida);
-		txtIdBebida.setColumns(10);
+		lblTipoDeEmpleado = new JLabel("Tipo de empleado :");
+		lblTipoDeEmpleado.setBounds(10, 111, 120, 14);
+		contentPane.add(lblTipoDeEmpleado);
 		
-		txtNombre = new JTextField();
-		txtNombre.setColumns(10);
-		txtNombre.setBounds(117, 33, 168, 20);
-		contentPanel.add(txtNombre);
+		lblLogin = new JLabel("Login :");
+		lblLogin.setBounds(270, 11, 85, 14);
+		contentPane.add(lblLogin);
 		
-		txtMarca = new JTextField();
-		txtMarca.setColumns(10);
-		txtMarca.setBounds(369, 8, 123, 20);
-		contentPanel.add(txtMarca);
+		lblPassword = new JLabel("Password :");
+		lblPassword.setBounds(270, 36, 85, 14);
+		contentPane.add(lblPassword);
 		
-		cbmEstado = new JComboBox<String>();
-		cbmEstado.setModel(new DefaultComboBoxModel<String>(new String[] {"Inhabilitado", "Habilitado"}));
-		cbmEstado.setBounds(369, 58, 123, 20);
-		contentPanel.add(cbmEstado);
+		lblTurno = new JLabel("Turno :");
+		lblTurno.setBounds(270, 61, 85, 14);
+		contentPane.add(lblTurno);
 		
-		btnListar = new JButton("Listar");
-		btnListar.setBounds(625, 7, 89, 23);
-		contentPanel.add(btnListar);
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setColumns(10);
+		textField.setBounds(140, 8, 120, 20);
+		contentPane.add(textField);
 		
-		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(625, 32, 89, 23);
-		contentPanel.add(btnModificar);
+		textField_1 = new JTextField();
+		textField_1.setEditable(false);
+		textField_1.setColumns(10);
+		textField_1.setBounds(140, 33, 120, 20);
+		contentPane.add(textField_1);
 		
-		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(625, 57, 89, 23);
-		contentPanel.add(btnEliminar);
+		textField_2 = new JTextField();
+		textField_2.setEditable(false);
+		textField_2.setColumns(10);
+		textField_2.setBounds(140, 58, 120, 20);
+		contentPane.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setEditable(false);
+		textField_3.setColumns(10);
+		textField_3.setBounds(140, 83, 120, 20);
+		contentPane.add(textField_3);
+		
+		textField_4 = new JTextField();
+		textField_4.setEditable(false);
+		textField_4.setColumns(10);
+		textField_4.setBounds(365, 8, 120, 20);
+		contentPane.add(textField_4);
+		
+		textField_5 = new JTextField();
+		textField_5.setEditable(false);
+		textField_5.setColumns(10);
+		textField_5.setBounds(365, 33, 120, 20);
+		contentPane.add(textField_5);
+		
+		cmbEmpleado = new JComboBox<String>();
+		cmbEmpleado.setEnabled(false);
+		cmbEmpleado.setBounds(140, 108, 120, 20);
+		contentPane.add(cmbEmpleado);
+		
+		cmbTurno = new JComboBox<String>();
+		cmbTurno.setEnabled(false);
+		cmbTurno.setBounds(365, 58, 120, 20);
+		contentPane.add(cmbTurno);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setEnabled(false);
+		btnBuscar.setBounds(365, 82, 120, 23);
+		contentPane.add(btnBuscar);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(502, 7, 89, 23);
-		contentPanel.add(btnAceptar);
+		btnAceptar.setEnabled(false);
+		btnAceptar.setBounds(365, 107, 120, 23);
+		contentPane.add(btnAceptar);
+		
+		btnOpciones = new JButton("Opciones");
+		btnOpciones.setEnabled(false);
+		btnOpciones.setBounds(549, 5, 140, 95);
+		contentPane.add(btnOpciones);
+		
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.setBounds(701, 8, 89, 23);
+		contentPane.add(btnNuevo);
+		
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.setBounds(701, 33, 89, 23);
+		contentPane.add(btnConsultar);
+		
+		btnModificar = new JButton("Modificar");
+		btnModificar.setBounds(701, 58, 89, 23);
+		contentPane.add(btnModificar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(701, 83, 89, 23);
+		contentPane.add(btnEliminar);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 91, 704, 261);
-		contentPanel.add(scrollPane);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		
-		label = new JLabel("Estado:");
-		label.setBounds(295, 61, 134, 14);
-		contentPanel.add(label);
-		
-		txtPrecio = new JTextField();
-		txtPrecio.setColumns(10);
-		txtPrecio.setBounds(369, 33, 123, 20);
-		contentPanel.add(txtPrecio);
-		
-		cmbTipoBebida = new JComboBox<String>();
-		cmbTipoBebida.setModel(new DefaultComboBoxModel<String>(new String[] {"Cerveza", "Vinos", "Whisky", "Ron", "Frutado", "Combinaci\u00F3n preparada", "Agua embotellada"}));
-		cmbTipoBebida.setBounds(117, 58, 168, 20);
-		contentPanel.add(cmbTipoBebida);
+		scrollPane.setBounds(10, 148, 934, 328);
+		contentPane.add(scrollPane);
 	}
 
 }
