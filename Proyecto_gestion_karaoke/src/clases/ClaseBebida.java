@@ -69,10 +69,7 @@ public class ClaseBebida {
 		this.estado = estado;
 	}
 
-	public String correlativ(int codigo) {
-		String bebid = "BEB" + String.format("%02d", codigo);
-		return bebid;
-	}
+	
 
 	public String tipodeBebida(){
 		switch (tipoBebida) {
