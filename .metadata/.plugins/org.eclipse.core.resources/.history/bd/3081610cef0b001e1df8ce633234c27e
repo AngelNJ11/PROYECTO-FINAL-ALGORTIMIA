@@ -1,5 +1,6 @@
 package guis;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -54,6 +55,7 @@ public class Form_Usuario extends JDialog implements ActionListener {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Form_Usuario() {
 		setTitle("Formulario Usuario ");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 434, 231);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
