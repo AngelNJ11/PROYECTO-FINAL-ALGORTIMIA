@@ -96,15 +96,15 @@ public class Usuario extends JFrame implements ActionListener {
 		contentPane.add(lblIdUsuario);
 		
 		lblApellidoMaterno = new JLabel("Apellido Materno :");
-		lblApellidoMaterno.setBounds(10, 61, 120, 14);
+		lblApellidoMaterno.setBounds(10, 86, 120, 14);
 		contentPane.add(lblApellidoMaterno);
 		
 		lblApellidoPaterno = new JLabel("Apellido Paterno :");
-		lblApellidoPaterno.setBounds(10, 36, 120, 14);
+		lblApellidoPaterno.setBounds(10, 61, 120, 14);
 		contentPane.add(lblApellidoPaterno);
 		
 		lblNombres = new JLabel("Nombres :");
-		lblNombres.setBounds(10, 86, 120, 14);
+		lblNombres.setBounds(10, 36, 120, 14);
 		contentPane.add(lblNombres);
 		
 		lblTipoDeEmpleado = new JLabel("Tipo de empleado :");
@@ -132,19 +132,19 @@ public class Usuario extends JFrame implements ActionListener {
 		txtApPa = new JTextField();
 		txtApPa.setEditable(false);
 		txtApPa.setColumns(10);
-		txtApPa.setBounds(140, 33, 120, 20);
+		txtApPa.setBounds(140, 58, 120, 20);
 		contentPane.add(txtApPa);
 		
 		txtApMa = new JTextField();
 		txtApMa.setEditable(false);
 		txtApMa.setColumns(10);
-		txtApMa.setBounds(140, 58, 120, 20);
+		txtApMa.setBounds(140, 83, 120, 20);
 		contentPane.add(txtApMa);
 		
 		txtNombre = new JTextField();
 		txtNombre.setEditable(false);
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(140, 83, 120, 20);
+		txtNombre.setBounds(140, 33, 120, 20);
 		contentPane.add(txtNombre);
 		
 		txtLogin = new JTextField();
@@ -160,16 +160,16 @@ public class Usuario extends JFrame implements ActionListener {
 		contentPane.add(txtPassword);
 		
 		cmbEmpleado = new JComboBox<String>();
+		cmbEmpleado.setEnabled(false);
 		cmbEmpleado.setModel(new DefaultComboBoxModel<String>
 		(new String[] {"Administrador ", "Supervisor ", "Mozo"}));
-		cmbEmpleado.setEnabled(false);
 		cmbEmpleado.setBounds(140, 108, 120, 20);
 		contentPane.add(cmbEmpleado);
 		
 		cmbTurno = new JComboBox<String>();
+		cmbTurno.setEnabled(false);
 		cmbTurno.setModel(new DefaultComboBoxModel<String>
 		(new String[] {"Tarde ", "Noche "}));
-		cmbTurno.setEnabled(false);
 		cmbTurno.setBounds(365, 58, 120, 20);
 		contentPane.add(cmbTurno);
 		
@@ -221,17 +221,18 @@ public class Usuario extends JFrame implements ActionListener {
 		
 		modelo = new DefaultTableModel();
 		modelo.addColumn("ID Usuario");
-		modelo.addColumn("Apellido Paterno"); 
-		modelo.addColumn("Apellido Materno"); 
-		modelo.addColumn("Nombres");
+		modelo.addColumn("Nombre Completo");
 		modelo.addColumn("Tipo Empleado"); 
 		modelo.addColumn("Login"); 
 		modelo.addColumn("Password"); 
 		modelo.addColumn("Turno"); 
 		tbResultado.setModel(modelo);
 		modelo.setRowCount(0); 
+		
+		
 	}
-		ArreUsuarios are =  new ArreUsuarios();
+	ArreUsuarios are =  new ArreUsuarios();
+		
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnBuscar){
 			actionPerformedbtnBuscar(e);
@@ -275,8 +276,22 @@ public class Usuario extends JFrame implements ActionListener {
 	}
 
 	public void actionPerformedbtnOpciones(ActionEvent e) {
+		txtIdUsuario.setText("");
+		txtApPa.setText("");
+		txtApMa.setText("");
+		txtPassword.setText("");
+		txtLogin.setText("");
+		txtPassword.setText("");
+		txtIdUsuario.setEditable(false);
+		habilitarEntradas(false);
+		habilitarBotones(true);
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
+		tipoOperacion = ADICIONAR;
+		txtIdUsuario.setText("" + are.codigoCorrelativo());
+		habilitarEntradas(true);
+		habilitarBotones(false);
+		txtNombre.requestFocus();
 	}
 	public void actionPerformedbtnConsultar(ActionEvent e) {
 	}
@@ -288,22 +303,7 @@ public class Usuario extends JFrame implements ActionListener {
 	
 	
 	
-	void listar() {
-		ClaseUsuarios x;
-		modelo.setRowCount(0);
-		for (int i=0; i<are.tamanio(); i++) {
-			x = are.obtener(i);
-			Object[] fila = { x.getIdUsuario(),
-					          x.getApellidoPaterno(),
-					          x.getApellidoMaternoo(),
-					          x.cargo(i),
-					          empleadoCargo(x.getTipoEmpleado()),
-					          x.getLogin(),
-					          x.getPassword(),
-					          turnoEmpleado(x.getTurno())};
-			modelo.addRow(fila);
-		}
-	}
+	
 	
 	
 
@@ -312,8 +312,38 @@ public class Usuario extends JFrame implements ActionListener {
 		}
 
 	void adicionarPersona() {
-			
+		
+		if (are.buscacod(leerCodigo()) == null) {
+			try {
+				int idusu = leerCodigo();
+				String appa = leerApPa();
+				String apma = leerApMa();
+				String nombre = leerNombre();
+				int empleado = leerEmpleado();
+				String login = leerLogin();
+				String password = LeerPassword();
+				int turno = leerTurno();
+				
+				ClaseUsuarios cla = new ClaseUsuarios(
+						idusu,nombre,appa,
+						apma,empleado, login, password, turno);
+				
+				are.adicionar(cla);
+				listar();
+				txtIdUsuario.setText("" + are.codigoCorrelativo());
+				txtNombre.setText("");
+				txtApPa.setText("");
+				txtApMa.setText("");
+				txtLogin.setText("");
+				txtPassword.setText("");
+				txtApPa.requestFocus();
+			}
+			catch (Exception e) {
+				error("dsfsdfs",txtIdUsuario);
+			}
 		}
+	
+	}
 	
 	void consultarPersona(){
 		try {
@@ -348,6 +378,59 @@ public class Usuario extends JFrame implements ActionListener {
 		}
 	}
 	
+	
+	void limpieza() {
+		txtIdUsuario.setText("");
+		txtApPa.setText("");
+		txtApMa.setText("");
+		txtNombre.setText("");
+		txtLogin.setText("");
+		txtPassword.setText("");
+		txtIdUsuario.requestFocus();
+	}	
+	
+	void listar() {
+		ClaseUsuarios x;
+		modelo.setRowCount(0);
+		for (int i=0; i<are.tamanio(); i++) {
+			x = are.obtener(i);
+			Object[] fila = { x.getIdUsuario(),
+					          x.nombreComple(),
+					          empleadoCargo(x.getTipoEmpleado()),
+					          x.getLogin(),
+					          x.getPassword(),
+					          turnoEmpleado(x.getTurno())};
+			modelo.addRow(fila);
+		}
+	}
+	
+	int leerCodigo() {
+		return Integer.parseInt(txtIdUsuario.getText().trim());
+	}
+	//
+	String leerNombre() {
+		return txtNombre.getText().trim();
+	}
+	String leerApPa() {
+		return (txtApPa.getText().trim());
+	}
+	String leerApMa() {
+		return (txtApMa.getText().trim());
+	}
+	String leerLogin() {
+		return (txtApPa.getText().trim());
+	}
+	String LeerPassword() {
+		return (txtApPa.getText().trim());
+	}
+	int leerEmpleado(){
+		return cmbEmpleado.getSelectedIndex();
+	}
+	int leerTurno(){
+		return cmbTurno.getSelectedIndex();
+	}
+	//
+	//
 	void mensaje(String s) {
 		JOptionPane.showMessageDialog(this, s, "Información", 0);
 	}
@@ -357,7 +440,7 @@ public class Usuario extends JFrame implements ActionListener {
 		txt.setText("");
 		txt.requestFocus();
 	}
-	
+	//
 	String empleadoCargo(int i) {
 		return cmbEmpleado.getItemAt(i);
 	}
@@ -366,18 +449,18 @@ public class Usuario extends JFrame implements ActionListener {
 		return cmbTurno.getItemAt(i);
 	}
 
-	int leerCodigo() {
-		return Integer.parseInt(txtIdUsuario.getText().trim());
-	}
+	
+	
 	void habilitarEntradas(boolean sino) {
 		if (tipoOperacion == ADICIONAR)
 			txtApPa.setEditable(sino);
 			txtApMa.setEditable(sino);
 			txtNombre.setEditable(sino);
-			cmbEmpleado.setEditable(sino);
+			cmbEmpleado.setEnabled(sino);
 			txtLogin.setEditable(sino);
 			txtPassword.setEditable(sino);
 			cmbTurno.setEnabled(sino);
+			
 	}
 	void habilitarBotones(boolean sino) {
 		if (tipoOperacion == ADICIONAR)
@@ -386,7 +469,6 @@ public class Usuario extends JFrame implements ActionListener {
 			btnBuscar.setEnabled(!sino);
 			btnAceptar.setEnabled(false);
 		}	
-		btnAceptar.setEnabled(sino);
 		btnConsultar.setEnabled(sino);
 		btnModificar.setEnabled(sino);
 		btnEliminar.setEnabled(sino);
