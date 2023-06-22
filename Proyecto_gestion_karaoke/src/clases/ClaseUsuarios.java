@@ -107,9 +107,8 @@ public class ClaseUsuarios {
 		this.turno = turno;
 	}
 
-	
 	public String correlativ(int codigo){
-		String cod = "COD" + String.format("%03d", codigo);
+		String cod = "USU" + String.format("%03d", codigo);
 		return cod;
 	}
 	

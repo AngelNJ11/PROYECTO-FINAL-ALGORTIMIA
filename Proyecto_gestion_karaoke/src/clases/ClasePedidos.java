@@ -5,14 +5,13 @@ import java.util.Date;
 import arreglos.ArreBebidas;
 import arreglos.ArreCanciones;
 import arreglos.ArrePiqueos;
-import arreglos.ArreUsuarios;
 
 
 
 public class ClasePedidos {
 
 	
-	ArreUsuarios idusuario = new ArreUsuarios();
+	ClaseUsuarios idusuario = new ClaseUsuarios();
 	ClaseCliente idcliente = new ClaseCliente();
 	ArreCanciones canciones = new ArreCanciones();
 	ArreBebidas bebidas = new ArreBebidas();
@@ -23,7 +22,7 @@ public class ClasePedidos {
 	private int estado;
 
 
-
+	
 
 	
 	

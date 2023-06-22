@@ -18,8 +18,8 @@ public class ArreUsuarios {
 		adicionar(new ClaseUsuarios(6, "jaun", "mendes", "Lopez", 3, "juan12", "12345",0));
 	}
 	
-	public void adicionar(ClaseUsuarios nuevoUsuario){
-		usuarioList.add(nuevoUsuario);
+	public void adicionar(ClaseUsuarios x){
+		usuarioList.add(x);
 	}
 	
 	public int tamanio(){
@@ -30,6 +30,10 @@ public class ArreUsuarios {
 		return usuarioList.get(posicion);
 	}
 	
+	public void eliminar(ClaseUsuarios x){
+		usuarioList.remove(x);
+	}
+	
 	public ClaseUsuarios buscacod(int codigo){
 		for(ClaseUsuarios usuario : usuarioList){
 			if(usuario.getIdUsuario() == codigo){
@@ -38,4 +42,5 @@ public class ArreUsuarios {
 		}
 		return null;
 	}
+	
 }

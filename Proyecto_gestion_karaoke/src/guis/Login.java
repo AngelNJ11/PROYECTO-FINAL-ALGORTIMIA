@@ -11,7 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Form_Usuario extends JDialog implements ActionListener {
+public class Login extends JDialog implements ActionListener {
 
 	/**
 	 * 
@@ -41,7 +41,7 @@ public class Form_Usuario extends JDialog implements ActionListener {
 	 */
 	public static void main(String[] args) {
 		try {
-			Form_Usuario frame = new Form_Usuario();
+			Login frame = new Login();
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,7 +52,7 @@ public class Form_Usuario extends JDialog implements ActionListener {
 	 * Create the frame.
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Form_Usuario() {
+	public Login() {
 		setTitle("Formulario Usuario ");
 		setBounds(100, 100, 434, 231);
 		contentPane = new JPanel();
@@ -151,8 +151,6 @@ public class Form_Usuario extends JDialog implements ActionListener {
 		login = txtLogin.getText();
 		password = txtPassword.getText();
 		turno = cmbTurno.getSelectedIndex();
-		
-		
 		dispose();
 	}
 }
