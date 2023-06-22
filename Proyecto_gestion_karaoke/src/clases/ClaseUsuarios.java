@@ -105,11 +105,6 @@ public class ClaseUsuarios {
 	public void setTurno(int turno) {
 		this.turno = turno;
 	}
-
-	public String correlativ(int codigo){
-		String cod = "USU" + String.format("%03d", codigo);
-		return cod;
-	}
 	
 	public String nombreComple(){
 		return nombres + " " + apellidoPaterno + " " + apellidoMaterno;
