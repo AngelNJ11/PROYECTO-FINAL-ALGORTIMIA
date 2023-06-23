@@ -223,7 +223,7 @@ public class manteGenero extends JDialog implements ActionListener {
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
-		txtIdGenero.setText("" + arg.codigoCorrelativo(arg.tamanio()-1));
+		txtIdGenero.setText("" + arg.codigoCorrelativo(arg.tamanio()+1));
 		habilitarEntradas(true);
 		habilitarBotones(false);
 		txtDescripcion.requestFocus();

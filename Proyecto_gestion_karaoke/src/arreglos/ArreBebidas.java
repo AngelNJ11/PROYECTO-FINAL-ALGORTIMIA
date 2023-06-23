@@ -21,7 +21,7 @@ public class ArreBebidas {
 		bebida.add(x);
 	}
 	
-	public int tamano() {
+	public int tamanio() {
 		return bebida.size();
 	}
 	
@@ -41,5 +41,15 @@ public class ArreBebidas {
 	public String correlativ(String codigo) {
 		String beb = "BEB" + String.format("%02d", codigo);
 		return beb;
+	}
+
+	public String codigoCorrelativo(int codigo) {
+		if (tamanio() == 0)
+			return "GEN01";
+		else {
+			String beb = "GEN" + String.format("0", codigo);
+			return beb;	
+		}
+			
 	}
 }
