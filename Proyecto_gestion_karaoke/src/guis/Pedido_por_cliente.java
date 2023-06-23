@@ -49,12 +49,12 @@ public class Pedido_por_cliente extends JDialog {
 		contentPanel.setLayout(null);
 		
 		lblIdCliente = new JLabel("Id Cliente");
-		lblIdCliente.setBounds(10, 11, 46, 14);
+		lblIdCliente.setBounds(10, 11, 149, 14);
 		contentPanel.add(lblIdCliente);
 		
 		txtIdCliente = new JTextField();
 		txtIdCliente.setEditable(false);
-		txtIdCliente.setBounds(80, 8, 110, 20);
+		txtIdCliente.setBounds(171, 8, 110, 20);
 		contentPanel.add(txtIdCliente);
 		txtIdCliente.setColumns(10);
 		
@@ -70,7 +70,7 @@ public class Pedido_por_cliente extends JDialog {
 		contentPanel.add(btnNewButton);
 		
 		comboBox = new JComboBox<String>();
-		comboBox.setBounds(200, 8, 110, 20);
+		comboBox.setBounds(293, 8, 110, 20);
 		contentPanel.add(comboBox);
 	}
 

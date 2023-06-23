@@ -11,8 +11,10 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class Genero extends JDialog {
+public class Genero extends JDialog implements ActionListener {
 
 	/**
 	 * 
@@ -27,12 +29,15 @@ public class Genero extends JDialog {
 	private JLabel lblEpoca;
 	private JLabel lblDescripcion;
 	private JLabel lblGenero;
-	private JButton btnListar;
 	private JButton btnModificar;
-	private JButton btnAceptar;
 	private JButton btnEliminar;
 	private JScrollPane scrollPane;
 	private JTable table;
+	private JButton btnBuscar;
+	private JButton btnOpciones;
+	private JButton btnNuevo;
+	private JButton btnAceptar;
+	private JButton btnListar;
 
 	/**
 	 * Launch the application.
@@ -52,7 +57,7 @@ public class Genero extends JDialog {
 	 */
 	public Genero() {
 		setTitle("Genero");
-		setBounds(100, 100, 634, 437);
+		setBounds(100, 100, 806, 505);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -94,27 +99,41 @@ public class Genero extends JDialog {
 		cmbEstado.setBounds(120, 83, 120, 20);
 		contentPanel.add(cmbEstado);
 		
-		btnListar = new JButton("Listar");
-		btnListar.setBounds(519, 7, 89, 23);
-		contentPanel.add(btnListar);
-		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(519, 32, 89, 23);
+		btnModificar.setBounds(679, 57, 97, 23);
 		contentPanel.add(btnModificar);
 		
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(250, 7, 89, 23);
-		contentPanel.add(btnAceptar);
-		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(519, 57, 89, 23);
+		btnEliminar.setBounds(679, 82, 97, 23);
 		contentPanel.add(btnEliminar);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 111, 598, 276);
+		scrollPane.setBounds(10, 151, 766, 294);
 		contentPanel.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(252, 6, 97, 25);
+		contentPanel.add(btnBuscar);
+		
+		btnOpciones = new JButton("Opciones");
+		btnOpciones.setBounds(578, 13, 97, 92);
+		contentPanel.add(btnOpciones);
+		
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.setBounds(679, 6, 97, 25);
+		contentPanel.add(btnNuevo);
+		
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(252, 31, 97, 25);
+		contentPanel.add(btnAceptar);
+		
+		btnListar = new JButton("Listar");
+		btnListar.setBounds(679, 31, 97, 25);
+		contentPanel.add(btnListar);
+	}
+	public void actionPerformed(ActionEvent arg0) {
 	}
 }

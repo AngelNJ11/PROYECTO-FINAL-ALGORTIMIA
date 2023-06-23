@@ -11,8 +11,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class Cancion extends JDialog {
+public class Cancion extends JDialog implements ActionListener {
 
 	/**
 	 * 
@@ -34,11 +36,14 @@ public class Cancion extends JDialog {
 	private JLabel lblEstado;
 	private JComboBox<String> comboBox;
 	private JButton btnAceptar;
-	private JButton btnListar;
+	private JButton btnConsultar;
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JTable table;
 	private JScrollPane scrollPane;
+	private JButton btnNuevo;
+	private JButton btnOpciones;
+	private JButton btnBuscar;
 
 	/**
 	 * Launch the application.
@@ -58,7 +63,7 @@ public class Cancion extends JDialog {
 	 */
 	public Cancion() {
 		setTitle("Cancion");
-		setBounds(100, 100, 880, 400);
+		setBounds(100, 100, 926, 454);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -138,32 +143,58 @@ public class Cancion extends JDialog {
 		}
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 111, 844, 239);
+		scrollPane.setBounds(10, 164, 886, 230);
 		contentPanel.add(scrollPane);
 		{
 			table = new JTable();
 			scrollPane.setViewportView(table);
 		}
 		
-		btnListar = new JButton("Listar");
-		btnListar.setBounds(765, 7, 89, 23);
-		contentPanel.add(btnListar);
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(this);
+		btnConsultar.setBounds(799, 32, 97, 23);
+		contentPanel.add(btnConsultar);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(765, 32, 89, 23);
+		btnModificar.addActionListener(this);
+		btnModificar.setBounds(799, 57, 97, 23);
 		contentPanel.add(btnModificar);
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(765, 57, 89, 23);
+		btnEliminar.setBounds(799, 82, 97, 23);
 		contentPanel.add(btnEliminar);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(531, 7, 89, 23);
+		btnAceptar.setBounds(533, 32, 97, 23);
 		contentPanel.add(btnAceptar);
 		
 		comboBox = new JComboBox<String>();
 		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Inhabilitado", "Habilitado"}));
 		comboBox.setBounds(410, 58, 111, 20);
 		contentPanel.add(comboBox);
+		
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.setBounds(799, 6, 97, 25);
+		contentPanel.add(btnNuevo);
+		
+		btnOpciones = new JButton("Opciones");
+		btnOpciones.setBounds(690, 6, 97, 95);
+		contentPanel.add(btnOpciones);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(533, 6, 97, 25);
+		contentPanel.add(btnBuscar);
+	}
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnConsultar) {
+			actionPerformedBtnConsultar(arg0);
+		}
+		if (arg0.getSource() == btnModificar) {
+			actionPerformedBtnModificar(arg0);
+		}
+	}
+	protected void actionPerformedBtnModificar(ActionEvent arg0) {
+	}
+	protected void actionPerformedBtnConsultar(ActionEvent arg0) {
 	}
 }
