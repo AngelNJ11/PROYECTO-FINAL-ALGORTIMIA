@@ -22,7 +22,7 @@ public class Registro_de_Consumo extends JDialog {
 	private JTextField txtFechaConsumo;
 	private JTextField txtImporteTotal;
 	private JTable table;
-	private JLabel lblCodCliente;
+	private JLabel lblCodigo;
 	private JLabel lblIdCliente;
 	private JLabel lblFechaConsumo;
 	private JLabel lblImporteTotal;
@@ -53,9 +53,9 @@ public class Registro_de_Consumo extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			lblCodCliente = new JLabel("Codigo Consumo");
-			lblCodCliente.setBounds(10, 11, 100, 14);
-			contentPanel.add(lblCodCliente);
+			lblCodigo = new JLabel("Codigo :");
+			lblCodigo.setBounds(10, 11, 65, 14);
+			contentPanel.add(lblCodigo);
 		}
 		{
 			lblIdCliente = new JLabel("Id Cliente");
@@ -74,7 +74,7 @@ public class Registro_de_Consumo extends JDialog {
 		}
 		{
 			txtCodCliente = new JTextField();
-			txtCodCliente.setBounds(120, 8, 140, 20);
+			txtCodCliente.setBounds(87, 8, 89, 20);
 			contentPanel.add(txtCodCliente);
 			txtCodCliente.setColumns(10);
 		}

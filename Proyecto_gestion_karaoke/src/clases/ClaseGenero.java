@@ -7,7 +7,7 @@ public class ClaseGenero {
 	private  String idGenero;
 	private  String descripcion;
 	private  int epoca = 2012;
-	private  boolean estado = true;
+	private  boolean estado;
 	
 	
 	

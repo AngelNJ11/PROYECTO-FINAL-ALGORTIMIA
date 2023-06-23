@@ -54,78 +54,78 @@ public class Login extends JDialog implements ActionListener {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Login() {
 		setTitle("Formulario Usuario ");
-		setBounds(100, 100, 434, 231);
+		setBounds(100, 100, 313, 295);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		lblNombres = new JLabel("Nombres :");
-		lblNombres.setBounds(10, 11, 110, 14);
+		lblNombres.setBounds(10, 11, 123, 14);
 		contentPane.add(lblNombres);
 		
 		lblApellidoPaterno = new JLabel("Apellido Paterno :");
-		lblApellidoPaterno.setBounds(10, 36, 110, 14);
+		lblApellidoPaterno.setBounds(10, 36, 123, 14);
 		contentPane.add(lblApellidoPaterno);
 		
 		lblApellidoMaterno = new JLabel("Apellido Materno :");
-		lblApellidoMaterno.setBounds(10, 61, 110, 14);
+		lblApellidoMaterno.setBounds(10, 61, 123, 14);
 		contentPane.add(lblApellidoMaterno);
 		
 		lblTipo = new JLabel("Tipo :");
-		lblTipo.setBounds(10, 86, 110, 14);
+		lblTipo.setBounds(10, 86, 123, 14);
 		contentPane.add(lblTipo);
 		
 		lblLogin = new JLabel("Login :");
-		lblLogin.setBounds(10, 111, 110, 14);
+		lblLogin.setBounds(10, 111, 123, 14);
 		contentPane.add(lblLogin);
 		
 		lblPassword = new JLabel("Password :");
-		lblPassword.setBounds(10, 136, 110, 14);
+		lblPassword.setBounds(10, 136, 123, 14);
 		contentPane.add(lblPassword);
 		
 		lblTurno = new JLabel("Turno :");
-		lblTurno.setBounds(10, 161, 110, 14);
+		lblTurno.setBounds(10, 161, 123, 14);
 		contentPane.add(lblTurno);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(130, 8, 140, 20);
+		txtNombre.setBounds(145, 8, 140, 20);
 		contentPane.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtApeliidoPa = new JTextField();
 		txtApeliidoPa.setColumns(10);
-		txtApeliidoPa.setBounds(130, 33, 140, 20);
+		txtApeliidoPa.setBounds(145, 33, 140, 20);
 		contentPane.add(txtApeliidoPa);
 		
 		txtApellidoMa = new JTextField();
 		txtApellidoMa.setColumns(10);
-		txtApellidoMa.setBounds(130, 58, 140, 20);
+		txtApellidoMa.setBounds(145, 58, 140, 20);
 		contentPane.add(txtApellidoMa);
 		
 		cmbTipo = new JComboBox();
 		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"Adminsitrador", "Supervisor", "Mozo"}));
-		cmbTipo.setBounds(130, 83, 140, 20);
+		cmbTipo.setBounds(144, 87, 140, 20);
 		contentPane.add(cmbTipo);
 		
 		txtLogin = new JTextField();
 		txtLogin.setColumns(10);
-		txtLogin.setBounds(130, 108, 140, 20);
+		txtLogin.setBounds(145, 108, 140, 20);
 		contentPane.add(txtLogin);
 		
 		txtPassword = new JTextField();
 		txtPassword.setColumns(10);
-		txtPassword.setBounds(130, 133, 140, 20);
+		txtPassword.setBounds(145, 133, 140, 20);
 		contentPane.add(txtPassword);
 		
 		cmbTurno = new JComboBox();
 		cmbTurno.setModel(new DefaultComboBoxModel(new String[] {"Tarde", "Noche"}));
-		cmbTurno.setBounds(130, 158, 140, 20);
+		cmbTurno.setBounds(145, 159, 140, 20);
 		contentPane.add(cmbTurno);
 		
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(this);
-		btnGuardar.setBounds(298, 157, 110, 23);
+		btnGuardar.setBounds(90, 191, 133, 48);
 		contentPane.add(btnGuardar);
 	}
 	
@@ -151,6 +151,5 @@ public class Login extends JDialog implements ActionListener {
 		login = txtLogin.getText();
 		password = txtPassword.getText();
 		turno = cmbTurno.getSelectedIndex();
-		dispose();
 	}
 }

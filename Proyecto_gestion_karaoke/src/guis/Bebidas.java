@@ -6,37 +6,57 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class Bebidas extends JDialog {
+import arreglos.ArreBebidas;
+import clases.ClaseBebida;
+import clases.ClaseUsuarios;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Bebidas extends JDialog implements ActionListener {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final JPanel contentPanel = new JPanel();
+	private JPanel contentPane;
+	private JLabel lblIdBebida;
+	private JLabel lblNombres;
+	private JLabel lblTipoDeBebida;
+	private JLabel lblMarca;
+	private JLabel lblPrecio;
+	private JLabel lblEstado;
 	private JTextField txtIdBebida;
 	private JTextField txtNombre;
 	private JTextField txtMarca;
-	private JTable table;
-	private JLabel lblIdBebida;
-	private JLabel lblNombre;
-	private JLabel lblIdTipoBebida;
-	private JLabel lblMarca;
-	private JLabel lblPrecio;
-	private JScrollPane scrollPane;
+	private JTextField txtPrecio;
+	private JComboBox<String> cmbTipoDeBebida;
+	private JComboBox<String> cmbEstado;
+	private JButton btnBuscar;
 	private JButton btnAceptar;
-	private JComboBox<String> cbmEstado;
-	private JButton btnListar;
+	private JButton btnOpciones;
+	private JButton btnNuevo;
+	private JButton btnConsultar;
 	private JButton btnModificar;
 	private JButton btnEliminar;
-	private JLabel label;
-	private JTextField txtPrecio;
-	private JComboBox<String> cmbTipoBebida;
+	private JScrollPane scrollPane;
+	
+	
+	// Tipo de operaci�n a procesar: Adicionar, Consultar, Modificar o Eliminar
+		private int tipoOperacion;
+		
+		// Constantes para los tipos de operaciones
+		public final static int ADICIONAR = 0;
+		public final static int CONSULTAR = 1;
+		public final static int MODIFICAR = 2;
+		public final static int ELIMINAR  = 3;
 
 	/**
 	 * Launch the application.
@@ -56,89 +76,267 @@ public class Bebidas extends JDialog {
 	 */
 	public Bebidas() {
 		setTitle("Bebida");
-		setBounds(100, 100, 740, 404);
-		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		setBounds(100, 100, 824, 450);
 		
-		lblIdBebida = new JLabel("Id Bebida:");
-		lblIdBebida.setBounds(10, 11, 134, 14);
-		contentPanel.add(lblIdBebida);
+		contentPane = new JPanel();
+		contentPane.setLayout(null);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPane, BorderLayout.CENTER);
 		
-		lblNombre = new JLabel("Nombre :");
-		lblNombre.setBounds(10, 36, 134, 14);
-		contentPanel.add(lblNombre);
+		lblIdBebida = new JLabel("ID Bebida :");
+		lblIdBebida.setBounds(10, 11, 120, 14);
+		contentPane.add(lblIdBebida);
 		
-		lblIdTipoBebida = new JLabel("Tipo Bebida:");
-		lblIdTipoBebida.setBounds(10, 61, 134, 14);
-		contentPanel.add(lblIdTipoBebida);
+		lblNombres = new JLabel("Nombres :");
+		lblNombres.setBounds(10, 37, 120, 14);
+		contentPane.add(lblNombres);
+		
+		lblTipoDeBebida = new JLabel("Tipo de bebida :");
+		lblTipoDeBebida.setBounds(10, 63, 120, 14);
+		contentPane.add(lblTipoDeBebida);
 		
 		lblMarca = new JLabel("Marca :");
-		lblMarca.setBounds(295, 11, 134, 14);
-		contentPanel.add(lblMarca);
+		lblMarca.setBounds(270, 11, 62, 14);
+		contentPane.add(lblMarca);
 		
-		lblPrecio = new JLabel("Precio:");
-		lblPrecio.setBounds(295, 36, 134, 14);
-		contentPanel.add(lblPrecio);
+		lblPrecio = new JLabel("Precio :");
+		lblPrecio.setBounds(270, 36, 62, 14);
+		contentPane.add(lblPrecio);
+		
+		lblEstado = new JLabel("Estado:");
+		lblEstado.setBounds(270, 61, 62, 14);
+		contentPane.add(lblEstado);
 		
 		txtIdBebida = new JTextField();
 		txtIdBebida.setEditable(false);
-		txtIdBebida.setBounds(117, 8, 168, 20);
-		contentPanel.add(txtIdBebida);
 		txtIdBebida.setColumns(10);
+		txtIdBebida.setBounds(140, 8, 120, 20);
+		contentPane.add(txtIdBebida);
 		
 		txtNombre = new JTextField();
+		txtNombre.setEditable(false);
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(117, 33, 168, 20);
-		contentPanel.add(txtNombre);
+		txtNombre.setBounds(140, 33, 120, 20);
+		contentPane.add(txtNombre);
 		
 		txtMarca = new JTextField();
+		txtMarca.setEditable(false);
 		txtMarca.setColumns(10);
-		txtMarca.setBounds(369, 8, 123, 20);
-		contentPanel.add(txtMarca);
-		
-		cbmEstado = new JComboBox<String>();
-		cbmEstado.setModel(new DefaultComboBoxModel<String>(new String[] {"Inhabilitado", "Habilitado"}));
-		cbmEstado.setBounds(369, 58, 123, 20);
-		contentPanel.add(cbmEstado);
-		
-		btnListar = new JButton("Listar");
-		btnListar.setBounds(625, 7, 89, 23);
-		contentPanel.add(btnListar);
-		
-		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(625, 32, 89, 23);
-		contentPanel.add(btnModificar);
-		
-		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(625, 57, 89, 23);
-		contentPanel.add(btnEliminar);
-		
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(502, 7, 89, 23);
-		contentPanel.add(btnAceptar);
-		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 91, 704, 261);
-		contentPanel.add(scrollPane);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		
-		label = new JLabel("Estado:");
-		label.setBounds(295, 61, 134, 14);
-		contentPanel.add(label);
+		txtMarca.setBounds(344, 11, 120, 20);
+		contentPane.add(txtMarca);
 		
 		txtPrecio = new JTextField();
+		txtPrecio.setEditable(false);
 		txtPrecio.setColumns(10);
-		txtPrecio.setBounds(369, 33, 123, 20);
-		contentPanel.add(txtPrecio);
+		txtPrecio.setBounds(344, 36, 120, 20);
+		contentPane.add(txtPrecio);
 		
-		cmbTipoBebida = new JComboBox<String>();
-		cmbTipoBebida.setModel(new DefaultComboBoxModel<String>(new String[] {"Cerveza", "Vinos", "Whisky", "Ron", "Frutado", "Combinaci\u00F3n preparada", "Agua embotellada"}));
-		cmbTipoBebida.setBounds(117, 58, 168, 20);
-		contentPanel.add(cmbTipoBebida);
+		cmbTipoDeBebida = new JComboBox<String>();
+		cmbTipoDeBebida.setModel(new DefaultComboBoxModel<String>
+		(new String[] {"Cerveza", "Vinos", "Whisky", "Ron", "Frutado", "Combinacion preparada", "Agua embotellada"}));
+		cmbTipoDeBebida.setEnabled(false);
+		cmbTipoDeBebida.setBounds(138, 61, 120, 20);
+		contentPane.add(cmbTipoDeBebida);
+		
+		cmbEstado = new JComboBox<String>();
+		cmbEstado.setModel(new DefaultComboBoxModel<String>
+		(new String[] {"Habilitado", "Inhabilitado"}));
+		cmbEstado.setEnabled(false);
+		cmbEstado.setBounds(344, 61, 120, 20);
+		contentPane.add(cmbEstado);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(this);
+		btnBuscar.setEnabled(false);
+		btnBuscar.setBounds(344, 85, 120, 23);
+		contentPane.add(btnBuscar);
+		
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(this);
+		btnAceptar.setEnabled(false);
+		btnAceptar.setBounds(344, 110, 120, 23);
+		contentPane.add(btnAceptar);
+		
+		btnOpciones = new JButton("Opciones");
+		btnOpciones.addActionListener(this);
+		btnOpciones.setEnabled(false);
+		btnOpciones.setBounds(577, 11, 140, 95);
+		contentPane.add(btnOpciones);
+		
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(this);
+		btnNuevo.setBounds(729, 14, 89, 23);
+		contentPane.add(btnNuevo);
+		
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(this);
+		btnConsultar.setBounds(729, 39, 89, 23);
+		contentPane.add(btnConsultar);
+		
+		btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(this);
+		btnModificar.setBounds(729, 64, 89, 23);
+		contentPane.add(btnModificar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(this);
+		btnEliminar.setBounds(729, 89, 89, 23);
+		contentPane.add(btnEliminar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 148, 934, 328);
+		contentPane.add(scrollPane);
+	}
+	
+	ArreBebidas arb = new ArreBebidas();
+	
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == btnBuscar){
+			actionPerformedbtnBuscar(e);
+		}
+		if(e.getSource() == btnAceptar){
+			actionPerformedbtnAceptar(e);
+		}
+		if(e.getSource() == btnOpciones){
+			actionPerformedbtnOpciones(e);
+		}
+		if(e.getSource() == btnNuevo){
+			actionPerformedbtnNuevo(e);
+		}
+		if(e.getSource() == btnConsultar){
+			actionPerformedbtnConsultar(e);
+		}
+		if(e.getSource() == btnModificar){
+			actionPerformedbtnModificar(e);
+		}
+		if(e.getSource() == btnEliminar){
+			actionPerformedbtnEliminar(e);
+		}
+	}
+	public void actionPerformedbtnBuscar(ActionEvent e) {
+		consultarPersona();
+	}
+	public void actionPerformedbtnAceptar(ActionEvent e) {
+		switch (tipoOperacion) {
+		case ADICIONAR:
+			adicionarPersona();
+			break;
+		case CONSULTAR:
+			consultarPersona();
+			break;
+		case MODIFICAR:
+			modificarPersona();
+			break;
+		case ELIMINAR:
+			adicionarPersona();
+	}
 	}
 
+	public void actionPerformedbtnOpciones(ActionEvent e) {
+		txtIdBebida.setText("");
+		txtNombre.setText("");
+		txtMarca.setText("");
+		txtPrecio.setText("");
+		txtIdBebida.setEditable(false);
+		habilitarEntradas(false);
+		habilitarBotones(true);
+	}
+	public void actionPerformedbtnNuevo(ActionEvent e) {
+	
+	}
+	public void actionPerformedbtnConsultar(ActionEvent e) {
+	}
+	public void actionPerformedbtnModificar(ActionEvent e) {
+	}
+	public void actionPerformedbtnEliminar(ActionEvent e) {
+	}
+	
+	
+	
+	
+	
+	
+	
+
+	void modificarPersona() {
+			
+		}
+
+	void adicionarPersona() {
+		
+		
+	
+	}
+	
+	void consultarPersona(){
+		
+	}
+	
+	
+	void limpieza() {
+		txtIdBebida.setText("");
+		txtNombre.setText("");
+		txtMarca.setText("");
+		txtPrecio.setText("");
+		txtIdBebida.requestFocus();
+	}	
+	
+	void listar() {
+	
+	}
+	
+	String leerCodigo() {
+		return (txtIdBebida.getText().trim());
+	}
+	//
+	String leerNombre() {
+		return txtNombre.getText().trim();
+	}
+	String leerMarca() {
+		return (txtMarca.getText().trim());
+	}
+	String LeerPrecio() {
+		return (txtPrecio.getText().trim());
+	}
+	//
+	//
+	void mensaje(String s) {
+		JOptionPane.showMessageDialog(this, s, "Informaci�n", 0);
+	}
+	
+	void error(String s, JTextField txt) {
+		mensaje(s);
+		txt.setText("");
+		txt.requestFocus();
+	}
+	//
+
+
+	
+	
+	void habilitarEntradas(boolean sino) {
+		if (tipoOperacion == ADICIONAR)
+			txtNombre.setEditable(sino);
+			cmbTipoDeBebida.setEnabled(sino);
+			txtMarca.setEditable(sino);
+			txtPrecio.setEditable(sino);
+			cmbEstado.setEnabled(sino);
+			
+	}
+	void habilitarBotones(boolean sino) {
+		if (tipoOperacion == ADICIONAR)
+			btnAceptar.setEnabled(!sino);
+		else {
+			btnBuscar.setEnabled(!sino);
+			btnAceptar.setEnabled(false);
+		}	
+		btnConsultar.setEnabled(sino);
+		btnModificar.setEnabled(sino);
+		btnEliminar.setEnabled(sino);
+		btnOpciones.setEnabled(!sino);		
+	}
 }
+
+
+

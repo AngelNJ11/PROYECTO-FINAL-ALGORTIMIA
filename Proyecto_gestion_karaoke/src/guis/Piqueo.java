@@ -43,7 +43,7 @@ public class Piqueo extends JDialog implements ActionListener {
 
 	
 	// Tipo de operación a procesar: Adicionar, Consultar, Modificar o Eliminar
-	private int tipoOperacion;
+
 	
 	// Constantes para los tipos de operaciones
 	public final static int ADICIONAR = 0;

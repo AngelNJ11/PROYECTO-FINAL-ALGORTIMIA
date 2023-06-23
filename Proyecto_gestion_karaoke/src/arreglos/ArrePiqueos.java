@@ -2,6 +2,7 @@ package arreglos;
 
 import java.util.ArrayList;
 
+import clases.ClaseBebida;
 import clases.ClasePiqueo;
 
 public class ArrePiqueos {
@@ -25,5 +26,19 @@ public class ArrePiqueos {
 	
 	public ClasePiqueo obtener(int i) {
 		return piqueo.get(i);
+	}
+	
+	public ClasePiqueo buscacod(String codigo){
+		for(ClasePiqueo piqueo : piqueo){
+			if(piqueo.getIdPiqueo().equals(codigo)){
+				return piqueo;
+			}
+		}
+		return null;
+	}
+	
+	public String correlativ(int codigo){
+		String cod = "PIQ" + String.format("%02d", codigo);
+		return cod;
 	}
 }

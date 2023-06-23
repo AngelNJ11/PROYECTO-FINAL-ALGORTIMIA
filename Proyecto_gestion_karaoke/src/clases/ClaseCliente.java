@@ -123,7 +123,7 @@ public class ClaseCliente {
 	}
 	
 	public String correlativo(int codigo) {
-		String newcodigos = "CLI" + String.format("%03d", codigo);
+		String newcodigos = "CLI" + String.format("%02d", codigo);
 		return newcodigos;
 	}
 	

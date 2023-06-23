@@ -228,6 +228,7 @@ public class Usuario extends JFrame implements ActionListener {
 		modelo.addColumn("Turno"); 
 		tbResultado.setModel(modelo);
 		modelo.setRowCount(0); 
+		listar();
 		
 		
 	}
@@ -274,7 +275,6 @@ public class Usuario extends JFrame implements ActionListener {
 			adicionarPersona();
 		}
 	}
-
 	public void actionPerformedbtnOpciones(ActionEvent e) {
 		txtIdUsuario.setText("");
 		txtApPa.setText("");
@@ -294,28 +294,70 @@ public class Usuario extends JFrame implements ActionListener {
 		txtNombre.requestFocus();
 	}
 	public void actionPerformedbtnConsultar(ActionEvent e) {
+		tipoOperacion = CONSULTAR;
+		txtIdUsuario.setEditable(true);
+		habilitarBotones(false);
+		txtIdUsuario.requestFocus();
 	}
 	public void actionPerformedbtnModificar(ActionEvent e) {
+		tipoOperacion = MODIFICAR;
+		txtIdUsuario.setEditable(true);
+		habilitarBotones(false);
+		txtIdUsuario.requestFocus();
 	}
 	public void actionPerformedbtnEliminar(ActionEvent e) {
+		tipoOperacion = ELIMINAR;
+		txtIdUsuario.setEditable(true);
+		habilitarBotones(false);
+		txtIdUsuario.requestFocus();
 	}
 	
-	
-	
-	
-	
-	
-	
-
-	void modificarPersona() {
-			
-		}
-
 	void adicionarPersona() {
-		
+			
+		int codigo = leerCodigo();
+		String nombre =  leerNombre();
+		if(nombre.length() > 0){
+			String appa = leerApPa();
+			if(appa.length() > 0){
+				String apma = leerApMa();
+				if(apma.length() > 0){
+					String login =  leerLogin();
+					if(login.length() > 0){
+						String password = LeerPassword();
+						if(password.length() > 0)
+							if(are.buscacod(codigo) == null)
+								try{
+									int empleado = leerEmpleado();
+									try{
+										int turno = leerTurno();
+										ClaseUsuarios cla = new ClaseUsuarios(codigo, nombre, appa, apma, empleado, login, password, turno);
+										are.adicionar(cla);
+										listar();
+										txtIdUsuario.setText("" + are.codigoCorrelativo());
+										txtNombre.setText("");
+										txtApPa.setText("");
+										txtApMa.setText("");
+										
+										
+									}catch(Exception e){
+										
+									}
+								}
+								catch (Exception e) {
+									// TODO: handle exception
+								}
+							}
+						}		
+					}
+				}	
+	}
+	
+
+	@SuppressWarnings("null")
+	void modificarPersona() {
+		ClaseUsuarios x = null;
 		if (are.buscacod(leerCodigo()) == null) {
 			try {
-				int idusu = leerCodigo();
 				String appa = leerApPa();
 				String apma = leerApMa();
 				String nombre = leerNombre();
@@ -323,28 +365,21 @@ public class Usuario extends JFrame implements ActionListener {
 				String login = leerLogin();
 				String password = LeerPassword();
 				int turno = leerTurno();
-				
-				ClaseUsuarios cla = new ClaseUsuarios(
-						idusu,nombre,appa,
-						apma,empleado, login, password, turno);
-				
-				are.adicionar(cla);
+				x.setApellidoPaterno(appa);
+				x.setApellidoMaternoo(apma);
+				x.setNombres(nombre);
+				x.setTipoEmpleado(empleado);
+				x.setLogin(login);
+				x.setPassword(password);
+				x.setTurno(turno);
 				listar();
-				txtIdUsuario.setText("" + are.codigoCorrelativo());
-				txtNombre.setText("");
-				txtApPa.setText("");
-				txtApMa.setText("");
-				txtLogin.setText("");
-				txtPassword.setText("");
-				txtApPa.requestFocus();
+				txtNombre.requestFocus();
 			}
 			catch (Exception e) {
-				error("dsfsdfs",txtIdUsuario);
+			error("Codigo No existe", txtIdUsuario);
 			}
 		}
-	
 	}
-	
 	void consultarPersona(){
 		try {
 			int codigo = leerCodigo();
@@ -378,6 +413,26 @@ public class Usuario extends JFrame implements ActionListener {
 		}
 	}
 	
+	void eliminarPersona() {
+		try {
+			int codigo = leerCodigo();
+			ClaseUsuarios x = are.buscacod(codigo);
+			if (x != null) {
+				int ok = confirmar("¿ Desea eliminar el registro ?");
+				if (ok == 0) {
+					are.eliminar(x);
+					listar();
+					btnAceptar.setEnabled(false);
+				}
+			}
+			else
+				error("El código " + codigo + " no existe", txtIdUsuario);
+		}
+		catch (Exception e) {
+			error("Ingrese CÓDIGO correcto", txtIdUsuario);
+		}	
+	}
+	
 	
 	void limpieza() {
 		txtIdUsuario.setText("");
@@ -387,6 +442,7 @@ public class Usuario extends JFrame implements ActionListener {
 		txtLogin.setText("");
 		txtPassword.setText("");
 		txtIdUsuario.requestFocus();
+		
 	}	
 	
 	void listar() {
@@ -439,6 +495,10 @@ public class Usuario extends JFrame implements ActionListener {
 		mensaje(s);
 		txt.setText("");
 		txt.requestFocus();
+	}
+	
+	int confirmar(String s) {
+		return JOptionPane.showConfirmDialog(this, s, "Alerta", 0, 1, null);
 	}
 	//
 	String empleadoCargo(int i) {

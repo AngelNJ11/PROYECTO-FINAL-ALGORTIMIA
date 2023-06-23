@@ -1,5 +1,6 @@
 package clases;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ClaseConsumo {
@@ -7,6 +8,9 @@ public class ClaseConsumo {
 	
 	ClaseCliente cliente = new ClaseCliente();
 
+	
+	// Atrubutos privados 
+	
 					//CON0001
 	private  String codigoConsumo;
 	private final String idCliente = cliente.getIdCliente();
@@ -14,6 +18,9 @@ public class ClaseConsumo {
 	private  double importeTotal;
 	
 	Date fachaConsumo = new Date();
+	
+	
+	// constructores
 	
 	public ClaseConsumo() {
 		
@@ -30,6 +37,8 @@ public class ClaseConsumo {
 	}
 
 
+	// get y seters
+	
 	public String getCodigoConsumo() {
 		return codigoConsumo;
 	}
@@ -65,7 +74,13 @@ public class ClaseConsumo {
 	}
 	
 	
+	// metodos
 	
 	
+
+	public String correlativ(int codigo){
+		String cod = "CON" + String.format("%03d", codigo);
+		return cod;
+	}
 	
 }
