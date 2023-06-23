@@ -1,0 +1,270 @@
+package guis;
+
+import java.awt.BorderLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class manteCancion extends JDialog implements ActionListener {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
+	private JTextField txtIdCancion;
+	private JTextField txtNombre;
+	private JTextField txtIdArtista;
+	private JTextField txtAlbum;
+	private JTextField txtFecRegistro;
+	private JTextField txtNumReproducion;
+	private JLabel lblNewLabel;
+	private JLabel lblNombre;
+	private JLabel lblIdArtista;
+	private JLabel lblAlbum;
+	private JLabel lblFechaRegistro;
+	private JLabel lblNumeroDeReproducciones;
+	private JLabel lblEstado;
+	private JComboBox<String> cmbEstado;
+	private JButton btnAceptar;
+	private JButton btnConsultar;
+	private JButton btnModificar;
+	private JButton btnEliminar;
+	private JButton btnNuevo;
+	private JButton btnOpciones;
+	private JButton btnBuscar;
+	private JScrollPane scrollPane;
+	private JTable tbResultado;
+	private DefaultTableModel modelo;
+
+	
+	private int tipoOperacion;
+	
+	
+	// Constantes para los tipos de operaciones
+	public final static int ADICIONAR = 0;
+	public final static int CONSULTAR = 1;
+	public final static int MODIFICAR = 2;
+	public final static int ELIMINAR  = 3;
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			manteCancion dialog = new manteCancion();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public manteCancion() {
+		setTitle("Cancion");
+		setBounds(100, 100, 973, 442);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		{
+			lblNewLabel = new JLabel("ID Cancion:");
+			lblNewLabel.setBounds(10, 11, 100, 14);
+			contentPanel.add(lblNewLabel);
+		}
+		{
+			lblNombre = new JLabel("Nombre:");
+			lblNombre.setBounds(10, 36, 100, 14);
+			contentPanel.add(lblNombre);
+		}
+		{
+			lblIdArtista = new JLabel("Id Artista:");
+			lblIdArtista.setBounds(10, 61, 100, 14);
+			contentPanel.add(lblIdArtista);
+		}
+		{
+			lblAlbum = new JLabel("Album:");
+			lblAlbum.setBounds(10, 86, 100, 14);
+			contentPanel.add(lblAlbum);
+		}
+		{
+			lblFechaRegistro = new JLabel("Fecha Registro:");
+			lblFechaRegistro.setBounds(241, 11, 167, 14);
+			contentPanel.add(lblFechaRegistro);
+		}
+		{
+			lblNumeroDeReproducciones = new JLabel("Numero de Reproducciones:");
+			lblNumeroDeReproducciones.setBounds(241, 36, 184, 14);
+			contentPanel.add(lblNumeroDeReproducciones);
+		}
+		{
+			lblEstado = new JLabel("Estado:");
+			lblEstado.setBounds(241, 61, 46, 14);
+			contentPanel.add(lblEstado);
+		}
+		{
+			txtIdCancion = new JTextField();
+			txtIdCancion.setEditable(false);
+			txtIdCancion.setBounds(120, 8, 111, 20);
+			contentPanel.add(txtIdCancion);
+			txtIdCancion.setColumns(10);
+		}
+		{
+			txtNombre = new JTextField();
+			txtNombre.setEditable(false);
+			txtNombre.setColumns(10);
+			txtNombre.setBounds(120, 33, 111, 20);
+			contentPanel.add(txtNombre);
+		}
+		{
+			txtIdArtista = new JTextField();
+			txtIdArtista.setEditable(false);
+			txtIdArtista.setColumns(10);
+			txtIdArtista.setBounds(120, 58, 111, 20);
+			contentPanel.add(txtIdArtista);
+		}
+		{
+			txtAlbum = new JTextField();
+			txtAlbum.setEditable(false);
+			txtAlbum.setColumns(10);
+			txtAlbum.setBounds(120, 83, 111, 20);
+			contentPanel.add(txtAlbum);
+		}
+		{
+			txtFecRegistro = new JTextField();
+			txtFecRegistro.setEditable(false);
+			txtFecRegistro.setColumns(10);
+			txtFecRegistro.setBounds(408, 8, 111, 20);
+			contentPanel.add(txtFecRegistro);
+		}
+		{
+			txtNumReproducion = new JTextField();
+			txtNumReproducion.setEditable(false);
+			txtNumReproducion.setColumns(10);
+			txtNumReproducion.setBounds(408, 33, 111, 20);
+			contentPanel.add(txtNumReproducion);
+		}
+		
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(this);
+		btnConsultar.setBounds(850, 32, 97, 23);
+		contentPanel.add(btnConsultar);
+		
+		btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(this);
+		btnModificar.setBounds(850, 57, 97, 23);
+		contentPanel.add(btnModificar);
+		
+		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(this);
+		btnEliminar.setBounds(850, 82, 97, 23);
+		contentPanel.add(btnEliminar);
+		
+		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(this);
+		btnAceptar.setEnabled(false);
+		btnAceptar.setBounds(529, 32, 97, 23);
+		contentPanel.add(btnAceptar);
+		
+		cmbEstado = new JComboBox<String>();
+		cmbEstado.setEnabled(false);
+		cmbEstado.setModel(new DefaultComboBoxModel<String>(new String[] {"Inhabilitado", "Habilitado"}));
+		cmbEstado.setBounds(408, 58, 111, 20);
+		contentPanel.add(cmbEstado);
+		
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(this);
+		btnNuevo.setBounds(850, 6, 97, 25);
+		contentPanel.add(btnNuevo);
+		
+		btnOpciones = new JButton("Opciones");
+		btnOpciones.addActionListener(this);
+		btnOpciones.setEnabled(false);
+		btnOpciones.setBounds(743, 8, 97, 95);
+		contentPanel.add(btnOpciones);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(this);
+		btnBuscar.setEnabled(false);
+		btnBuscar.setBounds(529, 6, 97, 25);
+		contentPanel.add(btnBuscar);
+		
+			scrollPane = new JScrollPane();
+			scrollPane.setBounds(10, 111, 937, 281);
+			contentPanel.add(scrollPane);
+			{
+				tbResultado = new JTable();
+				tbResultado.setFillsViewportHeight(true);
+				scrollPane.setViewportView(tbResultado);
+				
+				modelo =  new DefaultTableModel();
+				modelo.addColumn("ID Canción");
+				modelo.addColumn("Nombre");
+				modelo.addColumn("ID Artista");
+				modelo.addColumn("Album");
+				modelo.addColumn("Fecha Registro");
+				modelo.addColumn("Nº reproducción");
+				modelo.addColumn("Estado");
+				tbResultado.setModel(modelo);
+				modelo.setRowCount(0);
+				
+			}
+		}
+		
+		
+		
+	
+	
+	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnConsultar) {
+			actionPerformedBtnConsultar(arg0);
+		}
+		if (arg0.getSource() == btnModificar) {
+			actionPerformedBtnModificar(arg0);
+		}
+		if (arg0.getSource() == btnEliminar) {
+			actionPerformedBntEliminar(arg0);
+		}
+		if (arg0.getSource() == btnNuevo) {
+			actionPerformedBtnNuevo(arg0);
+		}
+		if (arg0.getSource() == btnAceptar) {
+			actionPerformedBtnAceptar(arg0);
+		}
+		if (arg0.getSource() == btnOpciones) {
+			actionPerformedBtnOpciones(arg0);
+		}
+		if (arg0.getSource() == btnBuscar) {
+			actionPerformedBtnBuscar(arg0);
+		}
+	}
+	protected void actionPerformedBtnModificar(ActionEvent arg0) {
+	}
+	protected void actionPerformedBtnConsultar(ActionEvent arg0) {
+	}
+	public void actionPerformedBntEliminar(ActionEvent arg0) {
+	}
+	public void actionPerformedBtnNuevo(ActionEvent arg0) {
+	}
+	public void actionPerformedBtnAceptar(ActionEvent arg0) {
+	}
+	public void actionPerformedBtnOpciones(ActionEvent arg0) {
+	}
+	public void actionPerformedBtnBuscar(ActionEvent arg0) {
+	}
+	
+	
+}
