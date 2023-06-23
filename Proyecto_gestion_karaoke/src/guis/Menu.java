@@ -200,7 +200,7 @@ public class Menu extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformedUsuario(ActionEvent e) {
-		Usuario usu = new Usuario();
+		manteUsuario usu = new manteUsuario();
 		usu.setVisible(true);
 	}
 	

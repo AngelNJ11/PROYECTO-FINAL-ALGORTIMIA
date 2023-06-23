@@ -19,7 +19,7 @@ public class ClasePedidos {
 	
 	private String idPedido;
 	private Date fechaPedido;
-	private int idUsuario = usuario.getIdUsuario();
+	private String idUsuario = usuario.getIdUsuario();
 	private String idCliente = cliente.getIdCliente();
 	private int estado;
 	
@@ -33,7 +33,7 @@ public class ClasePedidos {
 
 
 
-	public ClasePedidos(String idPedido, Date fechaPedido, int idUsuario, String idCliente, int estado) {
+	public ClasePedidos(String idPedido, Date fechaPedido, String idUsuario, String idCliente, int estado) {
 		this.idPedido = idPedido;
 		this.fechaPedido = fechaPedido;
 		this.idUsuario = idUsuario;
@@ -72,14 +72,14 @@ public class ClasePedidos {
 
 
 
-	public int getIdUsuario() {
+	public String getIdUsuario() {
 		return idUsuario;
 	}
 
 
 
 
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 

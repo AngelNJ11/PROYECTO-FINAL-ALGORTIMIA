@@ -21,7 +21,7 @@ import javax.swing.table.TableColumnModel;
 import arreglos.ArreUsuarios;
 import clases.ClaseUsuarios;
 
-public class Usuario extends JFrame implements ActionListener {
+public class manteUsuario extends JFrame implements ActionListener {
 
 	/**
 	 * 
@@ -71,7 +71,7 @@ public class Usuario extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Usuario frame = new Usuario();
+					manteUsuario frame = new manteUsuario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -83,7 +83,7 @@ public class Usuario extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public Usuario() {
+	public manteUsuario() {
 		setTitle("Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 970, 526);
@@ -229,7 +229,6 @@ public class Usuario extends JFrame implements ActionListener {
 		modelo.addColumn("Turno"); 
 		tbResultado.setModel(modelo);
 		modelo.setRowCount(0); 
-		
 		ajustarAnchoColumnas();
 		listar();
 		
@@ -291,7 +290,7 @@ public class Usuario extends JFrame implements ActionListener {
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
-		txtIdUsuario.setText("" + are.codigoCorrelativo());
+		txtIdUsuario.setText("" + are.codigoCorrelativo(are.tamanio()-1));
 		habilitarEntradas(true);
 		habilitarBotones(false);
 		txtNombre.requestFocus();
@@ -317,7 +316,7 @@ public class Usuario extends JFrame implements ActionListener {
 	
 	void adicionarPersona() {
 			
-		int codigo = leerCodigo();
+		String codigo = leerCodigo();
 		String nombre =  leerNombre();
 		if(nombre.length() > 0){
 			String appa = leerApPa();
@@ -388,7 +387,7 @@ public class Usuario extends JFrame implements ActionListener {
 	}
 	void consultarPersona(){
 		try {
-			int codigo = leerCodigo();
+			String codigo = leerCodigo();
 			ClaseUsuarios x = are.buscacod(codigo);
 			if (x != null) {
 				txtNombre.setText(x.getNombres());
@@ -421,7 +420,7 @@ public class Usuario extends JFrame implements ActionListener {
 	
 	void eliminarPersona() {
 		try {
-			int codigo = leerCodigo();
+			String codigo = leerCodigo();
 			ClaseUsuarios x = are.buscacod(codigo);
 			if (x != null) {
 				int ok = confirmar("� Desea eliminar el registro ?");
@@ -521,8 +520,8 @@ public class Usuario extends JFrame implements ActionListener {
 	
 	
 	//
-	int leerCodigo() {
-		return Integer.parseInt(txtIdUsuario.getText().trim());
+	String leerCodigo() {
+		return txtIdUsuario.getText().trim();
 	}
 	
 	String leerNombre() {
