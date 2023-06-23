@@ -261,18 +261,18 @@ public class Usuario extends JFrame implements ActionListener {
 		consultarPersona();
 	}
 	public void actionPerformedbtnAceptar(ActionEvent e) {
-			switch (tipoOperacion) {
-			case ADICIONAR:
-				adicionarPersona();
-				break;
-			case CONSULTAR:
-				consultarPersona();
-				break;
-			case MODIFICAR:
-				modificarPersona();
-				break;
-			case ELIMINAR:
-				adicionarPersona();
+		switch (tipoOperacion) {
+		case ADICIONAR:
+			adicionarPersona();
+			break;
+		case CONSULTAR:
+			consultarPersona();
+			break;
+		case MODIFICAR:
+			modificarPersona();
+			break;
+		case ELIMINAR:
+			adicionarPersona();
 		}
 	}
 	public void actionPerformedbtnOpciones(ActionEvent e) {
@@ -328,16 +328,20 @@ public class Usuario extends JFrame implements ActionListener {
 							if(are.buscacod(codigo) == null)
 								try{
 									int empleado = leerEmpleado();
-									int turno = leerTurno();
-									ClaseUsuarios cla = new ClaseUsuarios(codigo, nombre, appa, apma, empleado, login, password, turno);
-									are.adicionar(cla);
-									listar();
-									txtIdUsuario.setText("" + are.codigoCorrelativo());
-									txtNombre.setText("");
-									txtApPa.setText("");
-									txtApMa.setText("");
-									txtLogin.setText("");
-									txtPassword.setText("");
+									try{
+										int turno = leerTurno();
+										ClaseUsuarios cla = new ClaseUsuarios(codigo, nombre, appa, apma, empleado, login, password, turno);
+										are.adicionar(cla);
+										listar();
+										txtIdUsuario.setText("" + are.codigoCorrelativo());
+										txtNombre.setText("");
+										txtApPa.setText("");
+										txtApMa.setText("");
+										
+										
+									}catch(Exception e){
+										
+									}
 								}
 								catch (Exception e) {
 									// TODO: handle exception
@@ -345,9 +349,7 @@ public class Usuario extends JFrame implements ActionListener {
 							}
 						}		
 					}
-				}
-			
-		
+				}	
 	}
 	
 
