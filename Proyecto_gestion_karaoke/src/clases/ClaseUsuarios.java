@@ -2,7 +2,7 @@ package clases;
 
 public class ClaseUsuarios {
 
-	private  int idUsuario;
+	private  String idUsuario;
 	private  String nombres;
 	private  String apellidoPaterno;
 	private  String apellidoMaterno;
@@ -14,7 +14,7 @@ public class ClaseUsuarios {
 	public ClaseUsuarios() {
 	}
 	
-	public ClaseUsuarios(int idUsuario, String nombres, String apellidoPaterno, String apellidoMaternoo, int tipoEmpleado,
+	public ClaseUsuarios(String idUsuario, String nombres, String apellidoPaterno, String apellidoMaternoo, int tipoEmpleado,
 			String login, String password, int turno) {
 		this.idUsuario = idUsuario;
 		this.nombres = nombres;
@@ -27,12 +27,12 @@ public class ClaseUsuarios {
 	}
 
 
-	public int getIdUsuario() {
+	public String getIdUsuario() {
 		return idUsuario;
 	}
 
 
-	public void setIdUsuario(int idUsuario) {
+	public void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 
