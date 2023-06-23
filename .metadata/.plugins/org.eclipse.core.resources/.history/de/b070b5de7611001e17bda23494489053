@@ -55,7 +55,7 @@ public class Usuario extends JFrame implements ActionListener {
 	private JTable tbResultado;
 	private DefaultTableModel modelo;
 	
-	// Tipo de operaciï¿½n a procesar: Adicionar, Consultar, Modificar o Eliminar
+	// Tipo de operación a procesar: Adicionar, Consultar, Modificar o Eliminar
 	private int tipoOperacion;
 	
 	// Constantes para los tipos de operaciones
@@ -375,7 +375,6 @@ public class Usuario extends JFrame implements ActionListener {
 					x.setTurno(turno);
 					listar();
 					txtNombre.requestFocus();
-					limpieza();
 				}catch (Exception e) {
 					error("pipipipip", txtIdUsuario);
 				}
@@ -386,6 +385,7 @@ public class Usuario extends JFrame implements ActionListener {
 			error("pipipipip", txtIdUsuario);
 			}
 	}
+	
 	void consultarPersona(){
 		try {
 			int codigo = leerCodigo();
@@ -404,6 +404,7 @@ public class Usuario extends JFrame implements ActionListener {
 					btnBuscar.setEnabled(false);
 					btnAceptar.setEnabled(true);
 					txtNombre.requestFocus();
+					limpieza();
 				}
 				if (tipoOperacion == ELIMINAR) {
 					txtIdUsuario.setEditable(false);
@@ -412,10 +413,10 @@ public class Usuario extends JFrame implements ActionListener {
 				}
 			}
 			else
-				error("El cï¿½digo " + codigo + " no existe", txtIdUsuario);
+				error("El código " + codigo + " no existe", txtIdUsuario);
 		}
 		catch (Exception e) {
-			error("Ingrese Cï¿½DIGO correcto", txtIdUsuario);
+			error("Ingrese CÓDIGO correcto", txtIdUsuario);
 		}
 	}
 	
@@ -424,7 +425,7 @@ public class Usuario extends JFrame implements ActionListener {
 			int codigo = leerCodigo();
 			ClaseUsuarios x = are.buscacod(codigo);
 			if (x != null) {
-				int ok = confirmar("ï¿½ Desea eliminar el registro ?");
+				int ok = confirmar("¿ Desea eliminar el registro ?");
 				if (ok == 0) {
 					are.eliminar(x);
 					listar();
@@ -433,21 +434,21 @@ public class Usuario extends JFrame implements ActionListener {
 				}
 			}
 			else
-				error("El cï¿½digo " + codigo + " no existe", txtIdUsuario);
+				error("El código " + codigo + " no existe", txtIdUsuario);
 		}
 		catch (Exception e) {
-			error("Ingrese Cï¿½DIGO correcto", txtIdUsuario);
+			error("Ingrese CÓDIGO correcto", txtIdUsuario);
 		}	
 	}
 	
 	void ajustarAnchoColumnas() {
 		TableColumnModel tcm = tbResultado.getColumnModel();
-		tcm.getColumn(0).setPreferredWidth(anchoColumna( 8));  
-		tcm.getColumn(1).setPreferredWidth(anchoColumna(18));  
-		tcm.getColumn(2).setPreferredWidth(anchoColumna(10));  
-		tcm.getColumn(3).setPreferredWidth(anchoColumna(10));  
-		tcm.getColumn(4).setPreferredWidth(anchoColumna(15));  
-		tcm.getColumn(5).setPreferredWidth(anchoColumna(12));  
+		tcm.getColumn(0).setPreferredWidth(anchoColumna( 8));  // codigo
+		tcm.getColumn(1).setPreferredWidth(anchoColumna(18));  // nombre
+		tcm.getColumn(2).setPreferredWidth(anchoColumna(10));  // dni
+		tcm.getColumn(3).setPreferredWidth(anchoColumna(10));  // peso
+		tcm.getColumn(4).setPreferredWidth(anchoColumna(15));  // estatura
+		tcm.getColumn(5).setPreferredWidth(anchoColumna(12));  // estadoCivil
 	}
 	int anchoColumna(int porcentaje) {
 		return porcentaje * scrollPane.getWidth() / 100;
@@ -549,7 +550,7 @@ public class Usuario extends JFrame implements ActionListener {
 	//
 	//
 	void mensaje(String s) {
-		JOptionPane.showMessageDialog(this, s, "Informaciï¿½n", 0);
+		JOptionPane.showMessageDialog(this, s, "Información", 0);
 	}
 	
 	void error(String s, JTextField txt) {
