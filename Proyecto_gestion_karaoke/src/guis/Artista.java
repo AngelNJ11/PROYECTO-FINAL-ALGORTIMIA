@@ -57,7 +57,7 @@ public class Artista extends JDialog {
 	 */
 	public Artista() {
 		setTitle("Artista");
-		setBounds(100, 100, 740, 510);
+		setBounds(100, 100, 726, 510);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -85,29 +85,29 @@ public class Artista extends JDialog {
 		
 		txtIdArtista = new JTextField();
 		txtIdArtista.setEditable(false);
-		txtIdArtista.setBounds(117, 8, 123, 20);
+		txtIdArtista.setBounds(142, 8, 123, 20);
 		contentPanel.add(txtIdArtista);
 		txtIdArtista.setColumns(10);
 		
 		txtNomArtista = new JTextField();
 		txtNomArtista.setColumns(10);
-		txtNomArtista.setBounds(117, 33, 123, 20);
+		txtNomArtista.setBounds(142, 33, 123, 20);
 		contentPanel.add(txtNomArtista);
 		
 		txtdGenero = new JTextField();
 		txtdGenero.setEditable(false);
 		txtdGenero.setColumns(10);
-		txtdGenero.setBounds(117, 58, 123, 20);
+		txtdGenero.setBounds(142, 58, 123, 20);
 		contentPanel.add(txtdGenero);
 		
 		txtFechaRegisto = new JTextField();
 		txtFechaRegisto.setColumns(10);
-		txtFechaRegisto.setBounds(117, 83, 123, 20);
+		txtFechaRegisto.setBounds(142, 83, 123, 20);
 		contentPanel.add(txtFechaRegisto);
 		
 		cbmEstado = new JComboBox<String>();
 		cbmEstado.setModel(new DefaultComboBoxModel<String>(new String[] {"Inhabilitado", "Habilitado"}));
-		cbmEstado.setBounds(117, 108, 123, 20);
+		cbmEstado.setBounds(142, 109, 123, 20);
 		contentPanel.add(cbmEstado);
 		
 		btnListar = new JButton("Listar");
@@ -123,7 +123,8 @@ public class Artista extends JDialog {
 		contentPanel.add(btnEliminar);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(252, 32, 97, 23);
+		btnAceptar.setEnabled(false);
+		btnAceptar.setBounds(276, 32, 97, 23);
 		contentPanel.add(btnAceptar);
 		
 		scrollPane = new JScrollPane();
@@ -134,7 +135,8 @@ public class Artista extends JDialog {
 		scrollPane.setViewportView(table);
 		
 		btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(252, 6, 97, 25);
+		btnBuscar.setEnabled(false);
+		btnBuscar.setBounds(276, 6, 97, 25);
 		contentPanel.add(btnBuscar);
 		
 		btnNewButton = new JButton("Nuevo");
@@ -142,6 +144,7 @@ public class Artista extends JDialog {
 		contentPanel.add(btnNewButton);
 		
 		btnOpciones = new JButton("Opciones");
+		btnOpciones.setEnabled(false);
 		btnOpciones.setBounds(473, 6, 140, 95);
 		contentPanel.add(btnOpciones);
 	}
