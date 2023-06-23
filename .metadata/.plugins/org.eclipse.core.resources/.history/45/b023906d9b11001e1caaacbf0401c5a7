@@ -16,11 +16,12 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import arreglos.ArreUsuarios;
 import clases.ClaseUsuarios;
 
-public class Usuario extends JFrame implements ActionListener {
+public class manteUsuario extends JFrame implements ActionListener {
 
 	/**
 	 * 
@@ -54,7 +55,7 @@ public class Usuario extends JFrame implements ActionListener {
 	private JTable tbResultado;
 	private DefaultTableModel modelo;
 	
-	// Tipo de operación a procesar: Adicionar, Consultar, Modificar o Eliminar
+	// Tipo de operaciï¿½n a procesar: Adicionar, Consultar, Modificar o Eliminar
 	private int tipoOperacion;
 	
 	// Constantes para los tipos de operaciones
@@ -70,7 +71,7 @@ public class Usuario extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Usuario frame = new Usuario();
+					manteUsuario frame = new manteUsuario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -82,7 +83,7 @@ public class Usuario extends JFrame implements ActionListener {
 	/**
 	 * Create the frame.
 	 */
-	public Usuario() {
+	public manteUsuario() {
 		setTitle("Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 970, 526);
@@ -96,15 +97,15 @@ public class Usuario extends JFrame implements ActionListener {
 		contentPane.add(lblIdUsuario);
 		
 		lblApellidoMaterno = new JLabel("Apellido Materno :");
-		lblApellidoMaterno.setBounds(10, 61, 120, 14);
+		lblApellidoMaterno.setBounds(10, 86, 120, 14);
 		contentPane.add(lblApellidoMaterno);
 		
 		lblApellidoPaterno = new JLabel("Apellido Paterno :");
-		lblApellidoPaterno.setBounds(10, 36, 120, 14);
+		lblApellidoPaterno.setBounds(10, 61, 120, 14);
 		contentPane.add(lblApellidoPaterno);
 		
 		lblNombres = new JLabel("Nombres :");
-		lblNombres.setBounds(10, 86, 120, 14);
+		lblNombres.setBounds(10, 36, 120, 14);
 		contentPane.add(lblNombres);
 		
 		lblTipoDeEmpleado = new JLabel("Tipo de empleado :");
@@ -132,19 +133,19 @@ public class Usuario extends JFrame implements ActionListener {
 		txtApPa = new JTextField();
 		txtApPa.setEditable(false);
 		txtApPa.setColumns(10);
-		txtApPa.setBounds(140, 33, 120, 20);
+		txtApPa.setBounds(140, 58, 120, 20);
 		contentPane.add(txtApPa);
 		
 		txtApMa = new JTextField();
 		txtApMa.setEditable(false);
 		txtApMa.setColumns(10);
-		txtApMa.setBounds(140, 58, 120, 20);
+		txtApMa.setBounds(140, 83, 120, 20);
 		contentPane.add(txtApMa);
 		
 		txtNombre = new JTextField();
 		txtNombre.setEditable(false);
 		txtNombre.setColumns(10);
-		txtNombre.setBounds(140, 83, 120, 20);
+		txtNombre.setBounds(140, 33, 120, 20);
 		contentPane.add(txtNombre);
 		
 		txtLogin = new JTextField();
@@ -228,7 +229,8 @@ public class Usuario extends JFrame implements ActionListener {
 		modelo.addColumn("Turno"); 
 		tbResultado.setModel(modelo);
 		modelo.setRowCount(0); 
-		
+		ajustarAnchoColumnas();
+		listar();
 		
 	}
 	ArreUsuarios are =  new ArreUsuarios();
@@ -260,21 +262,20 @@ public class Usuario extends JFrame implements ActionListener {
 		consultarPersona();
 	}
 	public void actionPerformedbtnAceptar(ActionEvent e) {
-		switch (tipoOperacion) {
-		case ADICIONAR:
-			adicionarPersona();
-			break;
-		case CONSULTAR:
-			consultarPersona();
-			break;
-		case MODIFICAR:
-			modificarPersona();
-			break;
-		case ELIMINAR:
-			adicionarPersona();
+			switch (tipoOperacion) {
+			case ADICIONAR:
+				adicionarPersona();
+				break;
+			case CONSULTAR:
+				consultarPersona();
+				break;
+			case MODIFICAR:
+				modificarPersona();
+				break;
+			case ELIMINAR:
+				eliminarPersona();
+		}
 	}
-	}
-
 	public void actionPerformedbtnOpciones(ActionEvent e) {
 		txtIdUsuario.setText("");
 		txtApPa.setText("");
@@ -285,80 +286,119 @@ public class Usuario extends JFrame implements ActionListener {
 		txtIdUsuario.setEditable(false);
 		habilitarEntradas(false);
 		habilitarBotones(true);
+		limpieza();
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
-		txtIdUsuario.setText("" + are.codigoCorrelativo());
+		txtIdUsuario.setText("" + are.codigoCorrelativo(are.tamanio()-1));
 		habilitarEntradas(true);
 		habilitarBotones(false);
 		txtNombre.requestFocus();
 	}
 	public void actionPerformedbtnConsultar(ActionEvent e) {
+		tipoOperacion = CONSULTAR;
+		txtIdUsuario.setEditable(true);
+		habilitarBotones(false);
+		txtIdUsuario.requestFocus();
 	}
 	public void actionPerformedbtnModificar(ActionEvent e) {
+		tipoOperacion = MODIFICAR;
+		txtIdUsuario.setEditable(true);
+		habilitarBotones(false);
+		txtIdUsuario.requestFocus();
 	}
 	public void actionPerformedbtnEliminar(ActionEvent e) {
+		tipoOperacion = ELIMINAR;
+		txtIdUsuario.setEditable(true);
+		habilitarBotones(false);
+		txtIdUsuario.requestFocus();
 	}
 	
-	
-	
-	
-	
-	
-	
-
-	void modificarPersona() {
-			
-		}
-
 	void adicionarPersona() {
-		
-		if (are.buscacod(leerCodigo()) == null) {
-			try {
-				int idusu = leerCodigo();
-				String appa = leerApPa();
+			
+		String codigo = leerCodigo();
+		String nombre =  leerNombre();
+		if(nombre.length() > 0){
+			String appa = leerApPa();
+			if(appa.length() > 0){
 				String apma = leerApMa();
-				String nombre = leerNombre();
-				int empleado = leerEmpleado();
-				String login = leerLogin();
-				String password = LeerPassword();
-				int turno = leerTurno();
-				
-				ClaseUsuarios cla = new ClaseUsuarios(
-						idusu,nombre,appa,
-						apma,empleado, login, password, turno);
-				
-				are.adicionar(cla);
-				listar();
-				txtIdUsuario.setText("" + are.codigoCorrelativo());
-				txtNombre.setText("");
-				txtApPa.setText("");
-				txtApMa.setText("");
-				txtLogin.setText("");
-				txtPassword.setText("");
-				txtApPa.requestFocus();
-			}
-			catch (Exception e) {
-				error("dsfsdfs",txtIdUsuario);
-			}
-		}
-	
+				if(apma.length() > 0){
+					String login =  leerLogin();
+					if(login.length() > 0){
+						String password = LeerPassword();
+						if(password.length() > 0){
+							if(are.buscacod(codigo) == null)
+									try{
+										int empleado = leerEmpleado();
+										int turno = leerTurno();
+										ClaseUsuarios cla = new ClaseUsuarios(codigo, nombre, appa, apma, empleado, login, password, turno);
+										are.adicionar(cla);
+										listar();
+										limpieza();
+									}
+									catch (Exception e) {
+										mensaje("pipipipipipipipipipi");
+									}
+								}else
+									error("Password no ingresado", txtPassword);
+							}else
+								error("Login no ingresado", txtPassword);
+						}else
+							error("Apellido materno no registrado", txtApMa);
+					}else
+						error("Apellido paterno no registrado", txtApPa);
+				}else
+					error("Nombre no registrado", txtNombre);
 	}
 	
+
+	
+	void modificarPersona() {
+		try {
+			ClaseUsuarios x = are.buscacod(leerCodigo());
+			if(x != null){
+				try{
+					String password =  LeerPassword();
+					String login = leerLogin();
+					String apma = leerApMa();
+					String nombre = leerNombre();
+					String appa = leerApPa();
+					int empleado = leerEmpleado();
+					int turno = leerTurno();
+					x.setNombres(nombre);
+					x.setApellidoPaterno(appa);
+					x.setApellidoMaternoo(apma);
+					x.setTipoEmpleado(empleado);
+					x.setLogin(login);
+					x.setPassword(password);
+					x.setTurno(turno);
+					listar();
+					txtNombre.requestFocus();
+					limpieza();
+				}catch (Exception e) {
+					error("pipipipip", txtIdUsuario);
+				}
+					
+			}
+			
+		}catch (Exception e) {
+			error("pipipipip", txtIdUsuario);
+			}
+	}
 	void consultarPersona(){
 		try {
-			int codigo = leerCodigo();
+			String codigo = leerCodigo();
 			ClaseUsuarios x = are.buscacod(codigo);
 			if (x != null) {
+				txtNombre.setText(x.getNombres());
 				txtApPa.setText(x.getApellidoPaterno());
 				txtApMa.setText(x.getApellidoMaternoo());
-				txtNombre.setText(x.getNombres());
 				cmbEmpleado.setSelectedIndex(x.getTipoEmpleado());
 				txtLogin.setText(x.getLogin());
 				txtPassword.setText(x.getPassword());
 				cmbTurno.setSelectedIndex(x.getTurno());
 				if (tipoOperacion == MODIFICAR) {
-					habilitarEntradas(true);
+					habilitarEntradaModificar(true);
 					txtIdUsuario.setEditable(false);
 					btnBuscar.setEnabled(false);
 					btnAceptar.setEnabled(true);
@@ -371,23 +411,48 @@ public class Usuario extends JFrame implements ActionListener {
 				}
 			}
 			else
-				error("El código " + codigo + " no existe", txtIdUsuario);
+				error("El cï¿½digo " + codigo + " no existe", txtIdUsuario);
 		}
 		catch (Exception e) {
-			error("Ingrese CÓDIGO correcto", txtIdUsuario);
+			error("Ingrese Cï¿½DIGO correcto", txtIdUsuario);
 		}
 	}
 	
+	void eliminarPersona() {
+		try {
+			String codigo = leerCodigo();
+			ClaseUsuarios x = are.buscacod(codigo);
+			if (x != null) {
+				int ok = confirmar("ï¿½ Desea eliminar el registro ?");
+				if (ok == 0) {
+					are.eliminar(x);
+					listar();
+					btnAceptar.setEnabled(false);
+					limpieza();
+				}
+			}
+			else
+				error("El cï¿½digo " + codigo + " no existe", txtIdUsuario);
+		}
+		catch (Exception e) {
+			error("Ingrese Cï¿½DIGO correcto", txtIdUsuario);
+		}	
+	}
 	
-	void limpieza() {
-		txtIdUsuario.setText("");
-		txtApPa.setText("");
-		txtApMa.setText("");
-		txtNombre.setText("");
-		txtLogin.setText("");
-		txtPassword.setText("");
-		txtIdUsuario.requestFocus();
-	}	
+	void ajustarAnchoColumnas() {
+		TableColumnModel tcm = tbResultado.getColumnModel();
+		tcm.getColumn(0).setPreferredWidth(anchoColumna( 8));  
+		tcm.getColumn(1).setPreferredWidth(anchoColumna(18));  
+		tcm.getColumn(2).setPreferredWidth(anchoColumna(10));  
+		tcm.getColumn(3).setPreferredWidth(anchoColumna(10));  
+		tcm.getColumn(4).setPreferredWidth(anchoColumna(15));  
+		tcm.getColumn(5).setPreferredWidth(anchoColumna(12));  
+	}
+	int anchoColumna(int porcentaje) {
+		return porcentaje * scrollPane.getWidth() / 100;
+	}
+	
+	
 	
 	void listar() {
 		ClaseUsuarios x;
@@ -403,11 +468,62 @@ public class Usuario extends JFrame implements ActionListener {
 			modelo.addRow(fila);
 		}
 	}
+	void limpieza() {
+		txtIdUsuario.setText("");
+		txtNombre.setText("");
+		txtApPa.setText("");
+		txtApMa.setText("");
+		txtLogin.setText("");
+		txtPassword.setText("");
+		txtNombre.requestFocus();
+	}	
 	
-	int leerCodigo() {
-		return Integer.parseInt(txtIdUsuario.getText().trim());
+	
+	void habilitarEntradas(boolean sino) {
+		if (tipoOperacion == ADICIONAR){
+			txtNombre.setEditable(sino);
+			txtApPa.setEditable(sino);
+			txtApMa.setEditable(sino);
+			cmbEmpleado.setEnabled(sino);
+			txtLogin.setEditable(sino);
+			txtPassword.setEditable(sino);
+			cmbTurno.setEnabled(sino);
+		}
 	}
+	
+	void habilitarEntradaModificar(boolean sino){
+		if (tipoOperacion == MODIFICAR){
+			txtNombre.setEditable(sino);
+			txtApPa.setEditable(sino);
+			txtApMa.setEditable(sino);
+			cmbEmpleado.setEnabled(sino);
+			txtLogin.setEditable(sino);
+			txtPassword.setEditable(sino);
+			cmbTurno.setEnabled(sino);
+		}
+	}
+	
+	void habilitarBotones(boolean sino) {
+		if (tipoOperacion == ADICIONAR){
+			btnAceptar.setEnabled(!sino);
+		}
+		else {
+			btnBuscar.setEnabled(!sino);
+			btnAceptar.setEnabled(false);
+		}	
+		btnNuevo.setEnabled(sino);
+		btnConsultar.setEnabled(sino);
+		btnModificar.setEnabled(sino);
+		btnEliminar.setEnabled(sino);
+		btnOpciones.setEnabled(!sino);	
+	}
+	
+	
 	//
+	String leerCodigo() {
+		return txtIdUsuario.getText().trim();
+	}
+	
 	String leerNombre() {
 		return txtNombre.getText().trim();
 	}
@@ -418,10 +534,10 @@ public class Usuario extends JFrame implements ActionListener {
 		return (txtApMa.getText().trim());
 	}
 	String leerLogin() {
-		return (txtApPa.getText().trim());
+		return (txtLogin.getText().trim());
 	}
 	String LeerPassword() {
-		return (txtApPa.getText().trim());
+		return (txtPassword.getText().trim());
 	}
 	int leerEmpleado(){
 		return cmbEmpleado.getSelectedIndex();
@@ -432,13 +548,17 @@ public class Usuario extends JFrame implements ActionListener {
 	//
 	//
 	void mensaje(String s) {
-		JOptionPane.showMessageDialog(this, s, "Información", 0);
+		JOptionPane.showMessageDialog(this, s, "Informaciï¿½n", 0);
 	}
 	
 	void error(String s, JTextField txt) {
 		mensaje(s);
 		txt.setText("");
 		txt.requestFocus();
+	}
+	
+	int confirmar(String s) {
+		return JOptionPane.showConfirmDialog(this, s, "Alerta", 0, 1, null);
 	}
 	//
 	String empleadoCargo(int i) {
@@ -449,28 +569,4 @@ public class Usuario extends JFrame implements ActionListener {
 		return cmbTurno.getItemAt(i);
 	}
 
-	
-	
-	void habilitarEntradas(boolean sino) {
-		if (tipoOperacion == ADICIONAR)
-			txtApPa.setEditable(sino);
-			txtApMa.setEditable(sino);
-			txtNombre.setEditable(sino);
-			txtLogin.setEditable(sino);
-			txtPassword.setEditable(sino);
-			cmbTurno.setEnabled(sino);
-			cmbEmpleado.setEditable(sino);
-	}
-	void habilitarBotones(boolean sino) {
-		if (tipoOperacion == ADICIONAR)
-			btnAceptar.setEnabled(!sino);
-		else {
-			btnBuscar.setEnabled(!sino);
-			btnAceptar.setEnabled(false);
-		}	
-		btnConsultar.setEnabled(sino);
-		btnModificar.setEnabled(sino);
-		btnEliminar.setEnabled(sino);
-		btnOpciones.setEnabled(!sino);		
-	}
 }

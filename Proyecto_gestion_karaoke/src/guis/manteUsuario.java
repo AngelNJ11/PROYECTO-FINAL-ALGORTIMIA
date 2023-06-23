@@ -229,6 +229,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 		modelo.addColumn("Turno"); 
 		tbResultado.setModel(modelo);
 		modelo.setRowCount(0); 
+		
 		ajustarAnchoColumnas();
 		listar();
 		
@@ -290,7 +291,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
-		txtIdUsuario.setText("" + are.codigoCorrelativo(are.tamanio()-1));
+		txtIdUsuario.setText("" + are.codigoCorrelativo());
 		habilitarEntradas(true);
 		habilitarBotones(false);
 		txtNombre.requestFocus();
@@ -316,7 +317,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 	
 	void adicionarPersona() {
 			
-		String codigo = leerCodigo();
+		int codigo = leerCodigo();
 		String nombre =  leerNombre();
 		if(nombre.length() > 0){
 			String appa = leerApPa();
@@ -387,7 +388,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 	}
 	void consultarPersona(){
 		try {
-			String codigo = leerCodigo();
+			int codigo = leerCodigo();
 			ClaseUsuarios x = are.buscacod(codigo);
 			if (x != null) {
 				txtNombre.setText(x.getNombres());
@@ -411,19 +412,19 @@ public class manteUsuario extends JFrame implements ActionListener {
 				}
 			}
 			else
-				error("El cï¿½digo " + codigo + " no existe", txtIdUsuario);
+				error("El código " + codigo + " no existe", txtIdUsuario);
 		}
 		catch (Exception e) {
-			error("Ingrese Cï¿½DIGO correcto", txtIdUsuario);
+			error("Ingrese CÓDIGO correcto", txtIdUsuario);
 		}
 	}
 	
 	void eliminarPersona() {
 		try {
-			String codigo = leerCodigo();
+			int codigo = leerCodigo();
 			ClaseUsuarios x = are.buscacod(codigo);
 			if (x != null) {
-				int ok = confirmar("ï¿½ Desea eliminar el registro ?");
+				int ok = confirmar("¿ Desea eliminar el registro ?");
 				if (ok == 0) {
 					are.eliminar(x);
 					listar();
@@ -432,10 +433,10 @@ public class manteUsuario extends JFrame implements ActionListener {
 				}
 			}
 			else
-				error("El cï¿½digo " + codigo + " no existe", txtIdUsuario);
+				error("El código " + codigo + " no existe", txtIdUsuario);
 		}
 		catch (Exception e) {
-			error("Ingrese Cï¿½DIGO correcto", txtIdUsuario);
+			error("Ingrese CÓDIGO correcto", txtIdUsuario);
 		}	
 	}
 	
@@ -520,8 +521,8 @@ public class manteUsuario extends JFrame implements ActionListener {
 	
 	
 	//
-	String leerCodigo() {
-		return txtIdUsuario.getText().trim();
+	int leerCodigo() {
+		return Integer.parseInt(txtIdUsuario.getText().trim());
 	}
 	
 	String leerNombre() {
