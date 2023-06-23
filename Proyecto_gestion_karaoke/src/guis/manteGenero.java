@@ -14,7 +14,7 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Genero extends JDialog implements ActionListener {
+public class manteGenero extends JDialog implements ActionListener {
 
 	/**
 	 * 
@@ -37,14 +37,14 @@ public class Genero extends JDialog implements ActionListener {
 	private JButton btnOpciones;
 	private JButton btnNuevo;
 	private JButton btnAceptar;
-	private JButton btnListar;
+	private JButton btnConsultar;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		try {
-			Genero dialog = new Genero();
+			manteGenero dialog = new manteGenero();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -55,7 +55,7 @@ public class Genero extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public Genero() {
+	public manteGenero() {
 		setTitle("Genero");
 		setBounds(100, 100, 806, 505);
 		getContentPane().setLayout(new BorderLayout());
@@ -130,9 +130,9 @@ public class Genero extends JDialog implements ActionListener {
 		btnAceptar.setBounds(252, 31, 97, 25);
 		contentPanel.add(btnAceptar);
 		
-		btnListar = new JButton("Listar");
-		btnListar.setBounds(679, 31, 97, 25);
-		contentPanel.add(btnListar);
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.setBounds(679, 31, 97, 25);
+		contentPanel.add(btnConsultar);
 	}
 	public void actionPerformed(ActionEvent arg0) {
 	}

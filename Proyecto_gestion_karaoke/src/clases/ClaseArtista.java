@@ -2,38 +2,38 @@ package clases;
 
 import java.sql.Date;
 
-public class ClaseArtista {
+
+public class ClaseArtista{
 
 	ClaseGenero genero = new ClaseGenero();
 	// ART001
 	private String idArtista;
 	private String nombreArtistico;
-	private final String idgenero = genero.getIdGenero();
 	private Date fechaRegistro;
-	private boolean estado = true;
+	private String idGenero = genero.getIdGenero();
+	private boolean estado;
 
-	public ClaseArtista(ClaseGenero genero, String idArtista, String nombreArtistico, Date fechaRegistro,
-			boolean estado) {
 
-		this.genero = genero;
+	
+	
+	
+	
+	public ClaseArtista() {
+		super();
+	}
+
+
+
+	public ClaseArtista(String idArtista, String nombreArtistico, Date fechaRegistro,String idGenero, boolean estado) {
 		this.idArtista = idArtista;
 		this.nombreArtistico = nombreArtistico;
 		this.fechaRegistro = fechaRegistro;
+		this.idGenero = idGenero;
 		this.estado = estado;
 	}
+
+
 	
-	public ClaseArtista(){
-		
-	}
-
-	public ClaseGenero getGenero() {
-		return genero;
-	}
-
-	public void setGenero(ClaseGenero genero) {
-		this.genero = genero;
-	}
-
 	public String getIdArtista() {
 		return idArtista;
 	}
@@ -41,7 +41,7 @@ public class ClaseArtista {
 	public void setIdArtista(String idArtista) {
 		this.idArtista = idArtista;
 	}
-
+	
 	public String getNombreArtistico() {
 		return nombreArtistico;
 	}
@@ -57,6 +57,14 @@ public class ClaseArtista {
 	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
+	
+	public String getIdGenero() {
+		return idGenero;
+	}
+
+	public void setIdGenero(String idGenero) {
+		this.idGenero = idGenero;
+	}
 
 	public boolean isEstado() {
 		return estado;
@@ -66,24 +74,7 @@ public class ClaseArtista {
 		this.estado = estado;
 	}
 
-	public String getIdgenero() {
-		return idgenero;
-	}
-
-	public String correlativ(int pos) {
-		String artis = "ART" + String.format("%03d", pos);
-		return artis;
-	}
-
-	/*public int Registrofecha(){
-		int dd = getDay();
-		int mm = getMonth();
-		int aaaa = getYear();
-		
-	 return dd + "/" + mm + "/" + aaaa;
-	}*/
-	
-	public String ObsEstado(){	
+	public String estado(boolean estado){	
 		if (estado) {
 			return "Habilitado";	
 		}

@@ -49,6 +49,11 @@ public class ArreUsuarios {
 		else
 			return obtener(tamanio()-1).getIdUsuario() + 1;		
 	}
+	
+	public String correlativ(String codigo) {
+		String usu = "USU" + String.format("%02d", codigo);
+		return usu;
+	}
 
 	
 	

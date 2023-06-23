@@ -14,7 +14,7 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Cliente extends JDialog implements ActionListener {
+public class manteCliente extends JDialog implements ActionListener {
 
 	/**
 	 * 
@@ -55,7 +55,7 @@ public class Cliente extends JDialog implements ActionListener {
 	 */
 	public static void main(String[] args) {
 		try {
-			Cliente dialog = new Cliente();
+			manteCliente dialog = new manteCliente();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -66,7 +66,7 @@ public class Cliente extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public Cliente() {
+	public manteCliente() {
 		setTitle("Cliente");
 		setBounds(100, 100, 1014, 550);
 		getContentPane().setLayout(new BorderLayout());

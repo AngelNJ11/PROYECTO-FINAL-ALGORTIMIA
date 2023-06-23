@@ -39,7 +39,7 @@ public class ArreBebidas {
 	}
 	
 	public String correlativ(String codigo) {
-		String bebid = "BEB" + String.format("%02d", codigo);
-		return bebid;
+		String beb = "BEB" + String.format("%02d", codigo);
+		return beb;
 	}
 }

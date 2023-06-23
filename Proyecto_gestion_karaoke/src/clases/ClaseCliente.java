@@ -9,12 +9,13 @@ public class ClaseCliente {
 	private  String nombres;
 	private  String apellidoPaterno;
 	private  String apellidoMaternoo;
-	private  String dni;
+	private  String direccion;
 	private  Date fechaNacimiento;
 	private  Date fechaAfilacion;
 	//S = soltero  C = Casado  V = Viudo D = Divorciado  N = No especificada 
 	private  String estadoCivil;
 	private  String telefono;
+	private  String dni;
 	//0 = Estandar  1 = Bronce  2 = Plata 3 = Oro  4 = Diamante
 	private int tipoDelCliente;
 	
@@ -27,20 +28,25 @@ public class ClaseCliente {
 							
 	}
 
-	public ClaseCliente(String idCliente, String nombres, String apellidoPaterno, 
-			       String apellidoMaternoo, String dni, Date fechaNacimiento, Date fechaAfilacion,
-			  	   String estadoCivil, String telefono, int tipoDelCliente) {
+	
+
+	public ClaseCliente(String idCliente, String nombres, String apellidoPaterno, String apellidoMaternoo,
+			String direccion, Date fechaNacimiento, Date fechaAfilacion, String estadoCivil, String telefono,
+			String dni, int tipoDelCliente) {
 		this.idCliente = idCliente;
 		this.nombres = nombres;
 		this.apellidoPaterno = apellidoPaterno;
 		this.apellidoMaternoo = apellidoMaternoo;
-		this.dni = dni;
+		this.direccion = direccion;
 		this.fechaNacimiento = fechaNacimiento;
 		this.fechaAfilacion = fechaAfilacion;
 		this.estadoCivil = estadoCivil;
 		this.telefono = telefono;
+		this.dni = dni;
 		this.tipoDelCliente = tipoDelCliente;
 	}
+
+
 
 	public String getIdCliente() {
 		return idCliente;
@@ -122,38 +128,36 @@ public class ClaseCliente {
 		this.tipoDelCliente = tipoDelCliente;
 	}
 	
-	public String correlativo(int codigo) {
-		String newcodigos = "CLI" + String.format("%02d", codigo);
-		return newcodigos;
-	}
 	
-	public String obsCivil(int estado){
+	public String estadoCivil(int estado){
 	    switch (estado) {
+	        case 0:
+	        	return "Soltero";
 	        case 1:
-	        	return "S";
+	            return  "Casado";
 	        case 2:
-	            return  "C";
+	            return "Viudo";
 	        case 3:
-	            return "V";
-	        case 4:
-	            return "D";
+	            return "Divorciodo";
 	        default:
 	        	return "No especifica";
 	    }
 	}
-	public int obsTipoCli(int tipo){
+	public String tipoDeCliente(int tipo){
 
 	    switch (tipo) {
 	        case 0:
-	            return 0;
+	            return "Estandar";
 	        case 1:
-	        	return 1;
+	        	return "Bronce";
 	        case 2:
-	        	return 2;
+	        	return "Plata";
 	        case 3:
-	        	return  3;
+	        	return  "Oro";
+	        case 4:
+	        	return "Diamante";
 	        default:
-	        	return 4;
+	        	return null;
 	    }
 	}
 	

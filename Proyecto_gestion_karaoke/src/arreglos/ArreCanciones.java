@@ -38,6 +38,11 @@ public class ArreCanciones {
 		return null;
 	}
 	
+	public String correlativ(String codigo) {
+		String can = "CAN" + String.format("%03d", codigo);
+		return can;
+	}
+	
 	
 	
 }

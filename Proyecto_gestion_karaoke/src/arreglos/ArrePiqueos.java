@@ -38,7 +38,7 @@ public class ArrePiqueos {
 	}
 	
 	public String correlativ(int codigo){
-		String cod = "PIQ" + String.format("%02d", codigo);
-		return cod;
+		String piq = "PIQ" + String.format("%02d", codigo);
+		return piq;
 	}
 }

@@ -101,11 +101,11 @@ public class ClasePiqueo {
 		}
 	}
 	
-	public String obsEstado(){
+	public String estado(boolean estado){	
 		if (estado) {
-			return "Habilitado";
+			return "Habilitado";	
 		}
-		else {
+		else{
 			return "Inhabilitado";
 		}
 	}

@@ -14,7 +14,7 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Cancion extends JDialog implements ActionListener {
+public class manteCancion extends JDialog implements ActionListener {
 
 	/**
 	 * 
@@ -34,7 +34,7 @@ public class Cancion extends JDialog implements ActionListener {
 	private JLabel lblFechaRegistro;
 	private JLabel lblNumeroDeReproducciones;
 	private JLabel lblEstado;
-	private JComboBox<String> comboBox;
+	private JComboBox<String> cmbEstado;
 	private JButton btnAceptar;
 	private JButton btnConsultar;
 	private JButton btnModificar;
@@ -50,7 +50,7 @@ public class Cancion extends JDialog implements ActionListener {
 	 */
 	public static void main(String[] args) {
 		try {
-			Cancion dialog = new Cancion();
+			manteCancion dialog = new manteCancion();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -61,15 +61,15 @@ public class Cancion extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public Cancion() {
+	public manteCancion() {
 		setTitle("Cancion");
-		setBounds(100, 100, 926, 454);
+		setBounds(100, 100, 910, 442);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			lblNewLabel = new JLabel("Id Cancion:");
+			lblNewLabel = new JLabel("ID Cancion:");
 			lblNewLabel.setBounds(10, 11, 100, 14);
 			contentPanel.add(lblNewLabel);
 		}
@@ -90,12 +90,12 @@ public class Cancion extends JDialog implements ActionListener {
 		}
 		{
 			lblFechaRegistro = new JLabel("Fecha Registro:");
-			lblFechaRegistro.setBounds(241, 11, 89, 14);
+			lblFechaRegistro.setBounds(241, 11, 167, 14);
 			contentPanel.add(lblFechaRegistro);
 		}
 		{
 			lblNumeroDeReproducciones = new JLabel("Numero de Reproducciones:");
-			lblNumeroDeReproducciones.setBounds(241, 36, 167, 14);
+			lblNumeroDeReproducciones.setBounds(241, 36, 184, 14);
 			contentPanel.add(lblNumeroDeReproducciones);
 		}
 		{
@@ -132,18 +132,18 @@ public class Cancion extends JDialog implements ActionListener {
 		{
 			txtFecRegistro = new JTextField();
 			txtFecRegistro.setColumns(10);
-			txtFecRegistro.setBounds(410, 8, 111, 20);
+			txtFecRegistro.setBounds(437, 5, 111, 20);
 			contentPanel.add(txtFecRegistro);
 		}
 		{
 			txtNumReproducion = new JTextField();
 			txtNumReproducion.setColumns(10);
-			txtNumReproducion.setBounds(410, 33, 111, 20);
+			txtNumReproducion.setBounds(437, 30, 111, 20);
 			contentPanel.add(txtNumReproducion);
 		}
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 164, 886, 230);
+		scrollPane.setBounds(10, 131, 886, 263);
 		contentPanel.add(scrollPane);
 		{
 			table = new JTable();
@@ -165,24 +165,27 @@ public class Cancion extends JDialog implements ActionListener {
 		contentPanel.add(btnEliminar);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(533, 32, 97, 23);
+		btnAceptar.setEnabled(false);
+		btnAceptar.setBounds(560, 34, 97, 23);
 		contentPanel.add(btnAceptar);
 		
-		comboBox = new JComboBox<String>();
-		comboBox.setModel(new DefaultComboBoxModel<String>(new String[] {"Inhabilitado", "Habilitado"}));
-		comboBox.setBounds(410, 58, 111, 20);
-		contentPanel.add(comboBox);
+		cmbEstado = new JComboBox<String>();
+		cmbEstado.setModel(new DefaultComboBoxModel<String>(new String[] {"Inhabilitado", "Habilitado"}));
+		cmbEstado.setBounds(437, 55, 111, 20);
+		contentPanel.add(cmbEstado);
 		
 		btnNuevo = new JButton("Nuevo");
 		btnNuevo.setBounds(799, 6, 97, 25);
 		contentPanel.add(btnNuevo);
 		
 		btnOpciones = new JButton("Opciones");
+		btnOpciones.setEnabled(false);
 		btnOpciones.setBounds(690, 6, 97, 95);
 		contentPanel.add(btnOpciones);
 		
 		btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(533, 6, 97, 25);
+		btnBuscar.setEnabled(false);
+		btnBuscar.setBounds(560, 8, 97, 25);
 		contentPanel.add(btnBuscar);
 	}
 	public void actionPerformed(ActionEvent arg0) {

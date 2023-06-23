@@ -20,7 +20,7 @@ import clases.ClaseUsuarios;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class Bebidas extends JDialog implements ActionListener {
+public class manteBebidas extends JDialog implements ActionListener {
 
 	/**
 	 * 
@@ -63,7 +63,7 @@ public class Bebidas extends JDialog implements ActionListener {
 	 */
 	public static void main(String[] args) {
 		try {
-			Bebidas dialog = new Bebidas();
+			manteBebidas dialog = new manteBebidas();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -74,7 +74,7 @@ public class Bebidas extends JDialog implements ActionListener {
 	/**
 	 * Create the dialog.
 	 */
-	public Bebidas() {
+	public manteBebidas() {
 		setTitle("Bebida");
 		setBounds(100, 100, 824, 450);
 		

@@ -11,9 +11,11 @@ public class ClaseUsuarios {
 	private  String password;		
 	private  int turno;
 	
+	public ClaseUsuarios() {
+	}
+	
 	public ClaseUsuarios(int idUsuario, String nombres, String apellidoPaterno, String apellidoMaternoo, int tipoEmpleado,
 			String login, String password, int turno) {
-		super();
 		this.idUsuario = idUsuario;
 		this.nombres = nombres;
 		this.apellidoPaterno = apellidoPaterno;
@@ -24,9 +26,6 @@ public class ClaseUsuarios {
 		this.turno = turno;
 	}
 
-	public ClaseUsuarios() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public int getIdUsuario() {
 		return idUsuario;
@@ -108,11 +107,11 @@ public class ClaseUsuarios {
 	}
 	
 	public String nombreComple(){
-		return nombres + " " + apellidoPaterno + " " + apellidoMaterno;
+		return String.format("%s %s %s", nombres, apellidoPaterno, apellidoMaterno);
 	}
 	
-	public String cargo(int tipo){
-		switch(tipo){
+	public String cargo(int tipoEmpleado){
+		switch(tipoEmpleado){
 		case 0:
 			return "Administrador";
 		case 1:
@@ -127,9 +126,9 @@ public class ClaseUsuarios {
 	public String turno(int turno){
 		switch (turno){
 		case 0:
-			return "Tarde";
+			return "Tarde(3am-9pm)";
 		case 1: 
-			return "Noche";
+			return "Noche(9pm-3am)";
 		default:
 			return "No tiene";
 		}

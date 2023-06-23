@@ -4,9 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ClaseGenero {
+	
+					//GEN01
 	private  String idGenero;
 	private  String descripcion;
-	private  int epoca = 2012;
+	private  int epoca;
 	private  boolean estado;
 	
 	
@@ -55,12 +57,8 @@ public class ClaseGenero {
 		this.estado = estado;
 	}
 
-	public String correlativoGenero(int codigo){
-		String cod = "GEN" + String.format("%03d", codigo);
-		return cod;
-	}
 	
-	public String ObsEstado(){	
+	public String estado(boolean estado){	
 		if (estado) {
 			return "Habilitado";	
 		}
@@ -69,7 +67,7 @@ public class ClaseGenero {
 		}
 	}
 	
-	public static SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/YYYY");
+	public static SimpleDateFormat ano=new SimpleDateFormat("dd/MM/YYYY");
 	
 	public void fechaEpoca(){
 		Date fechaActual = new Date();
@@ -77,7 +75,7 @@ public class ClaseGenero {
 	}
 	
 	public static String DateString(Date fecha){
-		String fechaCadena = sdf.format(fecha);
+		String fechaCadena = ano.format(fecha);
 		return fechaCadena;
 	}
 	

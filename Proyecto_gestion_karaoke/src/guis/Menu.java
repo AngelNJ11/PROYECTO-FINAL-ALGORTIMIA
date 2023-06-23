@@ -205,32 +205,32 @@ public class Menu extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformedCliente(ActionEvent e) {
-		Cliente cli = new Cliente();
+		manteCliente cli = new manteCliente();
 		cli.setVisible(true);
 	}
 	
 	public void actionPerformedGenero(ActionEvent e) {
-		Genero gen = new Genero();
+		manteGenero gen = new manteGenero();
 		gen.setVisible(true);
 	}
 	
 	public void actionPerformedArtista(ActionEvent e) {
-		Artista art = new Artista();
+		manteArtista art = new manteArtista();
 		art.setVisible(true);
 	}
 	
 	public void actionPerformedCancion(ActionEvent e) {
-		Cancion can = new Cancion();
+		manteCancion can = new manteCancion();
 		can.setVisible(true);
 	}
 	
 	public void actionPerformedBebida(ActionEvent e) {
-		Bebidas beb = new Bebidas();
+		manteBebidas beb = new manteBebidas();
 		beb.setVisible(true);
 	}
 	
 	public void actionPerformedPiqueo(ActionEvent e) {
-		Piqueo piq = new Piqueo();
+		mantePiqueo piq = new mantePiqueo();
 		piq.setVisible(true);
 	}
 	

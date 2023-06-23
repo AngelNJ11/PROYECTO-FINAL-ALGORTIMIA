@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.DefaultComboBoxModel;
 
-public class Artista extends JDialog {
+public class manteArtista extends JDialog {
 
 	/**
 	 * 
@@ -32,11 +32,10 @@ public class Artista extends JDialog {
 	private JScrollPane scrollPane;
 	private JButton btnAceptar;
 	private JComboBox<String> cbmEstado;
-	private JButton btnListar;
+	private JButton btnConsultar;
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private JButton btnBuscar;
-	private JButton btnNewButton;
 	private JButton btnOpciones;
 
 	/**
@@ -44,7 +43,7 @@ public class Artista extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			Artista dialog = new Artista();
+			manteArtista dialog = new manteArtista();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -55,7 +54,7 @@ public class Artista extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Artista() {
+	public manteArtista() {
 		setTitle("Artista");
 		setBounds(100, 100, 726, 510);
 		getContentPane().setLayout(new BorderLayout());
@@ -110,16 +109,16 @@ public class Artista extends JDialog {
 		cbmEstado.setBounds(142, 109, 123, 20);
 		contentPanel.add(cbmEstado);
 		
-		btnListar = new JButton("Listar");
-		btnListar.setBounds(625, 32, 89, 23);
-		contentPanel.add(btnListar);
+		btnConsultar = new JButton("Consultar");
+		btnConsultar.setBounds(625, 11, 89, 23);
+		contentPanel.add(btnConsultar);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(625, 57, 89, 23);
+		btnModificar.setBounds(625, 36, 89, 23);
 		contentPanel.add(btnModificar);
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(625, 82, 89, 23);
+		btnEliminar.setBounds(625, 61, 89, 23);
 		contentPanel.add(btnEliminar);
 		
 		btnAceptar = new JButton("Aceptar");
@@ -138,10 +137,6 @@ public class Artista extends JDialog {
 		btnBuscar.setEnabled(false);
 		btnBuscar.setBounds(276, 6, 97, 25);
 		contentPanel.add(btnBuscar);
-		
-		btnNewButton = new JButton("Nuevo");
-		btnNewButton.setBounds(625, 6, 89, 25);
-		contentPanel.add(btnNewButton);
 		
 		btnOpciones = new JButton("Opciones");
 		btnOpciones.setEnabled(false);
