@@ -20,7 +20,7 @@ public class ArrePiqueos {
 		piqueo.add(x);
 	}
 	
-	public int tamano() {
+	public int tamanio() {
 		return piqueo.size();
 	}
 	
@@ -37,8 +37,14 @@ public class ArrePiqueos {
 		return null;
 	}
 	
-	public String correlativ(int codigo){
-		String piq = "PIQ" + String.format("%02d", codigo);
-		return piq;
+	public String generarCodigoCorrelativo(String codigoAnterior) {
+		if (tamanio() == 0) {
+			return "PIQ001";
+		}else {
+			String codigo = codigoAnterior.substring(3);
+		    int correlativo = Integer.parseInt(codigo) + 1; 
+		    String nuevoCodigo = "PIQ" + String.format("%03d", correlativo); 
+		    return nuevoCodigo;
+		}
 	}
 }

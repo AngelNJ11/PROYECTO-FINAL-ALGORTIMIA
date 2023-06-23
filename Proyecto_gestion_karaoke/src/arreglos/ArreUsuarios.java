@@ -7,19 +7,21 @@ import clases.ClaseUsuarios;
 public class ArreUsuarios {
 	
 	private ArrayList<ClaseUsuarios> usuarioList;
+	private int index;
 
 	public ArreUsuarios(){
 		usuarioList = new ArrayList<ClaseUsuarios>();
-		adicionar(new ClaseUsuarios(1001, "Arue", "Palma", "Casavarde", 0, "aruepalma", "arue123", 1));
-		adicionar(new ClaseUsuarios(1002, "Gustavo", "Osorio", "Hernandez", 1, "gosoher", "1234", 0));
-		adicionar(new ClaseUsuarios(1003, "Jennifer", "Vilcapuma", "Chevarria", 2, "jvilche", "1234", 1));
-		adicionar(new ClaseUsuarios(1004, "Rosa", "Ugarte", "Villafuerte", 2, "rugavil", "1234", 0));
-		adicionar(new ClaseUsuarios(1005, "Felipe", "Hurtado", "Solis", 1, "fhursol", "1234", 1));
-		adicionar(new ClaseUsuarios(1006, "jaun", "mendes", "Lopez", 2, "juan12", "12345",0));
+		adicionar(new ClaseUsuarios("USU001", "Arue", "Palma", "Casavarde", 0, "aruepalma", "arue123", 1));
+		adicionar(new ClaseUsuarios("USU002", "Gustavo", "Osorio", "Hernandez", 1, "gosoher", "1234", 0));
+		adicionar(new ClaseUsuarios("USU003", "Jennifer", "Vilcapuma", "Chevarria", 2, "jvilche", "1234", 1));
+		adicionar(new ClaseUsuarios("USU004", "Rosa", "Ugarte", "Villafuerte", 2, "rugavil", "1234", 0));
+		adicionar(new ClaseUsuarios("USU005", "Felipe", "Hurtado", "Solis", 1, "fhursol", "1234", 1));
+		adicionar(new ClaseUsuarios("USU006", "jaun", "mendes", "Lopez", 2, "juan12", "12345",0));
 	}
 	
 	public void adicionar(ClaseUsuarios x){
 		usuarioList.add(x);
+		index++;
 	}
 	
 	public int tamanio(){
@@ -34,25 +36,26 @@ public class ArreUsuarios {
 		usuarioList.remove(x);
 	}
 	
-	public ClaseUsuarios buscacod(int codigo){
+	public ClaseUsuarios buscacod(String codigo){
 		for(ClaseUsuarios usuario : usuarioList){
-			if(usuario.getIdUsuario() == codigo){
+			if(usuario.getIdUsuario().equals(codigo)){
 				return usuario;
 			}
 		}
 		return null;
 	}
 	
-	public int codigoCorrelativo() {
-		if (tamanio() == 0)
-			return 1001;
-		else
-			return obtener(tamanio()-1).getIdUsuario() + 1;		
-	}
+
 	
-	public String correlativ(String codigo) {
-		String usu = "USU" + String.format("%02d", codigo);
-		return usu;
+	public String generarCodigoCorrelativo(String codigoAnterior) {
+		if (tamanio() == 0) {
+			return "USU001";
+		}else {
+			String codigo = codigoAnterior.substring(3);
+		    int correlativo = Integer.parseInt(codigo) + 1; 
+		    String nuevoCodigo = "USU" + String.format("%03d", correlativo); 
+		    return nuevoCodigo;
+		}
 	}
 
 	

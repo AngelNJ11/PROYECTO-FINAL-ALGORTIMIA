@@ -291,7 +291,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
-		txtIdUsuario.setText("" + are.codigoCorrelativo());
+		txtIdUsuario.setText(are.generarCodigoCorrelativo(are.obtener(are.tamanio()-1).getIdUsuario()));
 		habilitarEntradas(true);
 		habilitarBotones(false);
 		txtNombre.requestFocus();
@@ -317,7 +317,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 	
 	void adicionarPersona() {
 			
-		int codigo = leerCodigo();
+		String codigo = leerCodigo();
 		String nombre =  leerNombre();
 		if(nombre.length() > 0){
 			String appa = leerApPa();
@@ -388,7 +388,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 	}
 	void consultarPersona(){
 		try {
-			int codigo = leerCodigo();
+			String codigo = leerCodigo();
 			ClaseUsuarios x = are.buscacod(codigo);
 			if (x != null) {
 				txtNombre.setText(x.getNombres());
@@ -412,19 +412,19 @@ public class manteUsuario extends JFrame implements ActionListener {
 				}
 			}
 			else
-				error("El código " + codigo + " no existe", txtIdUsuario);
+				error("El cï¿½digo " + codigo + " no existe", txtIdUsuario);
 		}
 		catch (Exception e) {
-			error("Ingrese CÓDIGO correcto", txtIdUsuario);
+			error("Ingrese Cï¿½DIGO correcto", txtIdUsuario);
 		}
 	}
 	
 	void eliminarPersona() {
 		try {
-			int codigo = leerCodigo();
+			String codigo = leerCodigo();
 			ClaseUsuarios x = are.buscacod(codigo);
 			if (x != null) {
-				int ok = confirmar("¿ Desea eliminar el registro ?");
+				int ok = confirmar("ï¿½ Desea eliminar el registro ?");
 				if (ok == 0) {
 					are.eliminar(x);
 					listar();
@@ -433,10 +433,10 @@ public class manteUsuario extends JFrame implements ActionListener {
 				}
 			}
 			else
-				error("El código " + codigo + " no existe", txtIdUsuario);
+				error("El cï¿½digo " + codigo + " no existe", txtIdUsuario);
 		}
 		catch (Exception e) {
-			error("Ingrese CÓDIGO correcto", txtIdUsuario);
+			error("Ingrese Cï¿½DIGO correcto", txtIdUsuario);
 		}	
 	}
 	
@@ -521,8 +521,8 @@ public class manteUsuario extends JFrame implements ActionListener {
 	
 	
 	//
-	int leerCodigo() {
-		return Integer.parseInt(txtIdUsuario.getText().trim());
+	String leerCodigo() {
+		return txtIdUsuario.getText().trim();
 	}
 	
 	String leerNombre() {

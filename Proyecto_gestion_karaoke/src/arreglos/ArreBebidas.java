@@ -38,18 +38,16 @@ public class ArreBebidas {
 		return null;
 	}
 	
-	public String correlativ(String codigo) {
-		String beb = "BEB" + String.format("%02d", codigo);
-		return beb;
-	}
 
-	public String codigoCorrelativo(int codigo) {
-		if (tamanio() == 0)
-			return "GEN01";
-		else {
-			String beb = "GEN" + String.format("0", codigo);
-			return beb;	
+
+	public String generarCodigoCorrelativo(String codigoAnterior) {
+		if (tamanio() == 0) {
+			return "BEB001";
+		}else {
+			String codigo = codigoAnterior.substring(3);
+		    int correlativo = Integer.parseInt(codigo) + 1; 
+		    String nuevoCodigo = "BEB" + String.format("%03d", correlativo); 
+		    return nuevoCodigo;
 		}
-			
 	}
 }

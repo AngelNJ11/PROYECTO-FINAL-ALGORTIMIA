@@ -20,7 +20,7 @@ public class ArreCanciones {
 		cancion.add(x);
 	}
 	
-	public int tamano() {
+	public int tamanio() {
 		return cancion.size();
 	}
 	
@@ -38,9 +38,15 @@ public class ArreCanciones {
 		return null;
 	}
 	
-	public String correlativ(String codigo) {
-		String can = "CAN" + String.format("%03d", codigo);
-		return can;
+	public String generarCodigoCorrelativo(String codigoAnterior) {
+		if (tamanio() == 0) {
+			return "CAN0001";
+		}else {
+			String codigo = codigoAnterior.substring(3);
+		    int correlativo = Integer.parseInt(codigo) + 1; 
+		    String nuevoCodigo = "CAN" + String.format("%04d", correlativo); 
+		    return nuevoCodigo;
+		}
 	}
 	
 	
