@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javax.swing.JDialog"/>
-<fullyQualifiedTypeName name="clases.ClaseUsuarios"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="arreglos.ArreCanciones"/>
 <fullyQualifiedTypeName name="arreglos.ArreBebidas"/>
 <fullyQualifiedTypeName name="arreglos.ArrePiqueos"/>
+<fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+<fullyQualifiedTypeName name="javax.swing.DefaultComboBoxModel"/>
 <fullyQualifiedTypeName name="arreglos.ArreUsuarios"/>
+<fullyQualifiedTypeName name="clases.ClaseUsuarios"/>
 </qualifiedTypeNameHistroy>
