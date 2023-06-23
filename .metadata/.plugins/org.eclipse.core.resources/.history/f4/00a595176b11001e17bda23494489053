@@ -287,7 +287,6 @@ public class Usuario extends JFrame implements ActionListener {
 		txtIdUsuario.setEditable(false);
 		habilitarEntradas(false);
 		habilitarBotones(true);
-		limpieza();
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
@@ -356,35 +355,41 @@ public class Usuario extends JFrame implements ActionListener {
 	
 	void modificarPersona() {
 		try {
-			ClaseUsuarios x = are.buscacod(leerCodigo());
+			int codigo = leerCodigo();
+			ClaseUsuarios x = are.buscacod(codigo);
 			if(x != null){
-				try{
-					String password =  LeerPassword();
-					String login = leerLogin();
-					String apma = leerApMa();
-					String nombre = leerNombre();
+				String nombre = leerNombre();
+				if(nombre.length() > 0){
 					String appa = leerApPa();
-					int empleado = leerEmpleado();
-					int turno = leerTurno();
-					x.setNombres(nombre);
-					x.setApellidoPaterno(appa);
-					x.setApellidoMaternoo(apma);
-					x.setTipoEmpleado(empleado);
-					x.setLogin(login);
-					x.setPassword(password);
-					x.setTurno(turno);
-					listar();
-					txtNombre.requestFocus();
-					limpieza();
-				}catch (Exception e) {
-					error("pipipipip", txtIdUsuario);
-				}
-					
+					if(appa.length() > 0){
+						String apma = leerApMa();
+						if(apma.length() > 0){
+							String login = leerLogin();
+							if(login.length() > 0){
+								String password =  LeerPassword();
+								if(password.length() > 0){
+									try {
+										int empleado = leerEmpleado();
+										int turno = leerTurno();
+										x.setNombres(nombre);
+										x.setApellidoPaterno(appa);
+										x.setApellidoMaternoo(apma);
+										x.setTipoEmpleado(empleado);
+										x.setLogin(login);
+										x.setPassword(password);
+										x.setTurno(turno);
+									} catch (Exception e) {
+										// TODO: handle exception
+									}
+								}
+							}
+						}
+					}
+				}	
 			}
-			
-		}catch (Exception e) {
-			error("pipipipip", txtIdUsuario);
-			}
+		} catch (Exception e) {
+			error("El código no existe ", txtIdUsuario);
+		}
 	}
 	void consultarPersona(){
 		try {
@@ -399,7 +404,7 @@ public class Usuario extends JFrame implements ActionListener {
 				txtPassword.setText(x.getPassword());
 				cmbTurno.setSelectedIndex(x.getTurno());
 				if (tipoOperacion == MODIFICAR) {
-					habilitarEntradaModificar(true);
+					habilitarEntradas(true);
 					txtIdUsuario.setEditable(false);
 					btnBuscar.setEnabled(false);
 					btnAceptar.setEnabled(true);
@@ -491,19 +496,6 @@ public class Usuario extends JFrame implements ActionListener {
 			cmbTurno.setEnabled(sino);
 		}
 	}
-	
-	void habilitarEntradaModificar(boolean sino){
-		if (tipoOperacion == MODIFICAR){
-			txtNombre.setEditable(sino);
-			txtApPa.setEditable(sino);
-			txtApMa.setEditable(sino);
-			cmbEmpleado.setEnabled(sino);
-			txtLogin.setEditable(sino);
-			txtPassword.setEditable(sino);
-			cmbTurno.setEnabled(sino);
-		}
-	}
-	
 	void habilitarBotones(boolean sino) {
 		if (tipoOperacion == ADICIONAR){
 			btnAceptar.setEnabled(!sino);
@@ -535,10 +527,10 @@ public class Usuario extends JFrame implements ActionListener {
 		return (txtApMa.getText().trim());
 	}
 	String leerLogin() {
-		return (txtLogin.getText().trim());
+		return (txtApPa.getText().trim());
 	}
 	String LeerPassword() {
-		return (txtPassword.getText().trim());
+		return (txtApPa.getText().trim());
 	}
 	int leerEmpleado(){
 		return cmbEmpleado.getSelectedIndex();

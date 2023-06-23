@@ -375,7 +375,6 @@ public class Usuario extends JFrame implements ActionListener {
 					x.setTurno(turno);
 					listar();
 					txtNombre.requestFocus();
-					limpieza();
 				}catch (Exception e) {
 					error("pipipipip", txtIdUsuario);
 				}

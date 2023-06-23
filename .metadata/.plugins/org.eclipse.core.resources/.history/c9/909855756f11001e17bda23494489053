@@ -287,7 +287,6 @@ public class Usuario extends JFrame implements ActionListener {
 		txtIdUsuario.setEditable(false);
 		habilitarEntradas(false);
 		habilitarBotones(true);
-		limpieza();
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
@@ -375,7 +374,6 @@ public class Usuario extends JFrame implements ActionListener {
 					x.setTurno(turno);
 					listar();
 					txtNombre.requestFocus();
-					limpieza();
 				}catch (Exception e) {
 					error("pipipipip", txtIdUsuario);
 				}
@@ -386,6 +384,8 @@ public class Usuario extends JFrame implements ActionListener {
 			error("pipipipip", txtIdUsuario);
 			}
 	}
+
+
 	void consultarPersona(){
 		try {
 			int codigo = leerCodigo();
@@ -399,7 +399,7 @@ public class Usuario extends JFrame implements ActionListener {
 				txtPassword.setText(x.getPassword());
 				cmbTurno.setSelectedIndex(x.getTurno());
 				if (tipoOperacion == MODIFICAR) {
-					habilitarEntradaModificar(true);
+					habilitarEntradas(true);
 					txtIdUsuario.setEditable(false);
 					btnBuscar.setEnabled(false);
 					btnAceptar.setEnabled(true);
@@ -491,19 +491,6 @@ public class Usuario extends JFrame implements ActionListener {
 			cmbTurno.setEnabled(sino);
 		}
 	}
-	
-	void habilitarEntradaModificar(boolean sino){
-		if (tipoOperacion == MODIFICAR){
-			txtNombre.setEditable(sino);
-			txtApPa.setEditable(sino);
-			txtApMa.setEditable(sino);
-			cmbEmpleado.setEnabled(sino);
-			txtLogin.setEditable(sino);
-			txtPassword.setEditable(sino);
-			cmbTurno.setEnabled(sino);
-		}
-	}
-	
 	void habilitarBotones(boolean sino) {
 		if (tipoOperacion == ADICIONAR){
 			btnAceptar.setEnabled(!sino);

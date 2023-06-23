@@ -274,7 +274,7 @@ public class Usuario extends JFrame implements ActionListener {
 				modificarPersona();
 				break;
 			case ELIMINAR:
-				eliminarPersona();
+				adicionarPersona();
 		}
 	}
 	public void actionPerformedbtnOpciones(ActionEvent e) {
@@ -287,7 +287,6 @@ public class Usuario extends JFrame implements ActionListener {
 		txtIdUsuario.setEditable(false);
 		habilitarEntradas(false);
 		habilitarBotones(true);
-		limpieza();
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
@@ -335,7 +334,12 @@ public class Usuario extends JFrame implements ActionListener {
 										ClaseUsuarios cla = new ClaseUsuarios(codigo, nombre, appa, apma, empleado, login, password, turno);
 										are.adicionar(cla);
 										listar();
-										limpieza();
+										txtIdUsuario.setText("" + are.codigoCorrelativo());
+										txtNombre.setText("");
+										txtApPa.setText("");
+										txtApMa.setText("");
+										txtLogin.setText("");
+										txtPassword.setText("");
 									}
 									catch (Exception e) {
 										mensaje("pipipipipipipipipipi");
@@ -356,35 +360,41 @@ public class Usuario extends JFrame implements ActionListener {
 	
 	void modificarPersona() {
 		try {
-			ClaseUsuarios x = are.buscacod(leerCodigo());
+			int codigo = leerCodigo();
+			ClaseUsuarios x = are.buscacod(codigo);
 			if(x != null){
-				try{
-					String password =  LeerPassword();
-					String login = leerLogin();
-					String apma = leerApMa();
-					String nombre = leerNombre();
+				String nombre = leerNombre();
+				if(nombre.length() > 0){
 					String appa = leerApPa();
-					int empleado = leerEmpleado();
-					int turno = leerTurno();
-					x.setNombres(nombre);
-					x.setApellidoPaterno(appa);
-					x.setApellidoMaternoo(apma);
-					x.setTipoEmpleado(empleado);
-					x.setLogin(login);
-					x.setPassword(password);
-					x.setTurno(turno);
-					listar();
-					txtNombre.requestFocus();
-					limpieza();
-				}catch (Exception e) {
-					error("pipipipip", txtIdUsuario);
-				}
-					
+					if(appa.length() > 0){
+						String apma = leerApMa();
+						if(apma.length() > 0){
+							String login = leerLogin();
+							if(login.length() > 0){
+								String password =  LeerPassword();
+								if(password.length() > 0){
+									try {
+										int empleado = leerEmpleado();
+										int turno = leerTurno();
+										x.setNombres(nombre);
+										x.setApellidoPaterno(appa);
+										x.setApellidoMaternoo(apma);
+										x.setTipoEmpleado(empleado);
+										x.setLogin(login);
+										x.setPassword(password);
+										x.setTurno(turno);
+									} catch (Exception e) {
+										// TODO: handle exception
+									}
+								}
+							}
+						}
+					}
+				}	
 			}
-			
-		}catch (Exception e) {
-			error("pipipipip", txtIdUsuario);
-			}
+		} catch (Exception e) {
+			error("El código no existe ", txtIdUsuario);
+		}
 	}
 	void consultarPersona(){
 		try {
@@ -399,7 +409,7 @@ public class Usuario extends JFrame implements ActionListener {
 				txtPassword.setText(x.getPassword());
 				cmbTurno.setSelectedIndex(x.getTurno());
 				if (tipoOperacion == MODIFICAR) {
-					habilitarEntradaModificar(true);
+					habilitarEntradas(true);
 					txtIdUsuario.setEditable(false);
 					btnBuscar.setEnabled(false);
 					btnAceptar.setEnabled(true);
@@ -429,7 +439,6 @@ public class Usuario extends JFrame implements ActionListener {
 					are.eliminar(x);
 					listar();
 					btnAceptar.setEnabled(false);
-					limpieza();
 				}
 			}
 			else
@@ -448,12 +457,23 @@ public class Usuario extends JFrame implements ActionListener {
 		tcm.getColumn(3).setPreferredWidth(anchoColumna(10));  // peso
 		tcm.getColumn(4).setPreferredWidth(anchoColumna(15));  // estatura
 		tcm.getColumn(5).setPreferredWidth(anchoColumna(12));  // estadoCivil
+		tcm.getColumn(6).setPreferredWidth(anchoColumna(17));  // imc
+		tcm.getColumn(7).setPreferredWidth(anchoColumna(10));  // grado
 	}
 	int anchoColumna(int porcentaje) {
 		return porcentaje * scrollPane.getWidth() / 100;
 	}
 	
-	
+	void limpieza() {
+		txtIdUsuario.setText("");
+		txtApPa.setText("");
+		txtApMa.setText("");
+		txtNombre.setText("");
+		txtLogin.setText("");
+		txtPassword.setText("");
+		txtIdUsuario.requestFocus();
+		
+	}	
 	
 	void listar() {
 		ClaseUsuarios x;
@@ -469,62 +489,11 @@ public class Usuario extends JFrame implements ActionListener {
 			modelo.addRow(fila);
 		}
 	}
-	void limpieza() {
-		txtIdUsuario.setText("");
-		txtNombre.setText("");
-		txtApPa.setText("");
-		txtApMa.setText("");
-		txtLogin.setText("");
-		txtPassword.setText("");
-		txtNombre.requestFocus();
-	}	
 	
-	
-	void habilitarEntradas(boolean sino) {
-		if (tipoOperacion == ADICIONAR){
-			txtNombre.setEditable(sino);
-			txtApPa.setEditable(sino);
-			txtApMa.setEditable(sino);
-			cmbEmpleado.setEnabled(sino);
-			txtLogin.setEditable(sino);
-			txtPassword.setEditable(sino);
-			cmbTurno.setEnabled(sino);
-		}
-	}
-	
-	void habilitarEntradaModificar(boolean sino){
-		if (tipoOperacion == MODIFICAR){
-			txtNombre.setEditable(sino);
-			txtApPa.setEditable(sino);
-			txtApMa.setEditable(sino);
-			cmbEmpleado.setEnabled(sino);
-			txtLogin.setEditable(sino);
-			txtPassword.setEditable(sino);
-			cmbTurno.setEnabled(sino);
-		}
-	}
-	
-	void habilitarBotones(boolean sino) {
-		if (tipoOperacion == ADICIONAR){
-			btnAceptar.setEnabled(!sino);
-		}
-		else {
-			btnBuscar.setEnabled(!sino);
-			btnAceptar.setEnabled(false);
-		}	
-		btnNuevo.setEnabled(sino);
-		btnConsultar.setEnabled(sino);
-		btnModificar.setEnabled(sino);
-		btnEliminar.setEnabled(sino);
-		btnOpciones.setEnabled(!sino);	
-	}
-	
-	
-	//
 	int leerCodigo() {
 		return Integer.parseInt(txtIdUsuario.getText().trim());
 	}
-	
+	//
 	String leerNombre() {
 		return txtNombre.getText().trim();
 	}
@@ -535,10 +504,10 @@ public class Usuario extends JFrame implements ActionListener {
 		return (txtApMa.getText().trim());
 	}
 	String leerLogin() {
-		return (txtLogin.getText().trim());
+		return (txtApPa.getText().trim());
 	}
 	String LeerPassword() {
-		return (txtPassword.getText().trim());
+		return (txtApPa.getText().trim());
 	}
 	int leerEmpleado(){
 		return cmbEmpleado.getSelectedIndex();
@@ -570,4 +539,30 @@ public class Usuario extends JFrame implements ActionListener {
 		return cmbTurno.getItemAt(i);
 	}
 
+	
+	
+	void habilitarEntradas(boolean sino) {
+		if (tipoOperacion == ADICIONAR)
+			txtNombre.setEditable(sino);
+			txtApPa.setEditable(sino);
+			txtApMa.setEditable(sino);
+			cmbEmpleado.setEnabled(sino);
+			txtLogin.setEditable(sino);
+			txtPassword.setEditable(sino);
+			cmbTurno.setEnabled(sino);
+			
+	}
+	void habilitarBotones(boolean sino) {
+		if (tipoOperacion == ADICIONAR)
+			btnAceptar.setEnabled(!sino);
+		else {
+			btnBuscar.setEnabled(!sino);
+			btnAceptar.setEnabled(false);
+		}	
+		btnNuevo.setEnabled(sino);
+		btnConsultar.setEnabled(sino);
+		btnModificar.setEnabled(sino);
+		btnEliminar.setEnabled(sino);
+		btnOpciones.setEnabled(!sino);	
+	}
 }

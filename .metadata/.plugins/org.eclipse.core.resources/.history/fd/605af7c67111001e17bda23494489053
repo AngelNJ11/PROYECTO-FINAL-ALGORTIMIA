@@ -15,7 +15,7 @@ public class ArreUsuarios {
 		adicionar(new ClaseUsuarios(1003, "Jennifer", "Vilcapuma", "Chevarria", 2, "jvilche", "1234", 1));
 		adicionar(new ClaseUsuarios(1004, "Rosa", "Ugarte", "Villafuerte", 2, "rugavil", "1234", 0));
 		adicionar(new ClaseUsuarios(1005, "Felipe", "Hurtado", "Solis", 1, "fhursol", "1234", 1));
-		adicionar(new ClaseUsuarios(1006, "jaun", "mendes", "Lopez", 2, "juan12", "12345",0));
+		adicionar(new ClaseUsuarios(1006, "jaun", "mendes", "Lopez", 3, "juan12", "12345",0));
 	}
 	
 	public void adicionar(ClaseUsuarios x){
