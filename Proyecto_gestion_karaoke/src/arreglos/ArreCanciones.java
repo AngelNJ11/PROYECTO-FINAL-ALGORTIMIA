@@ -9,9 +9,9 @@ public class ArreCanciones {
 	
 	private ArrayList <ClaseCancion> cancion;
 
-	public ArreCanciones() {
-		
+	public ArreCanciones() {	
 		cancion = new ArrayList <ClaseCancion> ();
+		adicionar(new ClaseCancion(null, null, null, null, null, 0, false));
 	}
 	
 	public void adicionar(ClaseCancion x) {
@@ -27,6 +27,7 @@ public class ArreCanciones {
 		return cancion.get(i);
 	}
 	
+
 	
 	
 }

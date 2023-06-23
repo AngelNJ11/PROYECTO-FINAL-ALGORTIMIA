@@ -272,7 +272,7 @@ public class Usuario extends JFrame implements ActionListener {
 			break;
 		case ELIMINAR:
 			adicionarPersona();
-	}
+		}
 	}
 
 	public void actionPerformedbtnOpciones(ActionEvent e) {

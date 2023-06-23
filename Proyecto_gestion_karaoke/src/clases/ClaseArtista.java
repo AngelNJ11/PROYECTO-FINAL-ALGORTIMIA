@@ -21,6 +21,10 @@ public class ClaseArtista {
 		this.fechaRegistro = fechaRegistro;
 		this.estado = estado;
 	}
+	
+	public ClaseArtista(){
+		
+	}
 
 	public ClaseGenero getGenero() {
 		return genero;

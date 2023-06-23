@@ -3,21 +3,21 @@ package clases;
 import java.sql.Date;
 
 public class ClaseCancion {
+	
+	ClaseArtista idartista = new ClaseArtista();
 					//CAN0001
 	private  String idCancion;
 	private  String nombre;
-	private final String idArtista;
+	private final String idArtista = idartista.getIdArtista();
 	private  String album;
 	private  Date fechaRegistro;
 	private  int numeroReproduciones = 0;
 	private  boolean estado = true;
-	
 
-
-	public ClaseCancion (String idArtista, String idCancion, String nombre, String album, Date fechaRegistro,
+	public ClaseCancion( String idCancion, String nombre,ClaseArtista idartista, String album, Date fechaRegistro,
 			int numeroReproduciones, boolean estado) {
 		super();
-		this.idArtista = idArtista;
+		this.idartista = idartista;
 		this.idCancion = idCancion;
 		this.nombre = nombre;
 		this.album = album;
@@ -25,8 +25,7 @@ public class ClaseCancion {
 		this.numeroReproduciones = numeroReproduciones;
 		this.estado = estado;
 	}
-
-
+	
 	
 
 
@@ -107,6 +106,8 @@ public class ClaseCancion {
 				return "Inhabilitado";
 		}
 	}
+	
+	
 	
 	
 	

@@ -21,7 +21,7 @@ public class Artista extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtIdArtista;
 	private JTextField txtNomArtista;
-	private JTextField txtIdGenero;
+	private JTextField txtdGenero;
 	private JTextField txtFechaRegisto;
 	private JTable table;
 	private JLabel lblIdArtista;
@@ -35,6 +35,9 @@ public class Artista extends JDialog {
 	private JButton btnListar;
 	private JButton btnModificar;
 	private JButton btnEliminar;
+	private JButton btnBuscar;
+	private JButton btnNewButton;
+	private JButton btnOpciones;
 
 	/**
 	 * Launch the application.
@@ -91,11 +94,11 @@ public class Artista extends JDialog {
 		txtNomArtista.setBounds(117, 33, 123, 20);
 		contentPanel.add(txtNomArtista);
 		
-		txtIdGenero = new JTextField();
-		txtIdGenero.setEditable(false);
-		txtIdGenero.setColumns(10);
-		txtIdGenero.setBounds(117, 58, 123, 20);
-		contentPanel.add(txtIdGenero);
+		txtdGenero = new JTextField();
+		txtdGenero.setEditable(false);
+		txtdGenero.setColumns(10);
+		txtdGenero.setBounds(117, 58, 123, 20);
+		contentPanel.add(txtdGenero);
 		
 		txtFechaRegisto = new JTextField();
 		txtFechaRegisto.setColumns(10);
@@ -108,19 +111,19 @@ public class Artista extends JDialog {
 		contentPanel.add(cbmEstado);
 		
 		btnListar = new JButton("Listar");
-		btnListar.setBounds(625, 7, 89, 23);
+		btnListar.setBounds(625, 32, 89, 23);
 		contentPanel.add(btnListar);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(625, 32, 89, 23);
+		btnModificar.setBounds(625, 57, 89, 23);
 		contentPanel.add(btnModificar);
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(625, 57, 89, 23);
+		btnEliminar.setBounds(625, 82, 89, 23);
 		contentPanel.add(btnEliminar);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(250, 7, 89, 23);
+		btnAceptar.setBounds(252, 32, 97, 23);
 		contentPanel.add(btnAceptar);
 		
 		scrollPane = new JScrollPane();
@@ -129,5 +132,17 @@ public class Artista extends JDialog {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(252, 6, 97, 25);
+		contentPanel.add(btnBuscar);
+		
+		btnNewButton = new JButton("Nuevo");
+		btnNewButton.setBounds(625, 6, 89, 25);
+		contentPanel.add(btnNewButton);
+		
+		btnOpciones = new JButton("Opciones");
+		btnOpciones.setBounds(473, 6, 140, 95);
+		contentPanel.add(btnOpciones);
 	}
 }

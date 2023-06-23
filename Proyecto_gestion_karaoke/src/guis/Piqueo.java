@@ -12,7 +12,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-public class Piqueo extends JDialog {
+import arreglos.ArrePiqueos;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Piqueo extends JDialog implements ActionListener {
 	/**
 	 * 
 	 */
@@ -34,6 +38,19 @@ public class Piqueo extends JDialog {
 	private JLabel label;
 	private JTextField txtPrecio;
 	private JComboBox<String> cmbTipoPiqueo;
+	private JButton button;
+	private JButton btnBuscar;
+
+	
+	// Tipo de operación a procesar: Adicionar, Consultar, Modificar o Eliminar
+	private int tipoOperacion;
+	
+	// Constantes para los tipos de operaciones
+	public final static int ADICIONAR = 0;
+	public final static int CONSULTAR = 1;
+	public final static int MODIFICAR = 2;
+	public final static int ELIMINAR  = 3;
+
 
 	/**
 	 * Launch the application.
@@ -53,7 +70,7 @@ public class Piqueo extends JDialog {
 	 */
 	public Piqueo() {
 		setTitle("Piqueo");
-		setBounds(100, 100, 740, 404);
+		setBounds(100, 100, 897, 466);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -72,7 +89,7 @@ public class Piqueo extends JDialog {
 		contentPanel.add(lblIdTipoPiqueo);
 		
 		lblPrecio = new JLabel("Precio:");
-		lblPrecio.setBounds(295, 11, 134, 14);
+		lblPrecio.setBounds(10, 91, 134, 14);
 		contentPanel.add(lblPrecio);
 		
 		txtIdPiqueo = new JTextField();
@@ -88,44 +105,68 @@ public class Piqueo extends JDialog {
 		
 		cbmEstado = new JComboBox<String>();
 		cbmEstado.setModel(new DefaultComboBoxModel<String>(new String[] {"Inhabilitado", "Habilitado"}));
-		cbmEstado.setBounds(369, 33, 123, 20);
+		cbmEstado.setBounds(367, 8, 123, 20);
 		contentPanel.add(cbmEstado);
 		
 		btnListar = new JButton("Listar");
-		btnListar.setBounds(625, 7, 89, 23);
+		btnListar.setBounds(778, 82, 89, 23);
 		contentPanel.add(btnListar);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(625, 32, 89, 23);
+		btnModificar.setBounds(778, 32, 89, 23);
 		contentPanel.add(btnModificar);
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(625, 57, 89, 23);
+		btnEliminar.setBounds(778, 57, 89, 23);
 		contentPanel.add(btnEliminar);
 		
 		btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(502, 7, 89, 23);
+		btnAceptar.setBounds(367, 57, 123, 23);
 		contentPanel.add(btnAceptar);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 91, 704, 261);
+		scrollPane.setBounds(10, 118, 857, 288);
 		contentPanel.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
 		label = new JLabel("Estado:");
-		label.setBounds(295, 36, 134, 14);
+		label.setBounds(297, 11, 134, 14);
 		contentPanel.add(label);
 		
 		txtPrecio = new JTextField();
 		txtPrecio.setColumns(10);
-		txtPrecio.setBounds(369, 8, 123, 20);
+		txtPrecio.setBounds(117, 88, 168, 20);
 		contentPanel.add(txtPrecio);
 		
 		cmbTipoPiqueo = new JComboBox<String>();
 		cmbTipoPiqueo.setModel(new DefaultComboBoxModel<String>(new String[] {"Frios", "Calientes", "Snacks"}));
 		cmbTipoPiqueo.setBounds(117, 58, 168, 20);
 		contentPanel.add(cmbTipoPiqueo);
+		
+		button = new JButton("Opciones");
+		button.setBounds(643, 6, 123, 98);
+		contentPanel.add(button);
+		
+		btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(367, 32, 123, 23);
+		contentPanel.add(btnBuscar);
+		
+		btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(this);
+		btnNuevo.setBounds(778, 6, 89, 25);
+		contentPanel.add(btnNuevo);
+	}
+	
+	ArrePiqueos piq = new ArrePiqueos();
+	private JButton btnNuevo;
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnNuevo) {
+			actionPerformedBtnNuevo(e);
+		}
+	}
+	protected void actionPerformedBtnNuevo(ActionEvent e) {
+
 	}
 }
