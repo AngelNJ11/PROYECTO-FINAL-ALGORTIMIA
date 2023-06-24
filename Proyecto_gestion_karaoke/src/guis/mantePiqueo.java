@@ -252,7 +252,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 	}
 	protected void actionPerformedBtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
-		txtIdPiqueo.setText("" + piq.correlativo(piq.tamano()+1));
+		txtIdPiqueo.setText(piq.generarCodigoCorrelativo(piq.obtener(piq.tamanio()-1).getIdPiqueo()));
 		habilitarEntradas(true);
 		habilitarBotones(false);
 		txtNombre.requestFocus();
@@ -397,7 +397,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 	void listar(){
 		ClasePiqueo x;
 		modelo.setRowCount(0);
-		for (int i = 0; i < piq.tamano(); i++) {
+		for (int i = 0; i < piq.tamanio(); i++) {
 			x = piq.obtener(i);
 			Object[] fila = { 
 					x.getIdPiqueo(),

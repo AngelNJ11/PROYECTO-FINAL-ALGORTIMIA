@@ -23,7 +23,7 @@ public class ArrePiqueos {
 		grabarPiqueos();
 	}
 	
-	public int tamano() {
+	public int tamanio() {
 		return piqueo.size();
 	}
 	
@@ -40,9 +40,15 @@ public class ArrePiqueos {
 		return null;
 	}
 	
-	public String correlativo(int codigo){
-		String piq = "PIQ" + String.format("%03d", codigo);
-		return piq;
+	public String generarCodigoCorrelativo(String codigoAnterior) {
+		if (tamanio() == 0) {
+			return "PIQ001";
+		}else {
+			String codigo = codigoAnterior.substring(3);
+		    int correlativo = Integer.parseInt(codigo) + 1; 
+		    String nuevoCodigo = "PIQ" + String.format("%03d", correlativo); 
+		    return nuevoCodigo;
+		}
 	}
 	public void eliminar(ClasePiqueo x){
 		piqueo.remove(x);
@@ -58,7 +64,7 @@ public class ArrePiqueos {
 			String linea;
 			ClasePiqueo x;
 			pw = new PrintWriter(new FileWriter("piqueos.txt"));
-			for(int i=0; i<tamano(); i++) {
+			for(int i=0; i<tamanio(); i++) {
 				x = obtener(i);
 				boolean estado = x.isEstado();
 				linea = x.getIdPiqueo() + ";" +

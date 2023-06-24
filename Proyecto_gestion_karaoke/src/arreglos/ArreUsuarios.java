@@ -7,6 +7,7 @@ import clases.ClaseUsuarios;
 public class ArreUsuarios {
 	
 	private ArrayList<ClaseUsuarios> usuarioList;
+	private int index;
 
 	public ArreUsuarios(){
 		usuarioList = new ArrayList<ClaseUsuarios>();
@@ -20,6 +21,7 @@ public class ArreUsuarios {
 	
 	public void adicionar(ClaseUsuarios x){
 		usuarioList.add(x);
+		index++;
 	}
 	
 	public int tamanio(){
@@ -43,17 +45,19 @@ public class ArreUsuarios {
 		return null;
 	}
 	
-	public String codigoCorrelativo(int codigo) {
-		if (tamanio() == 0)
+
+	
+	public String generarCodigoCorrelativo(String codigoAnterior) {
+		if (tamanio() == 0) {
 			return "USU001";
-		else {
-			String usu = "USU" + String.format("%03d", codigo);
-			return usu;	
+		}else {
+			String codigo = codigoAnterior.substring(3);
+		    int correlativo = Integer.parseInt(codigo) + 1; 
+		    String nuevoCodigo = "USU" + String.format("%03d", correlativo); 
+		    return nuevoCodigo;
 		}
-			
 	}
-	
-	
+
 	
 	
 	

@@ -229,6 +229,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 		modelo.addColumn("Turno"); 
 		tbResultado.setModel(modelo);
 		modelo.setRowCount(0); 
+		
 		ajustarAnchoColumnas();
 		listar();
 		
@@ -290,7 +291,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
-		txtIdUsuario.setText("" + are.codigoCorrelativo(are.tamanio()+1));
+		txtIdUsuario.setText(are.generarCodigoCorrelativo(are.obtener(are.tamanio()-1).getIdUsuario()));
 		habilitarEntradas(true);
 		habilitarBotones(false);
 		txtNombre.requestFocus();
