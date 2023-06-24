@@ -1,0 +1,9 @@
+PIQ004;Piqueo4;2;10.99;Inhabilitado
+PIQ005;Piqueo5;0;12.99;Inhabilitado
+PIQ006;Piqueo6;2;9.99;Inhabilitado
+PIQ007;Piqueo7;0;11.99;Inhabilitado
+PIQ008;Piqueo8;1;7.99;Inhabilitado
+PIQ009;Piqueo9;2;10.99;Inhabilitado
+PIQ010;PIQUEO10;2;11.2;Inhabilitado
+PIQ011;facw;0;32.0;Inhabilitado
+PIQ013;Papitas;2;20.0;Inhabilitado

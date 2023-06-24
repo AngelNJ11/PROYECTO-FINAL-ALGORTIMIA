@@ -290,10 +290,11 @@ public class manteUsuario extends JFrame implements ActionListener {
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
-		txtIdUsuario.setText("" + are.codigoCorrelativo(are.tamanio()-1));
+		txtIdUsuario.setText("" + are.codigoCorrelativo(are.tamanio()+1));
 		habilitarEntradas(true);
 		habilitarBotones(false);
 		txtNombre.requestFocus();
+		
 	}
 	public void actionPerformedbtnConsultar(ActionEvent e) {
 		tipoOperacion = CONSULTAR;
@@ -411,10 +412,10 @@ public class manteUsuario extends JFrame implements ActionListener {
 				}
 			}
 			else
-				error("El cï¿½digo " + codigo + " no existe", txtIdUsuario);
+				error("El codigo " + codigo + " no existe", txtIdUsuario);
 		}
 		catch (Exception e) {
-			error("Ingrese Cï¿½DIGO correcto", txtIdUsuario);
+			error("Ingrese CoDIGO correcto", txtIdUsuario);
 		}
 	}
 	
@@ -423,7 +424,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 			String codigo = leerCodigo();
 			ClaseUsuarios x = are.buscacod(codigo);
 			if (x != null) {
-				int ok = confirmar("ï¿½ Desea eliminar el registro ?");
+				int ok = confirmar("Desea eliminar el registro ?");
 				if (ok == 0) {
 					are.eliminar(x);
 					listar();
@@ -432,10 +433,10 @@ public class manteUsuario extends JFrame implements ActionListener {
 				}
 			}
 			else
-				error("El cï¿½digo " + codigo + " no existe", txtIdUsuario);
+				error("El código " + codigo + " no existe", txtIdUsuario);
 		}
 		catch (Exception e) {
-			error("Ingrese Cï¿½DIGO correcto", txtIdUsuario);
+			error("Ingrese código correcto", txtIdUsuario);
 		}	
 	}
 	
@@ -548,7 +549,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 	//
 	//
 	void mensaje(String s) {
-		JOptionPane.showMessageDialog(this, s, "Informaciï¿½n", 0);
+		JOptionPane.showMessageDialog(this, s, "Información", 0);
 	}
 	
 	void error(String s, JTextField txt) {
