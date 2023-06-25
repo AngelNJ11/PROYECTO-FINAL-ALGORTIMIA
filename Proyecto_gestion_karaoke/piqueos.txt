@@ -7,3 +7,4 @@ PIQ010;PIQUEO10;2;11.2;Inhabilitado
 PIQ011;facw;0;32.0;Inhabilitado
 PIQ013;CHETOS;2;20.0;Inhabilitado
 PIQ014;dw;0;243.0;Inhabilitado
+PIQ015;poijlk;2;87687.0;Inhabilitado
