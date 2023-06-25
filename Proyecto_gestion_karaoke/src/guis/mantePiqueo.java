@@ -112,7 +112,8 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		
 		cbmEstado = new JComboBox<String>();
 		cbmEstado.setEnabled(false);
-		cbmEstado.setModel(new DefaultComboBoxModel<String>(new String[] {"Habilitado", "Inhabilitado"}));
+		cbmEstado.setModel(new DefaultComboBoxModel<String>
+		(new String[] {"Habilitado", "Inhabilitado"}));
 		cbmEstado.setBounds(324, 37, 123, 20);
 		contentPanel.add(cbmEstado);
 		
@@ -151,7 +152,8 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		
 		cmbTipoPiqueo = new JComboBox<String>();
 		cmbTipoPiqueo.setEnabled(false);
-		cmbTipoPiqueo.setModel(new DefaultComboBoxModel<String>(new String[] {"Frios", "Calientes", "Snacks"}));
+		cmbTipoPiqueo.setModel(new DefaultComboBoxModel<String>
+		(new String[] {"Frios", "Calientes", "Snacks"}));
 		cmbTipoPiqueo.setBounds(106, 62, 123, 20);
 		contentPanel.add(cmbTipoPiqueo);
 		
@@ -291,7 +293,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		String codigo = leerCodigo();
 		String nombre =  leerNombre();
 		if(nombre.length() > 0){
-				if(piq.buscacod(codigo) == null)
+				if(piq.buscaID(codigo) == null)
 									try{
 										int tipo = leerTipo();
 										boolean estado = leerEstado();
@@ -312,7 +314,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 	
 	void modificarPiqueo() {
 		try {
-			ClasePiqueo x = piq.buscacod(leerCodigo());
+			ClasePiqueo x = piq.buscaID(leerCodigo());
 			if(x != null){
 				try{
 					String nombre = leerNombre();
@@ -340,7 +342,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 	void consultarPiqueo(){
 		try {
 		    String codigo = leerCodigo();
-		    ClasePiqueo x = piq.buscacod(codigo);
+		    ClasePiqueo x = piq.buscaID(codigo);
 		    if(x != null){
 		    	txtIdPiqueo.setText(x.getIdPiqueo());
 		    	txtNombre.setText(x.getNombre());
@@ -371,9 +373,9 @@ public class mantePiqueo extends JDialog implements ActionListener {
 	void eLiminarPiqueo(){
 		try {
 			String codigo = leerCodigo();
-			ClasePiqueo x = piq.buscacod(codigo);
+			ClasePiqueo x = piq.buscaID(codigo);
 			if(x != null){
-				int ok = confirmar("¿Dessea eliminar este registro?");
+				int ok = confirmar("ï¿½Dessea eliminar este registro?");
 				if(ok == 0){
 					piq.eliminar(x);
 					listar();
@@ -381,7 +383,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 					limpieza();
 				}
 			}else
-				error("El código " + codigo + " no existe", txtIdPiqueo);
+				error("El cï¿½digo " + codigo + " no existe", txtIdPiqueo);
 		
 		}
 		catch (Exception e) {
@@ -475,16 +477,16 @@ public class mantePiqueo extends JDialog implements ActionListener {
 	    boolean estado = false;
 
 	    if (selectedIndex == 0) {
-	        estado = true; // Si el índice seleccionado es 0, se asigna true
+	        estado = true; // Si el ï¿½ndice seleccionado es 0, se asigna true
 	    } else if (selectedIndex == 1) {
-	        estado = false; // Si el índice seleccionado es 1, se asigna false
+	        estado = false; // Si el ï¿½ndice seleccionado es 1, se asigna false
 	    }
 
 	    return estado;
 	}
 	//
 	void mensaje(String s) {
-		JOptionPane.showMessageDialog(this, s, "Información", 0);
+		JOptionPane.showMessageDialog(this, s, "Informaciï¿½n", 0);
 	}
 	
 	void error(String s, JTextField txt) {

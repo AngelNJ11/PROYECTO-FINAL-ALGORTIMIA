@@ -6,11 +6,10 @@ import clases.ClaseUsuarios;
 
 public class ArreUsuarios {
 	
-	private ArrayList<ClaseUsuarios> usuarioList;
-	private int index;
+	private ArrayList<ClaseUsuarios> usuarios;
 
 	public ArreUsuarios(){
-		usuarioList = new ArrayList<ClaseUsuarios>();
+		usuarios = new ArrayList<ClaseUsuarios>();
 		adicionar(new ClaseUsuarios("USU001", "Arue", "Palma", "Casavarde", 0, "aruepalma", "arue123", 1));
 		adicionar(new ClaseUsuarios("USU002", "Gustavo", "Osorio", "Hernandez", 1, "gosoher", "1234", 0));
 		adicionar(new ClaseUsuarios("USU003", "Jennifer", "Vilcapuma", "Chevarria", 2, "jvilche", "1234", 1));
@@ -20,30 +19,45 @@ public class ArreUsuarios {
 	}
 	
 	public void adicionar(ClaseUsuarios x){
-		usuarioList.add(x);
-		index++;
+		usuarios.add(x);
 	}
 	
 	public int tamanio(){
-		return usuarioList.size();
+		return usuarios.size();
 	}
 	
 	public ClaseUsuarios obtener(int posicion){
-		return usuarioList.get(posicion);
+		return usuarios.get(posicion);
 	}
 	
 	public void eliminar(ClaseUsuarios x){
-		usuarioList.remove(x);
+		usuarios.remove(x);
 	}
 	
 	public ClaseUsuarios buscacod(String codigo){
-		for(ClaseUsuarios usuario : usuarioList){
+		for(ClaseUsuarios usuario : usuarios){
 			if(usuario.getIdUsuario().equals(codigo)){
 				return usuario;
 			}
 		}
 		return null;
 	}
+	
+	public ClaseUsuarios buscarUsuLogin(String login, String Password, int tipoEmpleado){
+		
+		for(ClaseUsuarios usuario : usuarios){
+			if(usuario.getLogin().equals(login)){
+				if(usuario.getPassword().equals(Password)){
+					if (usuario.getTipoEmpleado() == tipoEmpleado) {
+						return usuario;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	
 	
 
 	

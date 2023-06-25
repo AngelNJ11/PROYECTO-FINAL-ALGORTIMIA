@@ -31,7 +31,12 @@ public class ArrePiqueos {
 		return piqueo.get(i);
 	}
 	
-	public ClasePiqueo buscacod(String codigo){
+	public void eliminar(ClasePiqueo x){
+		piqueo.remove(x);
+		grabarPiqueos();
+	}
+	
+	public ClasePiqueo buscaID(String codigo){
 		for(ClasePiqueo piqueo : piqueo){
 			if(piqueo.getIdPiqueo().equals(codigo)){
 				return piqueo;
@@ -50,10 +55,7 @@ public class ArrePiqueos {
 		    return nuevoCodigo;
 		}
 	}
-	public void eliminar(ClasePiqueo x){
-		piqueo.remove(x);
-		grabarPiqueos();
-	}
+	
 	public void actualizarArchivo() {
 		grabarPiqueos();
 	}
@@ -71,7 +73,7 @@ public class ArrePiqueos {
 						x.getNombre() + ";" +
 						x.getTipoPiqueo() + ";" +
 						x.getPrecio() + ";" +
-						(estado ? "Habilitado" : "Inhabilitado");;
+						(estado ? "Habilitado" : "Inhabilitado");
 				pw.println(linea);
 			}
 			pw.close();

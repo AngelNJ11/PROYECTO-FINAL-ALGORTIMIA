@@ -1,6 +1,5 @@
 package guis;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
@@ -68,16 +68,13 @@ public class manteUsuario extends JFrame implements ActionListener {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					manteUsuario frame = new manteUsuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		try {
+			manteUsuario dialog = new manteUsuario();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -85,7 +82,6 @@ public class manteUsuario extends JFrame implements ActionListener {
 	 */
 	public manteUsuario() {
 		setTitle("Usuario");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 970, 526);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -278,16 +274,11 @@ public class manteUsuario extends JFrame implements ActionListener {
 		}
 	}
 	public void actionPerformedbtnOpciones(ActionEvent e) {
-		txtIdUsuario.setText("");
-		txtApPa.setText("");
-		txtApMa.setText("");
-		txtPassword.setText("");
-		txtLogin.setText("");
-		txtPassword.setText("");
+	
 		txtIdUsuario.setEditable(false);
+		limpieza();
 		habilitarEntradas(false);
 		habilitarBotones(true);
-		limpieza();
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
@@ -434,10 +425,10 @@ public class manteUsuario extends JFrame implements ActionListener {
 				}
 			}
 			else
-				error("El código " + codigo + " no existe", txtIdUsuario);
+				error("El cï¿½digo " + codigo + " no existe", txtIdUsuario);
 		}
 		catch (Exception e) {
-			error("Ingrese código correcto", txtIdUsuario);
+			error("Ingrese cï¿½digo correcto", txtIdUsuario);
 		}	
 	}
 	
@@ -550,7 +541,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 	//
 	//
 	void mensaje(String s) {
-		JOptionPane.showMessageDialog(this, s, "Información", 0);
+		JOptionPane.showMessageDialog(this, s, "Informaciï¿½n", 0);
 	}
 	
 	void error(String s, JTextField txt) {

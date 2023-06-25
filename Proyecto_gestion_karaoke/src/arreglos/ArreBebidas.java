@@ -3,7 +3,6 @@ package arreglos;
 import java.util.ArrayList;
 
 import clases.ClaseBebida;
-import clases.ClaseUsuarios;
 
 
 public class ArreBebidas {
@@ -14,10 +13,13 @@ public class ArreBebidas {
 	public ArreBebidas() {
 		
 		bebida = new ArrayList <ClaseBebida> ();
+		adicionar(new ClaseBebida("BEB001", "cerveza Pilsen", 0, "Pilsen", 8.5, true));
+		adicionar(new ClaseBebida("BEB002", "cerveza Qusquena", 0, "Qusquena", 10.5, true));
+		adicionar(new ClaseBebida("BEB003", "Limonada", 5, null, 7.5, true));
+		adicionar(new ClaseBebida("BEB004", "Smothie de fresa", 4, "", 12.5, true));
 	}
 	
 	public void adicionar(ClaseBebida x) {
-		
 		bebida.add(x);
 	}
 	
@@ -29,7 +31,11 @@ public class ArreBebidas {
 		return bebida.get(i);
 	}
 	
-	public ClaseBebida buscacod(String codigo){
+	public void eliminar(ClaseBebida x){
+		bebida.remove(x);
+	}
+	
+	public ClaseBebida buscaID(String codigo){
 		for(ClaseBebida bebida : bebida){
 			if(bebida.getIdBebida().equals(codigo)){
 				return bebida;
@@ -38,7 +44,6 @@ public class ArreBebidas {
 		return null;
 	}
 	
-
 
 	public String generarCodigoCorrelativo(String codigoAnterior) {
 		if (tamanio() == 0) {

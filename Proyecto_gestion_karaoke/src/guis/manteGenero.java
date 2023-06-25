@@ -73,7 +73,7 @@ public class manteGenero extends JDialog implements ActionListener {
 	 */
 	public manteGenero() {
 		setTitle("Genero");
-		setBounds(100, 100, 806, 505);
+		setBounds(100, 100, 566, 487);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -117,15 +117,15 @@ public class manteGenero extends JDialog implements ActionListener {
 		contentPanel.add(cmbEstado);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(679, 57, 97, 23);
+		btnModificar.setBounds(462, 57, 97, 23);
 		contentPanel.add(btnModificar);
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(679, 82, 97, 23);
+		btnEliminar.setBounds(462, 82, 97, 23);
 		contentPanel.add(btnEliminar);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 151, 766, 294);
+		scrollPane.setBounds(10, 151, 543, 294);
 		contentPanel.add(scrollPane);
 		
 		tbResultado = new JTable();
@@ -139,11 +139,11 @@ public class manteGenero extends JDialog implements ActionListener {
 		
 		btnOpciones = new JButton("Opciones");
 		btnOpciones.setEnabled(false);
-		btnOpciones.setBounds(578, 13, 97, 92);
+		btnOpciones.setBounds(361, 13, 97, 92);
 		contentPanel.add(btnOpciones);
 		
 		btnNuevo = new JButton("Nuevo");
-		btnNuevo.setBounds(679, 6, 97, 25);
+		btnNuevo.setBounds(462, 6, 97, 25);
 		contentPanel.add(btnNuevo);
 		
 		btnAceptar = new JButton("Aceptar");
@@ -152,7 +152,7 @@ public class manteGenero extends JDialog implements ActionListener {
 		contentPanel.add(btnAceptar);
 		
 		btnConsultar = new JButton("Consultar");
-		btnConsultar.setBounds(679, 31, 97, 25);
+		btnConsultar.setBounds(462, 31, 97, 25);
 		contentPanel.add(btnConsultar);
 		
 		modelo = new DefaultTableModel();
@@ -195,21 +195,21 @@ public class manteGenero extends JDialog implements ActionListener {
 	}
 	
 	public void actionPerformedbtnBuscar(ActionEvent e) {
-		consultarPersona();
+		consultarGenero();
 	}
 	public void actionPerformedbtnAceptar(ActionEvent e) {
 			switch (tipoOperacion) {
 			case ADICIONAR:
-				adicionarPersona();
+				adicionarGenero();
 				break;
 			case CONSULTAR:
-				consultarPersona();
+				consultarGenero();
 				break;
 			case MODIFICAR:
-				modificarPersona();
+				modificarGenero();
 				break;
 			case ELIMINAR:
-				eliminarPersona();
+				eliminarGenero();
 		}
 	}
 	public void actionPerformedbtnOpciones(ActionEvent e) {
@@ -226,7 +226,7 @@ public class manteGenero extends JDialog implements ActionListener {
 		txtIdGenero.setText("" + arg.generarCodigoCorrelativo(arg.obtener(arg.tamanio()-1).getIdGenero()));
 		habilitarEntradas(true);
 		habilitarBotones(false);
-		txtDescripcion.requestFocus();
+		limpieza();
 	}
 	public void actionPerformedbtnConsultar(ActionEvent e) {
 		tipoOperacion = CONSULTAR;
@@ -247,16 +247,16 @@ public class manteGenero extends JDialog implements ActionListener {
 		txtIdGenero.requestFocus();
 	}
 	
-	void adicionarPersona() {
+	void adicionarGenero() {
 		
 		String codigo = leerCodigo();
 		String descripcion = leerDescripcion();
 		if(descripcion.length() > 0){
 			int epoca = leerEpoca();
 			if(epoca > 0){
-				if(arg.buscacod(codigo) == null)
+				if(arg.buscaID(codigo) == null)
 					try{
-						boolean estado = true;
+						boolean estado = leerEstado();
 						ClaseGenero gen = new ClaseGenero(codigo, descripcion, epoca, estado);
 						arg.adicionar(gen);
 						listar();
@@ -273,19 +273,18 @@ public class manteGenero extends JDialog implements ActionListener {
 	
 
 	
-	void modificarPersona() {
+	void modificarGenero() {
 		try {
-			ClaseGenero x = arg.buscacod(leerCodigo());
+			ClaseGenero x = arg.buscaID(leerCodigo());
 			if(x != null){
 				try{
 					String descripcion = leerDescripcion();
 					int epoca = leerEpoca();
-					boolean estado = true;
+					boolean estado = leerEstado();
 					x.setDescripcion(descripcion);
 					x.setEpoca(epoca);
 					x.setEstado(estado);
 					listar();
-					txtDescripcion.requestFocus();
 					limpieza();
 				}catch (Exception e) {
 					error("pipipipip", txtIdGenero);
@@ -297,10 +296,10 @@ public class manteGenero extends JDialog implements ActionListener {
 			error("oe y esto pa q sirve", txtIdGenero);
 			}
 	}
-	void consultarPersona(){
+	void consultarGenero(){
 		try {
 			String codigo = leerCodigo();
-			ClaseGenero x = arg.buscacod(codigo);
+			ClaseGenero x = arg.buscaID(codigo);
 			if (x != null) {
 				txtDescripcion.setText(x.getDescripcion());
 				txtEpoca.setText(x.getEpoca()+"");
@@ -326,10 +325,10 @@ public class manteGenero extends JDialog implements ActionListener {
 		}
 	}
 	
-	void eliminarPersona() {
+	void eliminarGenero() {
 		try {
 			String codigo = leerCodigo();
-			ClaseGenero x =	arg.buscacod(codigo);
+			ClaseGenero x =	arg.buscaID(codigo);
 			if (x != null) {
 				int ok = confirmar("� Desea eliminar el registro ?");
 				if (ok == 0) {
@@ -369,7 +368,7 @@ public class manteGenero extends JDialog implements ActionListener {
 							x.getIdGenero(),
 							x.getDescripcion(),
 							x.getEpoca(),
-					        //estado(leerEstado()),
+					        x.estado(leerEstado()),
 							};
 			modelo.addRow(fila);
 		}
@@ -425,8 +424,12 @@ public class manteGenero extends JDialog implements ActionListener {
 	int leerEpoca() {
 		return Integer.parseInt(txtEpoca.getText().trim());
 	}
-	String leerEstado(int i) {
-		return cmbEstado.getItemAt(i);
+	boolean leerEstado() {
+		if(cmbEstado.getSelectedIndex() == 0){
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 	

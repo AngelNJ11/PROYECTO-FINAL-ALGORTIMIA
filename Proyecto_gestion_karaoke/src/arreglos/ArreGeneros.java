@@ -41,7 +41,7 @@ public class ArreGeneros {
 		genero.remove(x);
 	}
 	
-	public ClaseGenero buscacod(String codigo){
+	public ClaseGenero buscaID(String codigo){
 		for(ClaseGenero genero : genero){
 			if(genero.getIdGenero().equals(codigo)){
 				return genero;

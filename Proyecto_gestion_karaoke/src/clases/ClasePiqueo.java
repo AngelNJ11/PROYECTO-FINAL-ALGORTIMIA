@@ -71,9 +71,9 @@ public class ClasePiqueo {
 			return "Calientes";
 		case 2:
 			return "Snaks";
-		
+		default:
+			return null;
 		}
-		return null;
 	}
 	public String estadoPiqueo(boolean estado) {
 	    if (estado) {
