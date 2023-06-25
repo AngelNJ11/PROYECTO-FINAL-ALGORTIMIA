@@ -66,12 +66,11 @@ public class ArrePiqueos {
 			pw = new PrintWriter(new FileWriter("piqueos.txt"));
 			for(int i=0; i<tamanio(); i++) {
 				x = obtener(i);
-				boolean estado = x.isEstado();
 				linea = x.getIdPiqueo() + ";" +
 						x.getNombre() + ";" +
 						x.getTipoPiqueo() + ";" +
 						x.getPrecio() + ";" +
-						(estado ? "Habilitado" : "Inhabilitado");;
+						x.isEstado();;
 				pw.println(linea);
 			}
 			pw.close();

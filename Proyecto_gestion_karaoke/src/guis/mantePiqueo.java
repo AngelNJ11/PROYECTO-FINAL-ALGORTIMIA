@@ -20,6 +20,7 @@ import clases.ClasePiqueo;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JCheckBox;
 
 public class mantePiqueo extends JDialog implements ActionListener {
 	/**
@@ -36,10 +37,8 @@ public class mantePiqueo extends JDialog implements ActionListener {
 	private JLabel lblPrecio;
 	private JScrollPane scrollPane;
 	private JButton btnAceptar;
-	private JComboBox<String> cbmEstado;
 	private JButton btnModificar;
 	private JButton btnEliminar;
-	private JLabel label;
 	private JTextField txtPrecio;
 	private JComboBox<String> cmbTipoPiqueo;
 	private JButton btnOpciones;
@@ -110,12 +109,6 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		txtNombre.setBounds(106, 35, 123, 20);
 		contentPanel.add(txtNombre);
 		
-		cbmEstado = new JComboBox<String>();
-		cbmEstado.setEnabled(false);
-		cbmEstado.setModel(new DefaultComboBoxModel<String>(new String[] {"Habilitado", "Inhabilitado"}));
-		cbmEstado.setBounds(324, 37, 123, 20);
-		contentPanel.add(cbmEstado);
-		
 		btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(this);
 		btnModificar.setBounds(759, 61, 89, 23);
@@ -138,10 +131,6 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		
 		tbtResultado = new JTable();
 		scrollPane.setViewportView(tbtResultado);
-		
-		label = new JLabel("Estado:");
-		label.setBounds(241, 38, 89, 14);
-		contentPanel.add(label);
 		
 		txtPrecio = new JTextField();
 		txtPrecio.setEditable(false);
@@ -184,6 +173,12 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		modelo.addColumn("Precio"); 
 		modelo.addColumn("Estado del Piqueo"); 
 		tbtResultado.setModel(modelo);
+		
+		chkEstado = new JCheckBox("Estado");
+		chkEstado.setEnabled(false);
+		chkEstado.setSelected(true);
+		chkEstado.setBounds(241, 33, 113, 25);
+		contentPanel.add(chkEstado);
 		modelo.setRowCount(0); 
 		ajustarAnchoColumnas();
 		listar();
@@ -192,6 +187,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 	ArrePiqueos piq = new ArrePiqueos();
 	private JButton btnNuevo;
 	private JButton btnConsultar;
+	private JCheckBox chkEstado;
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnEliminar) {
 			actionPerformedBtnEliminar(e);
@@ -243,7 +239,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		txtNombre.setEditable(false);
 		txtPrecio.setEditable(false);
 		cmbTipoPiqueo.setEnabled(false);
-		cbmEstado.setEnabled(false);
+		chkEstado.setEnabled(false);
 		btnBuscar.setEnabled(false);
 		btnAceptar.setEnabled(true);
 		limpieza();
@@ -294,8 +290,8 @@ public class mantePiqueo extends JDialog implements ActionListener {
 				if(piq.buscacod(codigo) == null)
 									try{
 										int tipo = leerTipo();
-										boolean estado = leerEstado();
 										double precio = leerPrecio();
+										boolean estado = leerEstado();
 										ClasePiqueo piqw = new ClasePiqueo(codigo, nombre, tipo, precio, estado);
 										piq.adicionar(piqw);;
 										listar();
@@ -346,7 +342,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		    	txtNombre.setText(x.getNombre());
 		    	cmbTipoPiqueo.setSelectedIndex(x.getTipoPiqueo());
 		    	txtPrecio.setText(String.valueOf(x.getPrecio()));
-		    	cbmEstado.setSelectedItem(x.isEstado());
+		    	chkEstado.setSelected(x.isEstado());
 		    	if(tipoOperacion==MODIFICAR){
 		    		habilitarEntradaModificar(true);
 		    		txtIdPiqueo.setEditable(false);
@@ -412,7 +408,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 					x.getNombre(),
 					tipoPiqueo(x.getTipoPiqueo()),
 					x.getPrecio(),
-					x.estadoPiqueo(x.isEstado())};
+					x.isEstado()};
 			modelo.addRow(fila);
 		}
 	}
@@ -430,7 +426,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 			txtNombre.setEditable(sino);
 			txtPrecio.setEditable(sino);
 			cmbTipoPiqueo.setEnabled(sino);
-			cbmEstado.setEnabled(sino);
+			chkEstado.setEnabled(sino);
 		}
 	}
 	
@@ -439,7 +435,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 			txtNombre.setEditable(sino);
 			txtPrecio.setEditable(sino);
 			cmbTipoPiqueo.setEnabled(sino);
-			cbmEstado.setEnabled(sino);
+			chkEstado.setEnabled(sino);
 		}
 	}
 	
@@ -470,18 +466,6 @@ public class mantePiqueo extends JDialog implements ActionListener {
 	int leerTipo(){
 		return cmbTipoPiqueo.getSelectedIndex();
 	}
-	boolean leerEstado() {
-	    int selectedIndex = cbmEstado.getSelectedIndex();
-	    boolean estado = false;
-
-	    if (selectedIndex == 0) {
-	        estado = true; // Si el índice seleccionado es 0, se asigna true
-	    } else if (selectedIndex == 1) {
-	        estado = false; // Si el índice seleccionado es 1, se asigna false
-	    }
-
-	    return estado;
-	}
 	//
 	void mensaje(String s) {
 		JOptionPane.showMessageDialog(this, s, "Información", 0);
@@ -502,6 +486,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		return cmbTipoPiqueo.getItemAt(i);
 	}
 	
-
-
+	private boolean leerEstado(){
+		return chkEstado.isSelected();
+	}
 }
