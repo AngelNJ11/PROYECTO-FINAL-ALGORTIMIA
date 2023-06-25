@@ -75,6 +75,13 @@ public class ClasePiqueo {
 		}
 		return null;
 	}
+	public String estadoPiqueo(boolean estado) {
+	    if (estado) {
+	        return "Inhabilitado";
+	    } else {
+	        return "Habilitado";
+	    }
+	}
 	
 
 

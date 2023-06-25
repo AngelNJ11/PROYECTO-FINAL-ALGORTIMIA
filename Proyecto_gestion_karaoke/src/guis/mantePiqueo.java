@@ -112,7 +112,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		
 		cbmEstado = new JComboBox<String>();
 		cbmEstado.setEnabled(false);
-		cbmEstado.setModel(new DefaultComboBoxModel<String>(new String[] {"Inhabilitado", "Habilitado"}));
+		cbmEstado.setModel(new DefaultComboBoxModel<String>(new String[] {"Habilitado", "Inhabilitado"}));
 		cbmEstado.setBounds(324, 37, 123, 20);
 		contentPanel.add(cbmEstado);
 		
@@ -237,8 +237,16 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		case ELIMINAR:
 			eLiminarPiqueo();
 		}
-		habilitarBotones(false);
-		habilitarEntradas(false);
+
+		piq.actualizarArchivo();
+		txtIdPiqueo.setEditable(false);
+		txtNombre.setEditable(false);
+		txtPrecio.setEditable(false);
+		cmbTipoPiqueo.setEnabled(false);
+		cbmEstado.setEnabled(false);
+		btnBuscar.setEnabled(false);
+		btnAceptar.setEnabled(true);
+		limpieza();
 	}
 	protected void actionPerformedBtnOpciones(ActionEvent e) {
 		txtIdPiqueo.setText("");
@@ -404,7 +412,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 					x.getNombre(),
 					tipoPiqueo(x.getTipoPiqueo()),
 					x.getPrecio(),
-					estadoPiqueo(x.isEstado())};
+					x.estadoPiqueo(x.isEstado())};
 			modelo.addRow(fila);
 		}
 	}
@@ -494,12 +502,6 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		return cmbTipoPiqueo.getItemAt(i);
 	}
 	
-	String estadoPiqueo(boolean estado) {
-	    if (estado) {
-	        return "Habilitado";
-	    } else {
-	        return "Inhabilitado";
-	    }
-	}
+
 
 }
