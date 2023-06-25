@@ -1,19 +1,17 @@
 package clases;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class ClaseConsumo {
 
 	
-	ClaseCliente cliente = new ClaseCliente();
 
 	
 	// Atrubutos privados 
 	
 					//CON0001
 	private  String idConsumo;
-	private final String idCliente = cliente.getIdCliente();
+	private  ClaseCliente cliente;
 	private  Date fechaConsumo;
 	private  double importeTotal;
 	
@@ -37,14 +35,7 @@ public class ClaseConsumo {
 
 	// get y seters
 	
-	public String getCodigoConsumo() {
-		return idConsumo;
-	}
 
-
-	public void setCodigoConsumo(String codigoConsumo) {
-		this.idConsumo = codigoConsumo;
-	}
 
 
 	public Date getFechaConsumo() {
@@ -67,9 +58,27 @@ public class ClaseConsumo {
 	}
 
 
-	public String getIdCliente() {
-		return idCliente;
+	public String getIdConsumo() {
+		return idConsumo;
 	}
+
+
+	public void setIdConsumo(String idConsumo) {
+		this.idConsumo = idConsumo;
+	}
+
+
+	public ClaseCliente getCliente() {
+		return cliente;
+	}
+
+
+	public void setCliente(ClaseCliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+
 	
 	
 	// metodos

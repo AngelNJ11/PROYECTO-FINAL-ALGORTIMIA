@@ -5,30 +5,23 @@ import java.sql.Date;
 
 public class ClaseArtista{
 
-	ClaseGenero genero = new ClaseGenero();
 	// ART001
 	private String idArtista;
 	private String nombreArtistico;
 	private Date fechaRegistro;
-	private String idGenero = genero.getIdGenero();
+	private ClaseGenero genero; 
 	private boolean estado;
 
-
-	
-	
-	
 	
 	public ClaseArtista() {
-		super();
 	}
 
 
-
-	public ClaseArtista(String idArtista, String nombreArtistico, Date fechaRegistro,String idGenero, boolean estado) {
+	public ClaseArtista(String idArtista, String nombreArtistico, Date fechaRegistro, ClaseGenero genero, boolean estado) {
 		this.idArtista = idArtista;
 		this.nombreArtistico = nombreArtistico;
 		this.fechaRegistro = fechaRegistro;
-		this.idGenero = idGenero;
+		this.genero = genero;
 		this.estado = estado;
 	}
 
@@ -58,12 +51,12 @@ public class ClaseArtista{
 		this.fechaRegistro = fechaRegistro;
 	}
 	
-	public String getIdGenero() {
-		return idGenero;
+	public ClaseGenero getGenero() {
+		return genero;
 	}
 
-	public void setIdGenero(String idGenero) {
-		this.idGenero = idGenero;
+	public void setGenero(ClaseGenero genero) {
+		this.genero = genero;
 	}
 
 	public boolean isEstado() {

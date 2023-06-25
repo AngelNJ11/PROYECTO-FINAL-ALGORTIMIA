@@ -8,7 +8,7 @@ public class ClaseDetalleConsumo {
 	
 	
 	
-	private  String idConsumo = consumo.getCodigoConsumo();
+	private  String idConsumo = consumo.getIdConsumo();
 	private  int cantidad;
 	private  double subtotal;
 	

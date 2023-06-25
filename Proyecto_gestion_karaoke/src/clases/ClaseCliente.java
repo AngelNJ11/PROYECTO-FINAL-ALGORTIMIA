@@ -8,7 +8,7 @@ public class ClaseCliente {
 	private  String idCliente;
 	private  String nombres;
 	private  String apellidoPaterno;
-	private  String apellidoMaternoo;
+	private  String apellidoMaterno;
 	private  String direccion;
 	private  Date fechaNacimiento;
 	private  Date fechaAfilacion;
@@ -30,13 +30,13 @@ public class ClaseCliente {
 
 	
 
-	public ClaseCliente(String idCliente, String nombres, String apellidoPaterno, String apellidoMaternoo,
+	public ClaseCliente(String idCliente, String nombres, String apellidoPaterno, String apellidoMaterno,
 			String direccion, Date fechaNacimiento, Date fechaAfilacion, String estadoCivil, String telefono,
 			String dni, int tipoDelCliente) {
 		this.idCliente = idCliente;
 		this.nombres = nombres;
 		this.apellidoPaterno = apellidoPaterno;
-		this.apellidoMaternoo = apellidoMaternoo;
+		this.apellidoMaterno = apellidoMaterno;
 		this.direccion = direccion;
 		this.fechaNacimiento = fechaNacimiento;
 		this.fechaAfilacion = fechaAfilacion;
@@ -46,98 +46,161 @@ public class ClaseCliente {
 		this.tipoDelCliente = tipoDelCliente;
 	}
 
+	
 
-
+	
+	
+	
+	
+	
+	
+	
 	public String getIdCliente() {
 		return idCliente;
 	}
+
+
 
 	public void setIdCliente(String idCliente) {
 		this.idCliente = idCliente;
 	}
 
+
+
 	public String getNombres() {
 		return nombres;
 	}
+
+
 
 	public void setNombres(String nombres) {
 		this.nombres = nombres;
 	}
 
+
+
 	public String getApellidoPaterno() {
 		return apellidoPaterno;
 	}
+
+
 
 	public void setApellidoPaterno(String apellidoPaterno) {
 		this.apellidoPaterno = apellidoPaterno;
 	}
 
-	public String getApellidoMaternoo() {
-		return apellidoMaternoo;
+
+
+	public String getApellidoMaterno() {
+		return apellidoMaterno;
 	}
 
-	public void setApellidoMaternoo(String apellidoMaternoo) {
-		this.apellidoMaternoo = apellidoMaternoo;
+
+
+	public void setApellidoMaterno(String apellidoMaterno) {
+		this.apellidoMaterno = apellidoMaterno;
 	}
 
-	public String getDni() {
-		return dni;
+
+
+	public String getDireccion() {
+		return direccion;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
+
+
 
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
+
+
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+
+
 
 	public Date getFechaAfilacion() {
 		return fechaAfilacion;
 	}
 
+
+
 	public void setFechaAfilacion(Date fechaAfilacion) {
 		this.fechaAfilacion = fechaAfilacion;
 	}
+
+
 
 	public String getEstadoCivil() {
 		return estadoCivil;
 	}
 
+
+
 	public void setEstadoCivil(String estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
+
+
 
 	public String getTelefono() {
 		return telefono;
 	}
 
+
+
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+
+
+
+	public String getDni() {
+		return dni;
+	}
+
+
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+
 
 	public int getTipoDelCliente() {
 		return tipoDelCliente;
 	}
 
+
+
 	public void setTipoDelCliente(int tipoDelCliente) {
 		this.tipoDelCliente = tipoDelCliente;
 	}
+
+
+
+	public String nombreComple(){
+		return String.format("%s %s %s", nombres, apellidoPaterno, apellidoMaterno);
+	}
 	
 	
-	public String estadoCivil(int estado){
+	public String estadoCivil(String estado){
 	    switch (estado) {
-	        case 0:
+	        case "S":
 	        	return "Soltero";
-	        case 1:
+	        case "C":
 	            return  "Casado";
-	        case 2:
+	        case "V":
 	            return "Viudo";
-	        case 3:
+	        case "D":
 	            return "Divorciodo";
 	        default:
 	        	return "No especifica";

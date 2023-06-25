@@ -1,7 +1,5 @@
 package clases;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class ClaseGenero {
 	
@@ -13,8 +11,7 @@ public class ClaseGenero {
 	
 	
 	
-	public ClaseGenero() {
-		
+	public ClaseGenero() {	
 	}
 	
 	public ClaseGenero(String idGenero, String descripcion, int epoca, boolean estado) {
@@ -59,25 +56,16 @@ public class ClaseGenero {
 
 	
 	public String estado(boolean estado){	
-		if (estado) {
+		if (estado == true) {
 			return "Habilitado";	
 		}
 		else{
-			return "Inhabilitado";
+			return "Desabilitado";
 		}
 	}
 	
-	public static SimpleDateFormat ano=new SimpleDateFormat("dd/MM/YYYY");
 	
-	public void fechaEpoca(){
-		Date fechaActual = new Date();
-		System.out.print(DateString(fechaActual));
-	}
-	
-	public static String DateString(Date fecha){
-		String fechaCadena = ano.format(fecha);
-		return fechaCadena;
-	}
+
 	
 	
 

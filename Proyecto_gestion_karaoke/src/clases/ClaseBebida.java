@@ -1,6 +1,7 @@
 package clases;
 
 public class ClaseBebida {
+					//BEB001
 	private String idBebida;
 	private String nombre;
 	private int tipoBebida;

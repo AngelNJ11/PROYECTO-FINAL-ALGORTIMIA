@@ -4,11 +4,10 @@ import java.sql.Date;
 
 public class ClaseCancion {
 	
-	ClaseArtista artista = new ClaseArtista();
 					//CAN0001
 	private  String idCancion;
 	private  String nombre;
-	private  String idArtista = artista.getIdArtista();
+	private  ClaseArtista artista;
 	private  String album;
 	private  Date fechaRegistro;
 	private  int numeroReproduciones;
@@ -27,11 +26,11 @@ public class ClaseCancion {
 	
 
 
-	public ClaseCancion(String idCancion, String nombre, String idArtista, String album, Date fechaRegistro,
+	public ClaseCancion(String idCancion, String nombre, ClaseArtista artista, String album, Date fechaRegistro,
 			int numeroReproduciones, boolean estado) {
 		this.idCancion = idCancion;
 		this.nombre = nombre;
-		this.idArtista = idArtista;
+		this.artista = artista;
 		this.album = album;
 		this.fechaRegistro = fechaRegistro;
 		this.numeroReproduciones = numeroReproduciones;
@@ -77,16 +76,16 @@ public class ClaseCancion {
 
 
 
-	public String getIdArtista() {
-		return idArtista;
+	public ClaseArtista getArtista() {
+		return artista;
 	}
 
 
 
 
 
-	public void setIdArtista(String idArtista) {
-		this.idArtista = idArtista;
+	public void setArtista(ClaseArtista artista) {
+		this.artista = artista;
 	}
 
 

@@ -275,5 +275,14 @@ public class Menu extends JFrame implements ActionListener {
 	}
 	
 	
+	void x (int x) {
+		if (x == 0) {
+			mnMantenimiento.setEnabled(true);
+		} else {
+			mnMantenimiento.setEnabled(false);
+		}
+	}
+	
+	
 	
 }

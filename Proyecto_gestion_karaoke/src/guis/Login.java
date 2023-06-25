@@ -2,7 +2,12 @@ package guis;
 
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import arreglos.ArreUsuarios;
+import clases.ClaseUsuarios;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -18,23 +23,14 @@ public class Login extends JDialog implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtNombre;
-	private JTextField txtApeliidoPa;
-	private JTextField txtApellidoMa;
 	private JTextField txtLogin;
 	private JTextField txtPassword;
-	private JLabel lblNombres;
-	private JLabel lblApellidoPaterno;
-	private JLabel lblApellidoMaterno;
 	private JLabel lblTipo;
 	private JLabel lblLogin;
 	private JLabel lblPassword;
-	private JLabel lblTurno;
-	private JButton btnGuardar;
+	private JButton btnIngresar;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cmbTipo;
-	@SuppressWarnings("rawtypes")
-	private JComboBox cmbTurno;
 
 	/**
 	 * Launch the application.
@@ -54,102 +50,87 @@ public class Login extends JDialog implements ActionListener {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Login() {
 		setTitle("Formulario Usuario ");
-		setBounds(100, 100, 313, 295);
+		setBounds(100, 100, 313, 174);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		lblNombres = new JLabel("Nombres :");
-		lblNombres.setBounds(10, 11, 123, 14);
-		contentPane.add(lblNombres);
-		
-		lblApellidoPaterno = new JLabel("Apellido Paterno :");
-		lblApellidoPaterno.setBounds(10, 36, 123, 14);
-		contentPane.add(lblApellidoPaterno);
-		
-		lblApellidoMaterno = new JLabel("Apellido Materno :");
-		lblApellidoMaterno.setBounds(10, 61, 123, 14);
-		contentPane.add(lblApellidoMaterno);
-		
 		lblTipo = new JLabel("Tipo :");
-		lblTipo.setBounds(10, 86, 123, 14);
+		lblTipo.setBounds(21, 6, 123, 14);
 		contentPane.add(lblTipo);
 		
 		lblLogin = new JLabel("Login :");
-		lblLogin.setBounds(10, 111, 123, 14);
+		lblLogin.setBounds(21, 31, 123, 14);
 		contentPane.add(lblLogin);
 		
 		lblPassword = new JLabel("Password :");
-		lblPassword.setBounds(10, 136, 123, 14);
+		lblPassword.setBounds(21, 56, 123, 14);
 		contentPane.add(lblPassword);
-		
-		lblTurno = new JLabel("Turno :");
-		lblTurno.setBounds(10, 161, 123, 14);
-		contentPane.add(lblTurno);
-		
-		txtNombre = new JTextField();
-		txtNombre.setBounds(145, 8, 140, 20);
-		contentPane.add(txtNombre);
-		txtNombre.setColumns(10);
-		
-		txtApeliidoPa = new JTextField();
-		txtApeliidoPa.setColumns(10);
-		txtApeliidoPa.setBounds(145, 33, 140, 20);
-		contentPane.add(txtApeliidoPa);
-		
-		txtApellidoMa = new JTextField();
-		txtApellidoMa.setColumns(10);
-		txtApellidoMa.setBounds(145, 58, 140, 20);
-		contentPane.add(txtApellidoMa);
 		
 		cmbTipo = new JComboBox();
 		cmbTipo.setModel(new DefaultComboBoxModel(new String[] {"Adminsitrador", "Supervisor", "Mozo"}));
-		cmbTipo.setBounds(144, 87, 140, 20);
+		cmbTipo.setBounds(155, 7, 140, 20);
 		contentPane.add(cmbTipo);
 		
 		txtLogin = new JTextField();
 		txtLogin.setColumns(10);
-		txtLogin.setBounds(145, 108, 140, 20);
+		txtLogin.setBounds(156, 28, 140, 20);
 		contentPane.add(txtLogin);
 		
 		txtPassword = new JTextField();
 		txtPassword.setColumns(10);
-		txtPassword.setBounds(145, 133, 140, 20);
+		txtPassword.setBounds(156, 53, 140, 20);
 		contentPane.add(txtPassword);
 		
-		cmbTurno = new JComboBox();
-		cmbTurno.setModel(new DefaultComboBoxModel(new String[] {"Tarde", "Noche"}));
-		cmbTurno.setBounds(145, 159, 140, 20);
-		contentPane.add(cmbTurno);
-		
-		btnGuardar = new JButton("Guardar");
-		btnGuardar.addActionListener(this);
-		btnGuardar.setBounds(90, 191, 133, 48);
-		contentPane.add(btnGuardar);
+		btnIngresar = new JButton("Ingresar");
+		btnIngresar.addActionListener(this);
+		btnIngresar.setBounds(100, 82, 133, 48);
+		contentPane.add(btnIngresar);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnGuardar) {
-			actionPerformedBtnGuardar(e);
+		if (e.getSource() == btnIngresar) {
+			actionPerformedBtnIngresar(e);
 		}
 	}
 	
-	public static String nombres;
-	public static String apellidoPaterno;
-	public static String apellidoMaterno;
-	public static int tipo;
-	public static String login;
-	public static String password;
-	public static int turno;
+	ArreUsuarios arreusu = new ArreUsuarios();
 	
-	protected void actionPerformedBtnGuardar(ActionEvent e){
-		nombres = txtNombre.getText();
-		apellidoPaterno = txtApeliidoPa.getText();
-		apellidoMaterno = txtApellidoMa.getText();
-		tipo = cmbTipo.getSelectedIndex();
-		login = txtLogin.getText();
-		password = txtPassword.getText();
-		turno = cmbTurno.getSelectedIndex();
+	protected void actionPerformedBtnIngresar(ActionEvent e){
+		
+		
+		String login = txtLogin.getText();
+		String password = txtPassword.getText();
+		int tipoEmpleado = cmbTipo.getSelectedIndex();
+		ClaseUsuarios usu = arreusu.buscarUsuLogin(login, password, tipoEmpleado);
+
+		if (usu != null) {
+			Menu menu = new Menu();
+			menu.x(tipoEmpleado);
+			menu.setVisible(true);
+			this.setVisible(false);
+		} else {
+			error("El login y/o el password es incorecto", txtLogin);
+		}
+		
+		
+		
+		
 	}
+	
+	
+	
+	
+	
+	void mensaje(String s) {
+		JOptionPane.showMessageDialog(this, s, "Informaci�n", 0);
+	}
+	
+	void error(String s, JTextField txt) {
+		mensaje(s);
+		txt.setText("");
+		txt.requestFocus();
+	}
+		
 }
