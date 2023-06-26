@@ -1,5 +1,6 @@
 PIQ005;JKAW NCJK;0;100.0;false
-PIQ006;ejvn;0;100.0;true
 PIQ007;acw;0;32.0;true
 PIQ008;DWADX;0;1212.0;true
 PIQ009;bhjca bjh;0;100.0;true
+PIQ010;sdasdad;1;1222.0;true
+PIQ011;asdasda;0;121.0;true

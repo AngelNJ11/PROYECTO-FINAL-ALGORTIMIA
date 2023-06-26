@@ -1,1 +1,8 @@
-GEN01;DRAMA;1;true
+GEN001;DRAMA;1;false
+GEN002;dasda;2;true
+GEN003;dasdad;1;true
+GEN004;asdasdasda;5;true
+GEN005;aweawdad;0;true
+GEN006;asdasdad;0;true
+GEN007;1wdawdad;0;true
+GEN008;asdasdas;4;false

@@ -249,7 +249,7 @@ public class manteArtista extends JDialog implements ActionListener {
 
 	void adicionarArtista() {
 		
-		/*String idArtista = area.generarCodigoCorrelativo(leerCodigo());
+		String idArtista = area.generarCodigoCorrelativo(leerCodigo());
 		String nombre = leerNombre();
 
 		
@@ -260,11 +260,11 @@ public class manteArtista extends JDialog implements ActionListener {
 		Artista nuevoArtista = new Artista(idArtista, nombre, genero, fechaRegistro, estado);
 
 		arrArtistas.adicionar(nuevoArtista, true);
-	*/
+	
 
 	}
 	
-	/*void modificarArtista() {
+	void modificarArtista() {
 		try {
 			ClaseArtista x = area.buscaID(leerCodigo());
 			if(x != null){
@@ -289,7 +289,7 @@ public class manteArtista extends JDialog implements ActionListener {
 		}catch (Exception e) {
 			error("pipipipip", txtIdArtista);
 			}
-	}*/
+	}
 	
 	void consultarArtista1(){
 		try {

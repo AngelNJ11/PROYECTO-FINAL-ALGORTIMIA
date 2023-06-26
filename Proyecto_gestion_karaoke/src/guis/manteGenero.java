@@ -99,33 +99,40 @@ public class manteGenero extends JDialog implements ActionListener {
 		contentPanel.add(txtDescripcion);
 		
 		btnModificar = new JButton("Modificar");
+		btnModificar.addActionListener(this);
 		btnModificar.setBounds(568, 57, 97, 23);
 		contentPanel.add(btnModificar);
 		
 		btnEliminar = new JButton("Eliminar");
+		btnEliminar.addActionListener(this);
 		btnEliminar.setBounds(568, 82, 97, 23);
 		contentPanel.add(btnEliminar);
 		
 		btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(this);
 		btnBuscar.setEnabled(false);
 		btnBuscar.setBounds(252, 6, 97, 25);
 		contentPanel.add(btnBuscar);
 		
 		btnOpciones = new JButton("Opciones");
+		btnOpciones.addActionListener(this);
 		btnOpciones.setEnabled(false);
 		btnOpciones.setBounds(459, 11, 97, 92);
 		contentPanel.add(btnOpciones);
 		
 		btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(this);
 		btnNuevo.setBounds(568, 6, 97, 25);
 		contentPanel.add(btnNuevo);
 		
 		btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(this);
 		btnAceptar.setEnabled(false);
 		btnAceptar.setBounds(252, 31, 97, 25);
 		contentPanel.add(btnAceptar);
 		
 		btnConsultar = new JButton("Consultar");
+		btnConsultar.addActionListener(this);
 		btnConsultar.setBounds(568, 31, 97, 25);
 		contentPanel.add(btnConsultar);
 		
@@ -144,9 +151,10 @@ public class manteGenero extends JDialog implements ActionListener {
 		tbtResultado = new JTable();
 		scrollPane.setViewportView(tbtResultado);
 		
-		cboEpoca = new JComboBox<Object>();
+		cboEpoca = new JComboBox<String>();
 		cboEpoca.setEnabled(false);
-		cboEpoca.setModel(new DefaultComboBoxModel<Object>(new String[] {"1970", "1980", "1990", "2000", "2010", "2020"}));
+		cboEpoca.setModel(new DefaultComboBoxModel<String>
+		(new String[] {"1970", "1980", "1990", "2000", "2010", "2020"}));
 		cboEpoca.setBounds(120, 57, 120, 22);
 		contentPanel.add(cboEpoca);	
 		
@@ -166,37 +174,38 @@ public class manteGenero extends JDialog implements ActionListener {
 	private JCheckBox chkEstado;
 	private JScrollPane scrollPane;
 	private JTable tbtResultado;
-	private JComboBox<Object> cboEpoca;
+	private JComboBox<String> cboEpoca;
 
 	
 	
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btnBuscar){
-			actionPerformedbtnBuscar(e);
+		if (e.getSource() == btnEliminar) {
+			actionPerformedbtnEliminar(e);
 		}
-		if(e.getSource() == btnAceptar){
-			actionPerformedbtnAceptar(e);
-		}
-		if(e.getSource() == btnOpciones){
-			actionPerformedbtnOpciones(e);
-		}
-		if(e.getSource() == btnNuevo){
-			actionPerformedbtnNuevo(e);
-		}
-		if(e.getSource() == btnConsultar){
-			actionPerformedbtnConsultar(e);
-		}
-		if(e.getSource() == btnModificar){
+		if (e.getSource() == btnModificar) {
 			actionPerformedbtnModificar(e);
 		}
-		if(e.getSource() == btnEliminar){
-			actionPerformedbtnEliminar(e);
+		if (e.getSource() == btnConsultar) {
+			actionPerformedbtnConsultar(e);
+		}
+		if (e.getSource() == btnOpciones) {
+			actionPerformedbtnOpciones(e);
+		}
+		if (e.getSource() == btnAceptar) {
+			actionPerformedbtnAceptar(e);
+		}
+		if (e.getSource() == btnBuscar) {
+			actionPerformedBtnBuscar(e);
+		}
+		if (e.getSource() == btnNuevo) {
+			actionPerformedbtnNuevo(e);
 		}
 	}
 	
 	public void actionPerformedbtnBuscar(ActionEvent e) {
 		consultarGenero();
 	}
+	
 	public void actionPerformedbtnAceptar(ActionEvent e) {
 			switch (tipoOperacion) {
 			case ADICIONAR:
@@ -220,6 +229,10 @@ public class manteGenero extends JDialog implements ActionListener {
 			btnAceptar.setEnabled(false);
 			limpieza();
 	}
+	protected void actionPerformedBtnBuscar(ActionEvent e) {
+		consultarGenero();
+	}
+	
 	public void actionPerformedbtnOpciones(ActionEvent e) {
 		txtIdGenero.setText("");
 		txtDescripcion.setText("");
@@ -230,9 +243,9 @@ public class manteGenero extends JDialog implements ActionListener {
 	}
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
-		txtIdGenero.setText("" + arg.generarCodigoCorrelativo(arg.obtener(arg.tamanio()-1).getIdGenero()));
-		habilitarBotones(false);
+		txtIdGenero.setText(arg.generarCodigoCorrelativo(arg.obtener(arg.tamanio()-1).getIdGenero()));
 		habilitarEntradas(true);
+		habilitarBotones(false);
 		txtDescripcion.requestFocus();
 	}
 	public void actionPerformedbtnConsultar(ActionEvent e) {
@@ -309,7 +322,7 @@ public class manteGenero extends JDialog implements ActionListener {
 				cboEpoca.setSelectedIndex(x.getEpoca());
 				chkEstado.setSelected(x.isEstado());
 				if (tipoOperacion == MODIFICAR) {
-					habilitarEntradas(true);
+					habilitarEntradaModificar(true);
 					txtIdGenero.setEditable(false);
 					btnBuscar.setEnabled(false);
 					btnAceptar.setEnabled(true);
@@ -373,8 +386,8 @@ public class manteGenero extends JDialog implements ActionListener {
 			Object[] fila = { 
 							x.getIdGenero(),
 							x.getDescripcion(),
-							x.getEpoca(),
-					        x.isEstado()};
+							epocagen(x.getEpoca()),
+					        x.estadoTipo()};
 			modelo.addRow(fila);
 		}
 	}
@@ -386,7 +399,14 @@ public class manteGenero extends JDialog implements ActionListener {
 	
 	
 	void habilitarEntradas(boolean sino) {
-		if ((tipoOperacion == ADICIONAR) || (tipoOperacion == MODIFICAR)){
+		if (tipoOperacion == ADICIONAR){
+			txtDescripcion.setEditable(sino);
+			cboEpoca.setEnabled(sino);
+			chkEstado.setEnabled(sino);
+		}
+	}
+	void habilitarEntradaModificar(boolean sino){
+		if (tipoOperacion == MODIFICAR){
 			txtDescripcion.setEditable(sino);
 			cboEpoca.setEditable(sino);
 			chkEstado.setEnabled(sino);
@@ -418,11 +438,14 @@ public class manteGenero extends JDialog implements ActionListener {
 	String leerDescripcion() {
 		return txtDescripcion.getText().trim();
 	}
-	int leerEpoca() {
+	int leerEpoca(){
 		return cboEpoca.getSelectedIndex();
 	}
+	String epocagen(int i) {
+		return cboEpoca.getItemAt(i);
+	}
 	
-	boolean leerEstado() {
+	private boolean leerEstado() {
 		return chkEstado.isSelected();
 	}
 	

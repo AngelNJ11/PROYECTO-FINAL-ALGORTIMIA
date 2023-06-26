@@ -218,8 +218,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 
 	protected void actionPerformedBtnBuscar(ActionEvent e) {
 		consultarPiqueo();
-
-		
+	
 	}
 	protected void actionPerformedBtnAceptar(ActionEvent e) {
 		switch (tipoOperacion) {
@@ -408,7 +407,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 					x.getNombre(),
 					tipoPiqueo(x.getTipoPiqueo()),
 					x.getPrecio(),
-					x.isEstado()};
+					x.tipoEstado()};
 			modelo.addRow(fila);
 		}
 	}

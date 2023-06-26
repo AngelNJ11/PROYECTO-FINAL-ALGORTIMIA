@@ -48,11 +48,11 @@ public class ArreGeneros {
 	
 	public String generarCodigoCorrelativo(String codigoAnterior) {
 		if (tamanio() == 0) {
-			return "GEN01";
+			return "GEN001";
 		}else {
-			String codigo = codigoAnterior.substring(2);
+			String codigo = codigoAnterior.substring(3);
 		    int correlativo = Integer.parseInt(codigo) + 1; 
-		    String nuevoCodigo = "GEN" + String.format("%02d", correlativo); 
+		    String nuevoCodigo = "GEN" + String.format("%03d", correlativo); 
 		    return nuevoCodigo;
 		}
 	}
