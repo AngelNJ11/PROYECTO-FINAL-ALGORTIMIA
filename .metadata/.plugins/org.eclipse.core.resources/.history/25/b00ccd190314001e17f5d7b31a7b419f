@@ -1,0 +1,42 @@
+package helpers;
+
+import javax.swing.JComboBox;
+
+import arreglos.ArregloArtistas;
+import arreglos.ArregloGeneros;
+import clases.Artista;
+import clases.Genero;
+
+public class JComboBoxData extends JComboBox<String> {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public JComboBoxData(String nombreClase) {
+		addItem("[seleccione]");
+
+		switch (nombreClase) {
+		case "GENERO":
+			ArregloGeneros arrGeneros = new ArregloGeneros();
+			Genero genero;
+			for (int i = 0; i < arrGeneros.tamanio(); i++) {
+				genero = arrGeneros.obtener(i);
+				if (genero.isEstado())
+					addItem(genero.getIdGenero() + ":" + genero.getDescripcion());
+			}
+			break;
+		case "ARTISTA":
+			ArregloArtistas arrArtistas = new ArregloArtistas();
+			Artista artista;
+			for (int i = 0; i < arrArtistas.tamanio(); i++) {
+				artista = arrArtistas.obtener(i);
+				if (artista.isEstado())
+					addItem(artista.getIdArtista() + ":" + artista.getNombreArtistico());
+			}
+			break;
+		default:
+			break;
+		}
+	}
+}

@@ -1,0 +1,131 @@
+package arreglos;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import clases.ClaseArtista;
+import clases.ClaseGenero;
+import helpers.ManejoArchivos;
+
+
+public class ArreArtistas {
+
+	
+	private ArrayList <ClaseArtista> artista;
+	private ManejoArchivos manejoArchivos;
+	private String nombreArchivo;
+
+
+	public ArreArtistas() {
+		
+		artista = new ArrayList <ClaseArtista> ();
+		cargarArtista();
+
+	}
+	
+	public void adicionar(ClaseArtista x, boolean graba) {
+		artista.add(x);
+		grabarArtista();
+	}
+
+	public int tamanio() {
+		return artista.size();
+	}
+	
+	public ClaseArtista obtener(int i) {
+		return artista.get(i);
+	}
+	
+	public void eliminar(ClaseArtista x){
+		artista.remove(x);
+		grabarArtista();
+	}
+	public void actualizarArtista() {
+		grabarArtista();
+	}
+	
+	public ClaseArtista buscaID(String codigo){
+		for(ClaseArtista artista : artista){
+			if(artista.getIdArtista().equals(codigo)){
+				return artista;
+			}
+		}
+		return null;
+	}
+	
+	public ClaseArtista buscarPorNombre(String nombre) {
+		for(ClaseArtista artista : artista){
+			if(artista.getIdArtista().equals(nombre)){
+				return artista;
+			}
+		}
+		return null;
+	}
+	
+
+	public String generarCodigoCorrelativo(String codigoAnterior) {
+		if (tamanio() == 0) {
+			return "ART001";
+		}else {
+			String codigo = codigoAnterior.substring(3);
+		    int correlativo = Integer.parseInt(codigo) + 1; 
+		    String nuevoCodigo = "ART" + String.format("%03d", correlativo); 
+		    return nuevoCodigo;
+		}
+	}
+	
+	private void grabarArtista(){
+		String linea;
+		ArrayList<String> datos = new ArrayList<String>();
+		for (ClaseArtista artista : artista) {
+			String dato1 = artista.getIdArtista() + ";";
+			String dato2 = artista.getNombreArtistico() + ";";
+			String dato3 = artista.getGenero().getIdGenero() + ";";
+			String dato4 = artista.fechaComoCadena() + ";";
+			String dato5 = artista.isEstado() + ";";
+			linea = dato1 + dato2 + dato3 + dato4 + dato5;
+			datos.add(linea);
+		}
+	}
+	
+	private void cargarArtista() {
+		String[] datos;
+		ClaseArtista artista;
+		ArrayList<String> lineas;
+		ArreGeneros arrGeneros = new ArreGeneros();
+		try {
+			lineas = manejoArchivos.cargarData(nombreArchivo);
+			if (lineas != null)
+				for (String linea : lineas) {
+					datos = linea.split(";");
+					String idArtista = datos[0];
+					String nombreArtistico = datos[1];
+					String idGenero = datos[2];
+					ClaseGenero genero = arrGeneros.buscaID(idGenero);
+					Date fechaRegistro = fechaComoDate(datos[3]);
+					boolean estado = Boolean.parseBoolean(datos[4]);
+					artista = new ClaseArtista(idArtista, nombreArtistico, fechaRegistro, genero, estado);
+					adicionar(artista, false);
+				}
+		} catch (Exception e) {
+			// TODO: handle exception
+		
+	}
+	}
+	
+	
+	public Date fechaComoDate(String datos) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
+		Date fechaComoDate = null;
+		try {
+			fechaComoDate = formatter.parse(datos);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return fechaComoDate;
+	}
+
+
+}

@@ -6,6 +6,7 @@ INDEX VERSION 1.127+C:\Users\Angel\OneDrive\Escritorio\Grupo algoritmia\PROYECTO
 51915478.index
 1921434313.index
 1073190104.index
+3472572939.index
 262141639.index
 4164139556.index
 3299422388.index
@@ -14,7 +15,6 @@ INDEX VERSION 1.127+C:\Users\Angel\OneDrive\Escritorio\Grupo algoritmia\PROYECTO
 4067068589.index
 507044819.index
 3400675815.index
-2416363589.index
 1630659722.index
 2032977337.index
 2355066768.index

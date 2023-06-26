@@ -1,0 +1,13 @@
+package helpers;
+
+public class Autogenerado {
+	public String correlativo(String ultimoCodigo) {
+		String definicion = ultimoCodigo.substring(0,3);
+		String codigo = ultimoCodigo.substring(3);
+		String formato = "%0" + codigo.length() + "d";
+
+		int numCorrelativo = Integer.parseInt(codigo) + 1;
+		String nuevoCodigo = definicion + String.format(formato, numCorrelativo);
+		return nuevoCodigo;
+	}
+}

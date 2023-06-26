@@ -1,0 +1,32 @@
+package helpers;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
+public class ManejoArchivos {
+
+	public void grabarData(ArrayList<String> registros, String nombreArchivo) throws Exception {
+		PrintWriter pw;
+		pw = new PrintWriter(new FileWriter(nombreArchivo));
+		for (String registro : registros) {
+			pw.println(registro);
+		}
+		pw.close();
+	}
+
+	public ArrayList<String> cargarData(String nombreArchivo) throws Exception {
+		ArrayList<String> lineas = null;
+		BufferedReader br;
+		String linea;
+		br = new BufferedReader(new FileReader(nombreArchivo));
+		lineas = new ArrayList<String>();
+		while ((linea = br.readLine()) != null) {
+			lineas.add(linea);
+		}
+		br.close();
+		return lineas;
+	}
+}

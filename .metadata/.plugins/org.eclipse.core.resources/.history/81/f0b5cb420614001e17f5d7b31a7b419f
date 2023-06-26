@@ -1,0 +1,25 @@
+package helpers;
+
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.TableColumnModel;
+
+public class Generico {
+	// Métodos tipo void (con parámetros)
+	public void mensaje(String s, String titulo) {
+		JOptionPane.showMessageDialog(null, s, titulo, 1);
+	}
+
+	public void ajustarAnchoColumnas(JTable tbl, JScrollPane scrollPane, int[] anchos) {
+		TableColumnModel tcm = tbl.getColumnModel();
+		for (int i = 0; i < anchos.length; i++) {
+			tcm.getColumn(i).setPreferredWidth(anchoColumna(anchos[i], scrollPane));
+		}
+	}
+
+	// Métodos que retornan valor (con parámetros)
+	public int anchoColumna(int porcentaje, JScrollPane scrollPane) {
+		return porcentaje * scrollPane.getWidth() / 100;
+	}
+}
