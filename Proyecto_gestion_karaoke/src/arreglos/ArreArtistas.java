@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import clases.ClaseArtista;
-import clases.ClasePiqueo;
+import clases.ClaseGenero;
 
 
 public class ArreArtistas {
@@ -21,12 +21,13 @@ public class ArreArtistas {
 	public ArreArtistas() {
 		
 		artista = new ArrayList <ClaseArtista> ();
-
+		cargarArtista();
 
 	}
 	
 	public void adicionar(ClaseArtista x) {
 		artista.add(x);
+		grabarArtista();
 	}
 	
 	public int tamanio() {
@@ -39,6 +40,7 @@ public class ArreArtistas {
 	
 	public void eliminar(ClaseArtista x){
 		artista.remove(x);
+		grabarArtista();
 	}
 	
 	public ClaseArtista buscaID(String codigo){
@@ -62,7 +64,7 @@ public class ArreArtistas {
 		}
 	}
 	
-	/*private void grabarArtista(){
+	private void grabarArtista(){
 		try{
 			PrintWriter pw;
 			String linea;
@@ -70,10 +72,10 @@ public class ArreArtistas {
 			pw = new PrintWriter(new FileWriter("artista.txt"));
 			for(int i=0; i<tamanio(); i++) {
 				x = obtener(i);
-				linea = x.getIdPiqueo() + ";" +
-						x.getNombre() + ";" +
-						x.getTipoPiqueo() + ";" +
-						x.getPrecio() + ";" +
+				linea = x.getIdArtista() + ";" +
+						x.getNombreArtistico() + ";" +
+						x.getFechaRegistro() + ";" +
+						x.getGenero() + ";" +
 						x.isEstado();
 				pw.println(linea);
 			}
@@ -82,38 +84,41 @@ public class ArreArtistas {
 		catch (Exception e) {
 			
 		}
-	}*/
-	/*private void cargarPiqueos() {
+	}
+	
+	private void cargarArtista() {
 		try {
 			BufferedReader br;
 			String linea;
-			String[] s;
-			String idPiqueo, nombre;
-			int tipoPiqueo;
-			double precio;
-			boolean estado;
+			String [] datos;
+			ClaseArtista artista;
+			ArreGeneros aregen =  new ArreGeneros();
 			br = new BufferedReader(new FileReader("piqueos.txt"));
 			while ((linea=br.readLine()) != null) {
-				s = linea.split(";");
-				idPiqueo =(s[0].trim());
-				nombre =(s[1].trim());
-				tipoPiqueo=Integer.parseInt(s[2].trim());
-				precio=Double.parseDouble(s[3].trim());
-				estado=Boolean.parseBoolean(s[4].trim());
-				adicionar(new ClasePiqueo(idPiqueo, nombre, tipoPiqueo, precio, estado));
+				datos = linea.split(";");
+				String idArtista =(datos[0].trim());
+				String nombre =(datos[1].trim());
+				Date fecha = fechaComoDate(datos[2].trim());
+				String idGenero = datos[3];
+				ClaseGenero genero = aregen.buscaID(idGenero);
+				boolean estado = Boolean.parseBoolean(datos[4]);
+				artista =  new ClaseArtista(idArtista, nombre,  (java.sql.Date) fecha, genero, estado);
+				adicionar(artista);
 			}
 			br.close();	
 		}
 		catch (Exception e) {
+			
 		}
-	}*/
+	}
 	
 	
-	public Date fechaComoDate(String fechaText) {
+	
+	public Date fechaComoDate(String datos) {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
 		Date fechaComoDate = null;
 		try {
-			fechaComoDate = formatter.parse(fechaText);
+			fechaComoDate = formatter.parse(datos);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

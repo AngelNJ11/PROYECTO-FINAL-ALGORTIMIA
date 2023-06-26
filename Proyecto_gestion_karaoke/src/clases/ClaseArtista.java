@@ -12,6 +12,7 @@ public class ClaseArtista{
 	private Date fechaRegistro;
 	private ClaseGenero genero; 
 	private boolean estado;
+	
 	public ClaseArtista(String idArtista, String nombreArtistico, Date fechaRegistro, ClaseGenero genero,
 			boolean estado) {
 		this.idArtista = idArtista;
@@ -20,6 +21,8 @@ public class ClaseArtista{
 		this.genero = genero;
 		this.estado = estado;
 	}
+	
+	
 	public String getIdArtista() {
 		return idArtista;
 	}
