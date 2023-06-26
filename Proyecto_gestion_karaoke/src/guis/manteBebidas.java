@@ -9,13 +9,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import arreglos.ArreBebidas;
-import clases.ClaseBebida;
-import clases.ClaseUsuarios;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
