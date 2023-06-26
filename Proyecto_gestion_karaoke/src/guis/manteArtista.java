@@ -12,6 +12,7 @@ import arreglos.ArreArtistas;
 import arreglos.ArreGeneros;
 import clases.ClaseArtista;
 import clases.ClaseGenero;
+import clases.ClasePiqueo;
 import helpers.JComboBoxData;
 
 import javax.swing.JLabel;
@@ -21,8 +22,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
+import java.time.Clock;
 import java.util.Date;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 
 public class manteArtista extends JDialog implements ActionListener {
@@ -219,12 +223,7 @@ public class manteArtista extends JDialog implements ActionListener {
 	}
 	
 	public void actionPerformedbtnOpciones(ActionEvent e) {
-		txtIdArtista.setText("");
-		txtNomArtista.setText("");
-		txtFechaRegisto.setEnabled(false);
-		habilitarEntradas(false);
-		habilitarBotones(true);
-		limpieza1();
+		
 	}
 	
 	public void actionPerformedbtnBuscar(ActionEvent e) {
@@ -233,68 +232,36 @@ public class manteArtista extends JDialog implements ActionListener {
 	}
 	
 	public void actionPerformedbtnAceptar(ActionEvent e) {
-			switch (tipoOperacion) {
-			case ADICIONAR:
-				adicionarArtista();
-				break;
-			case CONSULTAR:
-				consultarArtista1();
-				break;
-			case MODIFICAR:
-				modificarArtista();
-				break;
-			case ELIMINAR:
-				eLiminarArtista();
-		}
 		
-		
-				area.actualizarArtista();
-				txtIdArtista.setEditable(false);
-				txtNomArtista.setEditable(false);
-				txtFechaRegisto.setEditable(false);
-				cboGenero.setEnabled(false);
-				chcHabilitado.setEnabled(false);
-				btnBuscar.setEnabled(false);
-				btnAceptar.setEnabled(false);
-				limpieza1();
 	}
+	
 	public void actionPerformedbtnNuevo(ActionEvent e) {
-		tipoOperacion = ADICIONAR;
-		txtIdArtista.setText(area.generarCodigoCorrelativo(area.obtener(area.tamanio()-1).getIdArtista()));
-		habilitarEntradas(true);
-		habilitarBotones(false);
-		txtNombre.requestFocus();
+		
 	}
 	
 	public void actionPerformedbtnConsultar(ActionEvent e) {
-		tipoOperacion= CONSULTAR;
-		txtIdPiqueo.setEditable(true);
-		habilitarBotones(false);
-		txtIdPiqueo.requestFocus();
+		
 	}
 	
 	public void actionPerformedbtenModificar(ActionEvent e) {
-		tipoOperacion= MODIFICAR;
-		txtIdPiqueo.setEditable(true);
-		habilitarBotones(false);
-		txtIdPiqueo.requestFocus();
+		
 	}
 	
 	public void actionPerformedbtnEliminar(ActionEvent e) {
-		tipoOperacion= ELIMINAR;
-		txtIdPiqueo.setEditable(true);
-		habilitarBotones(false);
-		txtIdPiqueo.requestFocus();
+		
 	}
 
 	void adicionarArtista() {
 		
 		String idArtista = area.generarCodigoCorrelativo(leerCodigo());
 		String nombre = leerNombre();
-		Date fecha = new Date();
+
+		
+
 		ClaseGenero genero = leerGenero();
+		Date fechaRegistro = new Date();
 		boolean estado = leerEstado();
-		ClaseArtista nuevoArtista = new ClaseArtista(idArtista, nombre, fecha, genero, estado);
+		ClaseArtista nuevoArtista = new ClaseArtista(idArtista, nombre, genero, fechaRegistro, estado);
 
 		area.adicionar(nuevoArtista, true);
 	
@@ -316,7 +283,7 @@ public class manteArtista extends JDialog implements ActionListener {
 					x.setEstado(estado);
 					listar();
 					txtNomArtista.requestFocus();
-					limpieza1();
+					limpieza();
 				}catch (Exception e) {
 					error("pipipipip", txtIdArtista);
 				}
@@ -366,7 +333,7 @@ public class manteArtista extends JDialog implements ActionListener {
 					area.eliminar(x);
 					listar();
 					btnAceptar.setEnabled(false);
-					limpieza1();
+					limpieza();
 				}
 			}else
 				error("El c�digo " + codigo + " no existe", txtIdArtista);
@@ -395,7 +362,7 @@ public class manteArtista extends JDialog implements ActionListener {
 		return JOptionPane.showConfirmDialog(this, s, "Alerta", 0, 1, null);
 	}
 	
-	void limpieza1(){
+	void limpieza(){
 		txtIdArtista.setText("");
 		txtNomArtista.setText("");
 		cboGenero.getSelectedIndex();
