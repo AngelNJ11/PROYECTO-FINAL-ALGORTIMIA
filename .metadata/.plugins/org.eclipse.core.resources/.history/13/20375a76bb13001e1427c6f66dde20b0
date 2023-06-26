@@ -1,0 +1,17 @@
+package clases;
+
+import java.sql.Date;
+
+
+public class ClaseArtista{
+
+	// ART001
+	private String idArtista;
+	private String nombreArtistico;
+	private Date fechaRegistro;
+	private ClaseGenero genero; 
+	private boolean estado;
+
+	
+
+}
