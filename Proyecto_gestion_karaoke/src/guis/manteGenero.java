@@ -8,18 +8,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import arreglos.ArreGeneros;
 import clases.ClaseGenero;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class manteGenero extends JDialog implements ActionListener {
 
@@ -30,16 +30,11 @@ public class manteGenero extends JDialog implements ActionListener {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtIdGenero;
 	private JTextField txtDescripcion;
-	private JTextField txtEpoca;
-	private JComboBox<String> cmbEstado;
-	private JLabel lblEstado;
 	private JLabel lblEpoca;
 	private JLabel lblDescripcion;
 	private JLabel lblGenero;
 	private JButton btnModificar;
 	private JButton btnEliminar;
-	private JScrollPane scrollPane;
-	private JTable tbResultado;
 	private DefaultTableModel modelo;
 	private JButton btnBuscar;
 	private JButton btnOpciones;
@@ -73,7 +68,7 @@ public class manteGenero extends JDialog implements ActionListener {
 	 */
 	public manteGenero() {
 		setTitle("Genero");
-		setBounds(100, 100, 566, 487);
+		setBounds(100, 100, 695, 508);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -91,46 +86,25 @@ public class manteGenero extends JDialog implements ActionListener {
 		lblEpoca.setBounds(10, 61, 86, 14);
 		contentPanel.add(lblEpoca);
 		
-		lblEstado = new JLabel("Estado");
-		lblEstado.setBounds(10, 86, 86, 14);
-		contentPanel.add(lblEstado);
-		
 		txtIdGenero = new JTextField();
+		txtIdGenero.setEditable(false);
 		txtIdGenero.setBounds(120, 8, 120, 20);
 		contentPanel.add(txtIdGenero);
 		txtIdGenero.setColumns(10);
 		
 		txtDescripcion = new JTextField();
+		txtDescripcion.setEditable(false);
 		txtDescripcion.setColumns(10);
 		txtDescripcion.setBounds(120, 33, 120, 20);
 		contentPanel.add(txtDescripcion);
 		
-		txtEpoca = new JTextField();
-		txtEpoca.setColumns(10);
-		txtEpoca.setBounds(120, 58, 120, 20);
-		contentPanel.add(txtEpoca);
-		
-		cmbEstado = new JComboBox<String>();
-		cmbEstado.setModel(new DefaultComboBoxModel<String>
-		(new String[] {"Habilitado", "Inhabilitado"}));
-		cmbEstado.setBounds(120, 83, 120, 20);
-		contentPanel.add(cmbEstado);
-		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(462, 57, 97, 23);
+		btnModificar.setBounds(568, 57, 97, 23);
 		contentPanel.add(btnModificar);
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(462, 82, 97, 23);
+		btnEliminar.setBounds(568, 82, 97, 23);
 		contentPanel.add(btnEliminar);
-		
-		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 151, 543, 294);
-		contentPanel.add(scrollPane);
-		
-		tbResultado = new JTable();
-		tbResultado.setFillsViewportHeight(true);
-		scrollPane.setViewportView(tbResultado);
 		
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setEnabled(false);
@@ -139,11 +113,11 @@ public class manteGenero extends JDialog implements ActionListener {
 		
 		btnOpciones = new JButton("Opciones");
 		btnOpciones.setEnabled(false);
-		btnOpciones.setBounds(361, 13, 97, 92);
+		btnOpciones.setBounds(459, 11, 97, 92);
 		contentPanel.add(btnOpciones);
 		
 		btnNuevo = new JButton("Nuevo");
-		btnNuevo.setBounds(462, 6, 97, 25);
+		btnNuevo.setBounds(568, 6, 97, 25);
 		contentPanel.add(btnNuevo);
 		
 		btnAceptar = new JButton("Aceptar");
@@ -152,21 +126,47 @@ public class manteGenero extends JDialog implements ActionListener {
 		contentPanel.add(btnAceptar);
 		
 		btnConsultar = new JButton("Consultar");
-		btnConsultar.setBounds(462, 31, 97, 25);
+		btnConsultar.setBounds(568, 31, 97, 25);
 		contentPanel.add(btnConsultar);
+		
+
+		
+		chkEstado = new JCheckBox("Estado");
+		chkEstado.setEnabled(false);
+		chkEstado.setSelected(true);
+		chkEstado.setBounds(10, 84, 113, 25);
+		contentPanel.add(chkEstado);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 129, 655, 319);
+		contentPanel.add(scrollPane);
+		
+		tbtResultado = new JTable();
+		scrollPane.setViewportView(tbtResultado);
+		
+		cboEpoca = new JComboBox<Object>();
+		cboEpoca.setEnabled(false);
+		cboEpoca.setModel(new DefaultComboBoxModel<Object>(new String[] {"1970", "1980", "1990", "2000", "2010", "2020"}));
+		cboEpoca.setBounds(120, 57, 120, 22);
+		contentPanel.add(cboEpoca);	
 		
 		modelo = new DefaultTableModel();
 		modelo.addColumn("ID Genero"); 
 		modelo.addColumn("Descrpcion"); 
 		modelo.addColumn("Epoca"); 
 		modelo.addColumn("Estado");
-		tbResultado.setModel(modelo);
+		tbtResultado.setModel(modelo);
 		modelo.setRowCount(0);
 		ajustarAnchoColumnas();
 		listar();
 	}
 	
+	
 	ArreGeneros arg =  new ArreGeneros();
+	private JCheckBox chkEstado;
+	private JScrollPane scrollPane;
+	private JTable tbtResultado;
+	private JComboBox<Object> cboEpoca;
 
 	
 	
@@ -211,11 +211,18 @@ public class manteGenero extends JDialog implements ActionListener {
 			case ELIMINAR:
 				eliminarGenero();
 		}
+			arg.actualizarArchivo();
+			txtIdGenero.setEditable(false);
+			txtDescripcion.setEditable(false);
+			cboEpoca.setEnabled(false);
+			chkEstado.setEnabled(false);
+			btnBuscar.setEnabled(false);
+			btnAceptar.setEnabled(false);
+			limpieza();
 	}
 	public void actionPerformedbtnOpciones(ActionEvent e) {
 		txtIdGenero.setText("");
 		txtDescripcion.setText("");
-		txtEpoca.setText("");
 		txtIdGenero.setEditable(false);
 		habilitarEntradas(false);
 		habilitarBotones(true);
@@ -224,7 +231,9 @@ public class manteGenero extends JDialog implements ActionListener {
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
 		txtIdGenero.setText("" + arg.generarCodigoCorrelativo(arg.obtener(arg.tamanio()-1).getIdGenero()));
-		
+		habilitarBotones(false);
+		habilitarEntradas(true);
+		txtDescripcion.requestFocus();
 	}
 	public void actionPerformedbtnConsultar(ActionEvent e) {
 		tipoOperacion = CONSULTAR;
@@ -250,10 +259,9 @@ public class manteGenero extends JDialog implements ActionListener {
 		String codigo = leerCodigo();
 		String descripcion = leerDescripcion();
 		if(descripcion.length() > 0){
-			int epoca = leerEpoca();
-			if(epoca > 0){
 				if(arg.buscaID(codigo) == null)
 					try{
+						int epoca = leerEpoca();
 						boolean estado = leerEstado();
 						ClaseGenero gen = new ClaseGenero(codigo, descripcion, epoca, estado);
 						arg.adicionar(gen);
@@ -262,9 +270,7 @@ public class manteGenero extends JDialog implements ActionListener {
 					}
 					catch (Exception e) {
 						mensaje("pipipipipipipipipipi");
-					}	
-			}else
-				error("Epoca no ingresad", txtEpoca);
+					}
 		}else
 			error("Descripcion no ingresada", txtDescripcion);
 	}
@@ -300,8 +306,8 @@ public class manteGenero extends JDialog implements ActionListener {
 			ClaseGenero x = arg.buscaID(codigo);
 			if (x != null) {
 				txtDescripcion.setText(x.getDescripcion());
-				txtEpoca.setText(x.getEpoca()+"");
-				cmbEstado.setSelectedIndex(0);
+				cboEpoca.setSelectedIndex(x.getEpoca());
+				chkEstado.setSelected(x.isEstado());
 				if (tipoOperacion == MODIFICAR) {
 					habilitarEntradas(true);
 					txtIdGenero.setEditable(false);
@@ -344,13 +350,15 @@ public class manteGenero extends JDialog implements ActionListener {
 		}	
 	}
 	
-	void ajustarAnchoColumnas() {
-		TableColumnModel tcm = tbResultado.getColumnModel();
-		tcm.getColumn(0).setPreferredWidth(anchoColumna(10));  
-		tcm.getColumn(1).setPreferredWidth(anchoColumna(10));  
-		tcm.getColumn(2).setPreferredWidth(anchoColumna(10));  
-		tcm.getColumn(3).setPreferredWidth(anchoColumna(10));   
+
+	void ajustarAnchoColumnas(){
+		TableColumnModel tcm = tbtResultado.getColumnModel();
+		tcm.getColumn(0).setPreferredWidth(anchoColumna(20));  
+		tcm.getColumn(1).setPreferredWidth(anchoColumna(20));  
+		tcm.getColumn(2).setPreferredWidth(anchoColumna(20));  
+		tcm.getColumn(3).setPreferredWidth(anchoColumna(20));
 	}
+	
 	int anchoColumna(int porcentaje) {
 		return porcentaje * scrollPane.getWidth() / 100;
 	}
@@ -366,15 +374,13 @@ public class manteGenero extends JDialog implements ActionListener {
 							x.getIdGenero(),
 							x.getDescripcion(),
 							x.getEpoca(),
-					        x.estado(leerEstado()),
-							};
+					        x.isEstado()};
 			modelo.addRow(fila);
 		}
 	}
 	void limpieza() {
 		txtIdGenero.setText("");
 		txtDescripcion.setText("");
-		txtEpoca.setText("");
 		txtDescripcion.requestFocus();
 	}	
 	
@@ -382,8 +388,8 @@ public class manteGenero extends JDialog implements ActionListener {
 	void habilitarEntradas(boolean sino) {
 		if ((tipoOperacion == ADICIONAR) || (tipoOperacion == MODIFICAR)){
 			txtDescripcion.setEditable(sino);
-			txtEpoca.setEditable(sino);
-			cmbEstado.setEnabled(sino);
+			cboEpoca.setEditable(sino);
+			chkEstado.setEnabled(sino);
 		}
 	}
 	
@@ -413,14 +419,11 @@ public class manteGenero extends JDialog implements ActionListener {
 		return txtDescripcion.getText().trim();
 	}
 	int leerEpoca() {
-		return Integer.parseInt(txtEpoca.getText().trim());
+		return cboEpoca.getSelectedIndex();
 	}
+	
 	boolean leerEstado() {
-		if(cmbEstado.getSelectedIndex() == 0){
-			return true;
-		}else {
-			return false;
-		}
+		return chkEstado.isSelected();
 	}
 	
 	
@@ -437,8 +440,4 @@ public class manteGenero extends JDialog implements ActionListener {
 	int confirmar(String s) {
 		return JOptionPane.showConfirmDialog(this, s, "Alerta", 0, 1, null);
 	}
-	//
-	
-	
-	
 }

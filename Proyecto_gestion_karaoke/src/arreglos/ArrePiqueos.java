@@ -74,7 +74,7 @@ public class ArrePiqueos {
 				String dato2 = piqueo.getNombre() + ";";
 				String dato3 = piqueo.getTipoPiqueo() + ";";
 				String dato4 = piqueo.getPrecio() + ";";
-				String dato5 = piqueo.isEstado() + ";";
+				boolean dato5 = piqueo.isEstado();
 				linea = dato1 + 
 						dato2 + 
 						dato3 + 
@@ -107,7 +107,7 @@ public class ArrePiqueos {
 				nombre =(datos[1].trim());
 				tipoPiqueo=Integer.parseInt(datos[2].trim());
 				precio=Double.parseDouble(datos[3].trim());
-				estado=false;
+				estado=Boolean.parseBoolean(datos[4].trim());
 				piqueo = new ClasePiqueo(idPiqueo, nombre, tipoPiqueo, precio, estado);
 				adicionar(piqueo, false);
 			}
