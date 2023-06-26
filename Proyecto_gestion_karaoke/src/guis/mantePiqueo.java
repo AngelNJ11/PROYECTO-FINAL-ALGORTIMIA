@@ -295,7 +295,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 						double precio = leerPrecio();
 						boolean estado = leerEstado();
 						ClasePiqueo piqw = new ClasePiqueo(codigo, nombre, tipo, precio, estado);
-						piq.adicionar(piqw);;
+						piq.adicionar((piqw),false);
 						listar();
 						limpieza();
 						}
