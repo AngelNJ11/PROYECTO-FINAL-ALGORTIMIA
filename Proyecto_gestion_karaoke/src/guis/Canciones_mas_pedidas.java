@@ -24,6 +24,7 @@ public class Canciones_mas_pedidas extends JDialog {
 		try {
 			Canciones_mas_pedidas dialog = new Canciones_mas_pedidas();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setLocationRelativeTo(null);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

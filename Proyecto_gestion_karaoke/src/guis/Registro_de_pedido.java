@@ -51,6 +51,8 @@ public class Registro_de_pedido extends JDialog {
 			Registro_de_pedido dialog = new Registro_de_pedido();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+
+			dialog.setLocationRelativeTo(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

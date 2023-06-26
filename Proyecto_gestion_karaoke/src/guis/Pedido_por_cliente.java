@@ -33,6 +33,7 @@ public class Pedido_por_cliente extends JDialog {
 			Pedido_por_cliente dialog = new Pedido_por_cliente();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			dialog.setLocationRelativeTo(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

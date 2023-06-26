@@ -24,6 +24,8 @@ public class Usuarios_que_han_atendido_mas_pedidos extends JDialog {
 			Usuarios_que_han_atendido_mas_pedidos dialog = new Usuarios_que_han_atendido_mas_pedidos();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+
+			dialog.setLocationRelativeTo(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

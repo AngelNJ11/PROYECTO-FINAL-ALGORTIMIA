@@ -67,6 +67,7 @@ public class manteBebidas extends JDialog implements ActionListener {
 			manteBebidas dialog = new manteBebidas();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			dialog.setLocationRelativeTo(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

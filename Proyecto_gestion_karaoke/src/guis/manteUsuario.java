@@ -72,6 +72,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 			manteUsuario dialog = new manteUsuario();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			dialog.setLocationRelativeTo(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

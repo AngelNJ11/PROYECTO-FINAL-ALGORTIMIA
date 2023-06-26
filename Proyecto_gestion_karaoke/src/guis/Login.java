@@ -39,6 +39,7 @@ public class Login extends JDialog implements ActionListener {
 		try {
 			Login frame = new Login();
 			frame.setVisible(true);
+			frame.setLocationRelativeTo(null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,7 +51,7 @@ public class Login extends JDialog implements ActionListener {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Login() {
 		setTitle("Formulario Usuario ");
-		setBounds(100, 100, 313, 174);
+		setBounds(100, 100, 329, 174);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
