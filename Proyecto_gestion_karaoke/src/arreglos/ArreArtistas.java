@@ -45,9 +45,18 @@ public class ArreArtistas {
 	}
 	
 	public ClaseArtista buscaID(String codigo){
-		for(ClaseArtista bebida : artista){
-			if(bebida.getIdArtista().equals(codigo)){
-				return bebida;
+		for(ClaseArtista artista : artista){
+			if(artista.getIdArtista().equals(codigo)){
+				return artista;
+			}
+		}
+		return null;
+	}
+	
+	public ClaseArtista buscarPorNombre(String nombre) {
+		for(ClaseArtista artista : artista){
+			if(artista.getIdArtista().equals(nombre)){
+				return artista;
 			}
 		}
 		return null;
