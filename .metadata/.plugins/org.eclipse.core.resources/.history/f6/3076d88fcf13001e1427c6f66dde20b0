@@ -86,6 +86,7 @@ public class ArreArtistas {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void cargarArtista() {
 		try {
 			BufferedReader br;
@@ -102,13 +103,12 @@ public class ArreArtistas {
 				String idGenero = datos[3];
 				ClaseGenero genero = aregen.buscaID(idGenero);
 				boolean estado = Boolean.parseBoolean(datos[4]);
-				artista =  new ClaseArtista(idArtista, nombre,  (java.sql.Date) fecha, genero, estado);
+				artista =  new ClaseArtista(idArtista, nombre, fecha, genero, estado);
 				adicionar(artista);
 			}
 			br.close();	
 		}
 		catch (Exception e) {
-			
 		}
 	}
 	

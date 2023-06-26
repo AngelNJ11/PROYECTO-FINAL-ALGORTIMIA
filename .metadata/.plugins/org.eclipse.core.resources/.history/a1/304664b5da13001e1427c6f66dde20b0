@@ -252,8 +252,11 @@ public class manteArtista extends JDialog implements ActionListener {
 		if(nombre.length() > 0){
 				if(area.buscaID(codigo) == null)
 						try{
+							int tipo = leerTipo();
+							double precio = leerPrecio();
 							boolean estado = leerEstado();
-							
+							ClaseArtista piqw = new ClasePiqueo(codigo, nombre, tipo, precio, estado);
+							area.adicionar(piqw);;
 							listar();
 							limpieza();
 						}

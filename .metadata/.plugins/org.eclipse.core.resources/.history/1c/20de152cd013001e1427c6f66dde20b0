@@ -22,7 +22,6 @@ public class ClaseArtista{
 		this.estado = estado;
 	}
 	
-	
 	public String getIdArtista() {
 		return idArtista;
 	}

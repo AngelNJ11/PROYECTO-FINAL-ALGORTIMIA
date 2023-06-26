@@ -252,8 +252,11 @@ public class manteArtista extends JDialog implements ActionListener {
 		if(nombre.length() > 0){
 				if(area.buscaID(codigo) == null)
 						try{
+							int tipo = leerTipo();
+							double precio = leerPrecio();
 							boolean estado = leerEstado();
-							
+							ClaseArtista piqw = new ClasePiqueo(codigo, nombre, tipo, precio, estado);
+							area.adicionar(piqw);;
 							listar();
 							limpieza();
 						}
@@ -272,7 +275,12 @@ public class manteArtista extends JDialog implements ActionListener {
 			if(x != null){
 				try{
 					String nombre = leerNombre();
+					double precio = leerPrecio();
+					int tipo = leerTipo();
 					boolean estado = leerEstado();
+					x.setNombre(nombre);
+					x.setPrecio(precio);
+					x.setTipoPiqueo(tipo);
 					x.setEstado(estado);
 					listar();
 					txtNomArtista.requestFocus();
@@ -293,9 +301,11 @@ public class manteArtista extends JDialog implements ActionListener {
 		    String codigo = leerCodigo();
 		    ClaseArtista x = area.buscaID(codigo);
 		    if(x != null){
-		    	txtIdArtista.setText(x.getIdArtista());
-		    	txtNomArtista.setText(x.getNombreArtistico());
-		    	chcHabilitado.setSelected(x.isEstado());
+		    	txtIdPiqueo.setText(x.getIdPiqueo());
+		    	txtNombre.setText(x.getNombre());
+		    	cmbTipoPiqueo.setSelectedIndex(x.getTipoPiqueo());
+		    	txtPrecio.setText(String.valueOf(x.getPrecio()));
+		    	chkEstado.setSelected(x.isEstado());
 		    	if(tipoOperacion==MODIFICAR){
 		    		habilitarEntradaModificar(true);
 		    		txtIdArtista.setEditable(false);
