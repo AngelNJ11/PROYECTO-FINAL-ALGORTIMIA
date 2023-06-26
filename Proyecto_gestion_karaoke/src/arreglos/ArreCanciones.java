@@ -1,7 +1,15 @@
 package arreglos;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
+import clases.ClaseArtista;
 import clases.ClaseCancion;
 
 public class ArreCanciones {
@@ -11,16 +19,14 @@ public class ArreCanciones {
 
 	public ArreCanciones() {	
 		cancion = new ArrayList <ClaseCancion> ();
-		adicionar(new ClaseCancion("CAN0001", "BEBE", null, "Mis Manos", null, 0, true));
-		adicionar(new ClaseCancion("CAN0002", "Mi primer Millon", null, "Caraluna", null, 0, true));
-		adicionar(new ClaseCancion("CAN0003", "Los Caminos de la vida", null, "Los Rayos", null, 0, true));
-		adicionar(new ClaseCancion("CAN0004", "Rayando el Sol", null, "Falta Amor", null, 0, true));
+		cargarCancion();
 	}
 	
-	public void adicionar(ClaseCancion x) {
-		cancion.add(x);
-	}
-	
+	public void adicionar(ClaseCancion nuevoCliente, boolean graba){
+		cancion.add(nuevoCliente);
+		if(graba)
+			grabarCancion();
+	}	
 	public int tamanio() {
 		return cancion.size();
 	}
@@ -31,6 +37,7 @@ public class ArreCanciones {
 	
 	public void eliminar(ClaseCancion x){
 		cancion.remove(x);
+		grabarCancion();
 	}
 	
 	
@@ -54,6 +61,75 @@ public class ArreCanciones {
 		}
 	}
 	
+	public void actualizarArchivo() {
+		grabarCancion();
+	}
 	
+	private void grabarCancion(){
+		try{
+			PrintWriter pw;
+			String linea;
+			ClaseCancion cancion;
+			pw = new PrintWriter(new FileWriter("canciones.txt"));
+			for(int i=0; i<tamanio(); i++) {
+				cancion = obtener(i);
+				String dato1 = cancion.getIdCancion() + ";";
+				String dato2 = cancion.getNombre() + ";";
+				String dato3 = cancion.getArtista().getNombreArtistico() + ";";
+				String dato4 = cancion.getAlbum() + ";";
+				String dato5 = cancion.getFechaRegistro() + ";";
+				String dato6 = cancion.getNumeroReproduciones() + ";";
+				String dato7 = cancion.isEstado() + ";";
+				linea = dato1 + dato2 + dato3 + dato4 + dato5 + dato6 + dato7;
+				pw.println(linea);
+			}
+			pw.close();
+		}
+		catch (Exception e) {
+			
+		}
+	}
+
+	private void cargarCancion() {
+		try {
+			BufferedReader br;
+			String linea;
+			String[] datos;
+			ClaseCancion cancion;
+			
+			br = new BufferedReader(new FileReader("canciones.txt"));
+			while ((linea = br.readLine()) != null) {
+				datos = linea.split(";");
+				
+				String idCancion =(datos[0].trim());
+				String nombre =(datos[1].trim());
+				String nombreArtista = (datos[2].trim());
+				ArreArtistas arreartista = new ArreArtistas();
+				ClaseArtista artista = arreartista.buscarPorNombre(nombreArtista);
+				String album = (datos[3].trim());
+				Date fechaRegistro = fechaComoDate(datos[4].trim());
+				int numeroRepro = Integer.parseInt(datos[5].trim());
+				boolean estado = Boolean.parseBoolean(datos[6]);
+				
+				cancion = new ClaseCancion(idCancion, nombre, artista, album, (java.sql.Date) fechaRegistro, numeroRepro, estado);
+				adicionar(cancion, false);
+			}
+			br.close();	
+		}
+		catch (Exception e) {
+		}
+	}
 	
+	public Date fechaComoDate(String datos) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
+		Date fechaComoDate = null;
+		try {
+			fechaComoDate = formatter.parse(datos);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return fechaComoDate;
+	}
 }
+	
+
