@@ -1,0 +1,70 @@
+package clases;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
+
+public class ClaseArtista{
+
+	// ART001
+	private String idArtista;
+	private String nombreArtistico;
+	private Date fechaRegistro;
+	private ClaseGenero genero; 
+	private boolean estado;
+	
+	public ClaseArtista(String idArtista, String nombreArtistico, Date fechaRegistro, ClaseGenero genero, boolean estado) {
+		this.idArtista = idArtista;
+		this.nombreArtistico = nombreArtistico;
+		this.fechaRegistro = fechaRegistro;
+		this.genero = genero;
+		this.estado = estado;
+	}
+	
+	
+	public String getIdArtista() {
+		return idArtista;
+	}
+	public void setIdArtista(String idArtista) {
+		this.idArtista = idArtista;
+	}
+	public String getNombreArtistico() {
+		return nombreArtistico;
+	}
+	public void setNombreArtistico(String nombreArtistico) {
+		this.nombreArtistico = nombreArtistico;
+	}
+	public Date getFechaRegistro() {
+		return fechaRegistro;
+	}
+	public void setFechaRegistro(Date fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+	public ClaseGenero getGenero() {
+		return genero;
+	}
+	public void setGenero(ClaseGenero genero) {
+		this.genero = genero;
+	}
+	public boolean isEstado() {
+		return estado;
+	}
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+	
+	public String nombreEstado() {
+		return estado ? "Activo" : "Inactivo";
+	}
+	
+	public String fechaComoCadena() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		String fechaComoCadena = sdf.format(fechaRegistro);
+		return fechaComoCadena;
+	}
+
+
+	
+	
+
+}

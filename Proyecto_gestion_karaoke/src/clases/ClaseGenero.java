@@ -54,24 +54,6 @@ public class ClaseGenero {
 		this.estado = estado;
 	}
 	
-	public String epoca(int anio) {
-		switch (anio) {
-			case 0:
-				return "1970";
-			case 1:
-				return "1980";
-			case 2:
-				return "1990";
-			case 3:
-				return "2000";
-			case 4:
-				return "2010";
-			case 5:
-				return "2020";
-			default:
-				return null;
-		}
-	}
 	
 	public String estadoTipo(){	
 		return estado ? "Habilitado" : "Inhabilitado";
