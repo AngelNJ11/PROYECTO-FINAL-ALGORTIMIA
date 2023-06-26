@@ -1,2 +1,2 @@
 USU001;Arue;Palma;Casavarde;0;aruepalma;arue123;1
-USU002;asdasd;asdasd;asdasda;0;asdasd;asdasda;0
+USU002;Angel;Navarro; ;0;angel;angel123;0
