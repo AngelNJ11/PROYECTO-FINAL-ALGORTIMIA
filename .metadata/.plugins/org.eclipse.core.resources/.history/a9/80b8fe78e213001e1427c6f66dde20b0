@@ -10,8 +10,8 @@ import javax.swing.table.TableColumnModel;
 
 import arreglos.ArreArtistas;
 import clases.ClaseArtista;
-import clases.ClaseGenero;
 import clases.ClasePiqueo;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -19,10 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JCheckBox;
 import java.awt.event.ActionListener;
-import java.util.Date;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 
 public class manteArtista extends JDialog implements ActionListener {
@@ -34,6 +31,7 @@ public class manteArtista extends JDialog implements ActionListener {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtIdArtista;
 	private JTextField txtNomArtista;
+	private JTextField txtdGenero;
 	private JTextField txtFechaRegisto;
 	private JTable table;
 	private JLabel lblIdArtista;
@@ -51,7 +49,7 @@ public class manteArtista extends JDialog implements ActionListener {
 	private JButton btnNuevo;
 	private JCheckBox chcHabilitado;
 	private DefaultTableModel modelo;
-	private JComboBox<String> cboGenero;
+
 
 	
 	// Tipo de operaci�n a procesar: Adicionar, Consultar, Modificar o Eliminar
@@ -118,6 +116,12 @@ public class manteArtista extends JDialog implements ActionListener {
 		txtNomArtista.setBounds(142, 33, 123, 20);
 		contentPanel.add(txtNomArtista);
 		
+		txtdGenero = new JTextField();
+		txtdGenero.setEditable(false);
+		txtdGenero.setColumns(10);
+		txtdGenero.setBounds(142, 58, 123, 20);
+		contentPanel.add(txtdGenero);
+		
 		txtFechaRegisto = new JTextField();
 		txtFechaRegisto.setColumns(10);
 		txtFechaRegisto.setBounds(142, 83, 123, 20);
@@ -183,16 +187,10 @@ public class manteArtista extends JDialog implements ActionListener {
 		btnNuevo.addActionListener(this);
 		btnNuevo.setBounds(625, 7, 89, 23);
 		contentPanel.add(btnNuevo);
-		
-		cboGenero = new JComboBox<String>();
-		cboGenero.setSelectedIndex(0);
-		cboGenero.setBounds(142, 58, 123, 20);
-		contentPanel.add(cboGenero);
 	}
 	
 	
 		ArreArtistas area = new ArreArtistas();
-		
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == btnOpciones) {
@@ -223,7 +221,7 @@ public class manteArtista extends JDialog implements ActionListener {
 	}
 	
 	public void actionPerformedbtnBuscar(ActionEvent e) {
-		consultarArtista1();
+		consultarPiqueo();
 
 	}
 	
@@ -247,35 +245,34 @@ public class manteArtista extends JDialog implements ActionListener {
 		
 	}
 
-	void adicionarArtista() {
+	void adicionarPiqueo() {
 		
-		String idArtista = area.generarCodigoCorrelativo(leerCodigo());
-		String nombre = leerNombre();
-
-		
-
-		ClaseGenero genero = leerGenero();
-		Date fechaRegistro = new Date();
-		boolean estado = leerEstado();
-		Artista nuevoArtista = new Artista(idArtista, nombre, genero, fechaRegistro, estado);
-
-		arrArtistas.adicionar(nuevoArtista, true);
+		String codigo = leerCodigo();
+		String nombre =  leerNombre();
+		if(nombre.length() > 0){
+				if(area.buscaID(codigo) == null)
+						try{
+							boolean estado = leerEstado();
+							
+							listar();
+							limpieza();
+						}
+						catch (Exception e) {
+							mensaje("valo?");
+						}
+					}else
+					error("Nombre no ingresado", txtNomArtista);
 	
 
 	}
 	
-	void modificarArtista() {
+	void modificarPiqueo() {
 		try {
 			ClaseArtista x = area.buscaID(leerCodigo());
 			if(x != null){
 				try{
 					String nombre = leerNombre();
-					double precio = leerPrecio();
-					int tipo = leerTipo();
 					boolean estado = leerEstado();
-					x.setNombre(nombre);
-					x.setPrecio(precio);
-					x.setTipoPiqueo(tipo);
 					x.setEstado(estado);
 					listar();
 					txtNomArtista.requestFocus();
@@ -291,13 +288,14 @@ public class manteArtista extends JDialog implements ActionListener {
 			}
 	}
 	
-	void consultarArtista1(){
+	void consultarPiqueo(){
 		try {
 		    String codigo = leerCodigo();
 		    ClaseArtista x = area.buscaID(codigo);
 		    if(x != null){
 		    	txtIdArtista.setText(x.getIdArtista());
 		    	txtNomArtista.setText(x.getNombreArtistico());
+		    	chcHabilitado.setSelected(x.isEstado());
 		    	if(tipoOperacion==MODIFICAR){
 		    		habilitarEntradaModificar(true);
 		    		txtIdArtista.setEditable(false);
@@ -319,7 +317,7 @@ public class manteArtista extends JDialog implements ActionListener {
 		}
 	}
 	
-	void eLiminarArtista(){
+	void eLiminarPiqueo(){
 		try {
 			String codigo = leerCodigo();
 			ClaseArtista x = area.buscaID(codigo);
@@ -361,7 +359,7 @@ public class manteArtista extends JDialog implements ActionListener {
 	void limpieza(){
 		txtIdArtista.setText("");
 		txtNomArtista.setText("");
-		cboGenero.getSelectedIndex();
+		txtdGenero.setText("");
 		txtFechaRegisto.requestFocus();
 	}
 	
@@ -456,12 +454,6 @@ public class manteArtista extends JDialog implements ActionListener {
 	}
 	String leerNombre(){
 		return txtNomArtista.getText().trim();
-	}
-	ClaseGenero leerGenero() {
-		String item = cm.getSelectedItem().toString();
-		String idGenero = item.split(":")[0];
-		ClaseGenero genero = arrGeneros.buscarPorCodigo(idGenero);
-		return genero;
 	}
 	
 	private boolean leerEstado(){

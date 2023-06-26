@@ -25,8 +25,8 @@ public class ArreArtistas {
 
 	}
 	
-	public void adicionar(ClaseArtista x, boolean graba) {
-		artista.add(x);
+	public void adicionar(ClaseArtista nuevoUsuario, boolean graba) {
+		ClaseArtista.add(nuevoUsuario);
 		if (graba)
 			grabarArtista();
 	}
@@ -104,7 +104,7 @@ public class ArreArtistas {
 				ClaseGenero genero = aregen.buscaID(idGenero);
 				boolean estado = Boolean.parseBoolean(datos[4]);
 				artista =  new ClaseArtista(idArtista, nombre,  (java.sql.Date) fecha, genero, estado);
-				adicionar(artista,false);
+				adicionar(artista);
 			}
 			br.close();	
 		}

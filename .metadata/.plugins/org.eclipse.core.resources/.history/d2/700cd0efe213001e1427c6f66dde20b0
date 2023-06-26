@@ -9,9 +9,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import arreglos.ArreArtistas;
+import clases.Artista;
 import clases.ClaseArtista;
 import clases.ClaseGenero;
 import clases.ClasePiqueo;
+import clases.Genero;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -22,7 +25,6 @@ import java.awt.event.ActionListener;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 
 public class manteArtista extends JDialog implements ActionListener {
@@ -51,7 +53,7 @@ public class manteArtista extends JDialog implements ActionListener {
 	private JButton btnNuevo;
 	private JCheckBox chcHabilitado;
 	private DefaultTableModel modelo;
-	private JComboBox<String> cboGenero;
+
 
 	
 	// Tipo de operaci�n a procesar: Adicionar, Consultar, Modificar o Eliminar
@@ -184,15 +186,13 @@ public class manteArtista extends JDialog implements ActionListener {
 		btnNuevo.setBounds(625, 7, 89, 23);
 		contentPanel.add(btnNuevo);
 		
-		cboGenero = new JComboBox<String>();
-		cboGenero.setSelectedIndex(0);
+		JComboBox cboGenero = new JComboBox();
 		cboGenero.setBounds(142, 58, 123, 20);
 		contentPanel.add(cboGenero);
 	}
 	
 	
 		ArreArtistas area = new ArreArtistas();
-		
 	public void actionPerformed(ActionEvent e) {
 		
 		if (e.getSource() == btnOpciones) {
@@ -223,7 +223,7 @@ public class manteArtista extends JDialog implements ActionListener {
 	}
 	
 	public void actionPerformedbtnBuscar(ActionEvent e) {
-		consultarArtista1();
+		consultarPiqueo();
 
 	}
 	
@@ -247,7 +247,7 @@ public class manteArtista extends JDialog implements ActionListener {
 		
 	}
 
-	void adicionarArtista() {
+	void adicionarPiqueo() {
 		
 		String idArtista = area.generarCodigoCorrelativo(leerCodigo());
 		String nombre = leerNombre();
@@ -264,7 +264,7 @@ public class manteArtista extends JDialog implements ActionListener {
 
 	}
 	
-	void modificarArtista() {
+	void modificarPiqueo() {
 		try {
 			ClaseArtista x = area.buscaID(leerCodigo());
 			if(x != null){
@@ -291,7 +291,7 @@ public class manteArtista extends JDialog implements ActionListener {
 			}
 	}
 	
-	void consultarArtista1(){
+	void consultarPiqueo(){
 		try {
 		    String codigo = leerCodigo();
 		    ClaseArtista x = area.buscaID(codigo);
@@ -319,7 +319,7 @@ public class manteArtista extends JDialog implements ActionListener {
 		}
 	}
 	
-	void eLiminarArtista(){
+	void eLiminarPiqueo(){
 		try {
 			String codigo = leerCodigo();
 			ClaseArtista x = area.buscaID(codigo);
@@ -361,7 +361,7 @@ public class manteArtista extends JDialog implements ActionListener {
 	void limpieza(){
 		txtIdArtista.setText("");
 		txtNomArtista.setText("");
-		cboGenero.getSelectedIndex();
+		txtdGenero.setText("");
 		txtFechaRegisto.requestFocus();
 	}
 	
