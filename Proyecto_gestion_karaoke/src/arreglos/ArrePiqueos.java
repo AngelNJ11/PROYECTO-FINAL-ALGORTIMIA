@@ -67,7 +67,7 @@ public class ArrePiqueos {
 			PrintWriter pw;
 			String linea;
 			ClasePiqueo piqueo;
-			pw = new PrintWriter(new FileWriter("piqueos.txt"));
+			pw = new PrintWriter(new FileWriter("piqueo.txt"));
 			for(int i=0; i<tamanio(); i++) {
 				piqueo = obtener(i);
 				String dato1 = piqueo.getIdPiqueo() + ";";
@@ -99,7 +99,7 @@ public class ArrePiqueos {
 			int tipoPiqueo;
 			double precio;
 			boolean estado;
-			br = new BufferedReader(new FileReader("piqueos.txt"));
+			br = new BufferedReader(new FileReader("piqueo.txt"));
 			while ((linea = br.readLine()) != null) {
 				datos = linea.split(";");
 				

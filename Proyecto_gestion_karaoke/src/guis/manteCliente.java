@@ -53,7 +53,6 @@ public class manteCliente extends JDialog implements ActionListener {
 	private JLabel lblTelefono;
 	private JLabel lblTipoCliente;
 	private JComboBox<String> cmbTipoCliente;
-	private JTable tbResultado;
 	private DefaultTableModel modelo;
 	private JComboBox<String> cmbEstadoCivil;
 	private JButton btnConsultar;
@@ -88,7 +87,7 @@ public class manteCliente extends JDialog implements ActionListener {
 	 */
 	public manteCliente() {
 		setTitle("Cliente");
-		setBounds(100, 100, 1014, 550);
+		setBounds(100, 100, 1059, 550);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -191,26 +190,25 @@ public class manteCliente extends JDialog implements ActionListener {
 		contentPanel.add(cmbTipoCliente);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 161, 993, 339);
+		scrollPane.setBounds(10, 161, 1019, 339);
 		contentPanel.add(scrollPane);
 		
-		tbResultado = new JTable();
-		tbResultado.setFillsViewportHeight(true);
-		scrollPane.setViewportView(tbResultado);
+		tbtResultado = new JTable();
+		scrollPane.setViewportView(tbtResultado);
 		
 		btnNuevo = new JButton("Nuevo");
 		btnNuevo.addActionListener(this);
-		btnNuevo.setBounds(914, 10, 89, 23);
+		btnNuevo.setBounds(940, 7, 89, 23);
 		contentPanel.add(btnNuevo);
 		
 		btnModificar = new JButton("Modificar");
 		btnModificar.addActionListener(this);
-		btnModificar.setBounds(914, 60, 89, 23);
+		btnModificar.setBounds(940, 56, 89, 23);
 		contentPanel.add(btnModificar);
 		
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.addActionListener(this);
-		btnEliminar.setBounds(914, 86, 89, 23);
+		btnEliminar.setBounds(940, 82, 89, 23);
 		contentPanel.add(btnEliminar);
 		
 		cmbEstadoCivil = new JComboBox<String>();
@@ -221,7 +219,7 @@ public class manteCliente extends JDialog implements ActionListener {
 		
 		btnConsultar = new JButton("Consultar");
 		btnConsultar.addActionListener(this);
-		btnConsultar.setBounds(914, 34, 89, 23);
+		btnConsultar.setBounds(940, 30, 89, 23);
 		contentPanel.add(btnConsultar);
 		
 		btnBuscar = new JButton("Buscar");
@@ -239,7 +237,7 @@ public class manteCliente extends JDialog implements ActionListener {
 		btnOpciones = new JButton("Opciones");
 		btnOpciones.addActionListener(this);
 		btnOpciones.setEnabled(false);
-		btnOpciones.setBounds(772, 8, 140, 95);
+		btnOpciones.setBounds(788, 11, 140, 95);
 		contentPanel.add(btnOpciones);
 		
 		modelo = new DefaultTableModel();
@@ -251,8 +249,8 @@ public class manteCliente extends JDialog implements ActionListener {
 		modelo.addColumn("Estaado Civil"); 
 		modelo.addColumn("Telefono"); 
 		modelo.addColumn("DNI"); 
-		modelo.addColumn("Tipo de Cliente"); 
-		tbResultado.setModel(modelo);
+		modelo.addColumn("Tipo de Cliente");
+		tbtResultado.setModel(modelo);
 		modelo.setRowCount(0); 
 		
 		ajustarAnchoColumnas();
@@ -262,6 +260,7 @@ public class manteCliente extends JDialog implements ActionListener {
 	}
 	
 	ArreCliente arc = new ArreCliente();
+	private JTable tbtResultado;
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnBuscar){
@@ -346,6 +345,22 @@ public class manteCliente extends JDialog implements ActionListener {
 	
 	
 	void eliminarCliente() {
+		try {
+			String codigo = leerCodigo();
+			ClaseCliente x = arc.buscarPorID(codigo);
+			if (x != null) {
+				int ok = confirmar("¿Desea eliminar el registro?");
+				if (ok == 0){
+					arc.eliminar(x);
+					listar();
+					btnAceptar.setEnabled(false);
+					limpieza();
+				}
+			}
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
 		// TODO Auto-generated method stub
 		
 	}
@@ -396,7 +411,7 @@ public class manteCliente extends JDialog implements ActionListener {
 	
 	
 	void ajustarAnchoColumnas() {
-		TableColumnModel tcm = tbResultado.getColumnModel();
+		TableColumnModel tcm = tbtResultado.getColumnModel();
 		tcm.getColumn(0).setPreferredWidth(anchoColumna(6));  
 		tcm.getColumn(1).setPreferredWidth(anchoColumna(15));  
 		tcm.getColumn(2).setPreferredWidth(anchoColumna(13));  
@@ -404,7 +419,7 @@ public class manteCliente extends JDialog implements ActionListener {
 		tcm.getColumn(4).setPreferredWidth(anchoColumna(10));  
 		tcm.getColumn(5).setPreferredWidth(anchoColumna(7));  
 		tcm.getColumn(6).setPreferredWidth(anchoColumna(7));  
-		tcm.getColumn(6).setPreferredWidth(anchoColumna(7));  
+		tcm.getColumn(7).setPreferredWidth(anchoColumna(7));  
 
 	}
 	int anchoColumna(int porcentaje) {
@@ -420,8 +435,8 @@ public class manteCliente extends JDialog implements ActionListener {
 			Object[] fila = { x.getIdCliente(),
 					          x.nombreComple(),
 					          x.getDireccion(),
-					          x.getFechaNacimiento(),
-					          x.getFechaAfilacion(),
+					          x.fechaNacimiento(),
+					          x.fechaAfilacion(),
 					          x.estadoCivil(x.getEstadoCivil()),
 					          x.getTelefono(),
 					          x.getDni(),
@@ -506,11 +521,6 @@ public class manteCliente extends JDialog implements ActionListener {
 	String leerTelefono() {
 		return (txtTelefono.getText().trim());
 	}
-
-	
-	
-	
-	
 	void mensaje(String s) {
 		JOptionPane.showMessageDialog(this, s, "Informaciï¿½n", 0);
 	}
@@ -532,10 +542,4 @@ public class manteCliente extends JDialog implements ActionListener {
 	String estadoCivil(int i) {
 		return cmbEstadoCivil.getItemAt(i);
 	}
-	
-	
-	
-	
-	
-	
 }

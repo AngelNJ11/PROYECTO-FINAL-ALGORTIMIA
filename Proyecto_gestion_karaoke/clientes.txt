@@ -1,0 +1,1 @@
+CLI001;NombresApellidoPaternoApellidoMaterno;Dirección;25/06/2023;26/06/2023;1;123456789;12345678;1

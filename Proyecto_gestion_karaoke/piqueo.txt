@@ -1,0 +1,2 @@
+PIQ001;Piqueo de mariscos;2;25.99;true
+PIQ002;chetos;0;50.0;true

@@ -46,15 +46,6 @@ public class ClaseCliente {
 		this.dni = dni;
 		this.tipoDelCliente = tipoDelCliente;
 	}
-
-	
-
-	
-	
-	
-	
-	
-	
 	
 	public String getIdCliente() {
 		return idCliente;

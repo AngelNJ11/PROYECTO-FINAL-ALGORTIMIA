@@ -23,10 +23,9 @@ public class ArreCliente {
 		cargarCliente();
 	}
 	
-	public void adicionar(ClaseCliente  nuevoCliente, boolean graba){
-		cliente.add(nuevoCliente);
-		if(graba)
-			grabarCliente();
+	public void adicionar(ClaseCliente  x){
+		cliente=new ArrayList<ClaseCliente>();
+		grabarCliente();
 	}
 	
 	public int tamanio(){
@@ -82,12 +81,12 @@ public class ArreCliente {
 				String dato3 = cliente.getApellidoPaterno() + ";";
 				String dato4 = cliente.getApellidoMaterno() + ";";
 				String dato5 = cliente.getDireccion() + ";";
-				String dato6 = cliente.getEstadoCivil() + ";";
-				String dato7 = cliente.fechaNacimiento() + ";";
-				String dato8 = cliente.fechaAfilacion() + ";";
+				String dato6 = cliente.fechaNacimiento() + ";";
+				String dato7 = cliente.fechaAfilacion() + ";";
+				String dato8 = cliente.getEstadoCivil() + ";";
 				String dato9 = cliente.getTelefono() + ";";
 				String dato10 = cliente.getDni() + ";";
-				String dato11 = cliente.getTipoDelCliente() + ";";
+				int dato11 = cliente.getTipoDelCliente();
 
 				linea = dato1 + 
 						dato2 + 
@@ -113,8 +112,6 @@ public class ArreCliente {
 			BufferedReader br;
 			String linea;
 			String[] datos;
-
-			ClaseCliente cliente;
 			br = new BufferedReader(new FileReader("clientes.txt"));
 			while ((linea = br.readLine()) != null) {
 				datos = linea.split(";");
@@ -124,14 +121,13 @@ public class ArreCliente {
 				String apepaternos = datos[2];
 				String apematernos = datos[3];
 				String dirreccion = datos[4];
-				int estadoCivil = Integer.parseInt(datos[5]);
-				Date fechaNacimiento = fechaComoDate(datos[6]);
-				Date fechaAfilacion = fechaComoDate(datos[7]);
+				Date fechaNacimiento = fechaComoDate(datos[5]);
+				Date fechaAfilacion = fechaComoDate(datos[6]);
+				int estadoCivil = Integer.parseInt(datos[7]);
 				String telefono = datos[8];
 				String dni = datos[9];
 				int tipoCliente = Integer.parseInt(datos[10]);
-				cliente = new ClaseCliente(idCliente, nombres, apepaternos, apematernos, dirreccion, fechaNacimiento, fechaAfilacion, estadoCivil, telefono, dni, tipoCliente);
-				adicionar(cliente, false);
+				adicionar(new ClaseCliente(idCliente,nombres,apepaternos,apematernos,dirreccion,fechaNacimiento,fechaAfilacion,estadoCivil,telefono,dni,tipoCliente));
 			}
 			br.close();
 			
