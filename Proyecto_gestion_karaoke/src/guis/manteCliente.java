@@ -10,7 +10,6 @@ import javax.swing.table.TableColumnModel;
 
 import arreglos.ArreCliente;
 import clases.ClaseCliente;
-import clases.ClaseUsuarios;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -315,7 +314,6 @@ public class manteCliente extends JDialog implements ActionListener {
 		txtIdCliente.setText(arc.generarCodigoCorrelativo(arc.obtener(arc.tamanio()-1).getIdCliente()));
 		habilitarEntradas(true);
 		habilitarBotones(false);
-
 	}
 
 	private void actionPerformedbtnOpciones(ActionEvent e) {
@@ -358,8 +356,38 @@ public class manteCliente extends JDialog implements ActionListener {
 	}
 
 	void consultarCliente() {
-		// TODO Auto-generated method stub
-		
+		try {
+			String codigo = leerCodigo();
+			ClaseCliente x = arc.buscarPorID(codigo);
+			if (x != null) {
+				txtNombres.setText(x.getNombres());
+				txtApPaterno.setText(x.getApellidoPaterno());
+				txtApMaterno.setText(x.getApellidoMaterno());
+				txtDni.setText(x.getDni());
+				txtDireccion.setText(x.getDireccion());
+				cmbEstadoCivil.setSelectedIndex(x.getEstadoCivil());
+				txtDireccion.setText(x.getDireccion());
+				txtFecNacimiento.setText(leerFecNacimiento());
+				txtFecAfiliacion.setText(leerFecAfiliacion());
+				txtTelefono.setText(x.getTelefono());
+				txtDni.setText(x.getDni());
+				cmbTipoCliente.setSelectedIndex(x.getTipoDelCliente());
+				if (tipoOperacion == MODIFICAR) {
+					habilitarEntradas(true);
+					txtIdCliente.setEditable(false);
+				}
+				if (tipoOperacion == ELIMINAR) {
+					txtIdCliente.setEditable(false);
+					btnBuscar.setEnabled(false);
+					btnAceptar.setEnabled(true);
+				}
+			}
+			else
+				error("El codigo " + codigo + " no existe", txtIdCliente);
+		}
+		catch (Exception e) {
+			error("Ingrese CoDIGO correcto", txtIdCliente);
+		}
 	}
 
 	void adicionarCliente() {
@@ -435,8 +463,8 @@ public class manteCliente extends JDialog implements ActionListener {
 
 	void habilitarBotones(boolean sino) {
 		if (tipoOperacion == ADICIONAR){
-			btnAceptar.setEnabled(!sino);
-			btnBuscar.setEnabled(false);
+			btnAceptar.setEnabled(sino);
+			btnBuscar.setEnabled(!sino);
 		}
 		else {
 			btnBuscar.setEnabled(!sino);
@@ -466,18 +494,19 @@ public class manteCliente extends JDialog implements ActionListener {
 	String leerDni() {
 		return (txtDni.getText().trim());
 	}
-	String LeerDireccion() {
+	String leerDireccion() {
 		return (txtDireccion.getText().trim());
 	}
-	String LeerFecNacimiento() {
+	String leerFecNacimiento() {
 		return (txtFecNacimiento.getText().trim());
 	}
-	String LeerFecAfiliacion() {
+	String leerFecAfiliacion() {
 		return (txtFecAfiliacion.getText().trim());
 	}
-	String LeerTelefono() {
+	String leerTelefono() {
 		return (txtTelefono.getText().trim());
 	}
+
 	
 	
 	

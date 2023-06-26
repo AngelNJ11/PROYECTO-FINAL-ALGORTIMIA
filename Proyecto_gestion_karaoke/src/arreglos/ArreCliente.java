@@ -1,6 +1,13 @@
 package arreglos;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import clases.ClaseCliente;
 
@@ -13,13 +20,13 @@ public class ArreCliente {
 
 	public ArreCliente(){
 		cliente = new ArrayList<ClaseCliente>();
-		adicionar(new ClaseCliente("CLI001", "Arue", "Palma", "Casavarde", "Atahualpa 270", null, null, "S", "945628356", "72081959", 4));
-		adicionar(new ClaseCliente("CLI002", "Angel", "Navarro", "", "Sol de la molina 415", null, null, "C", "945634456", "71131959", 3));
-		adicionar(new ClaseCliente("CLI003", "Alejo", "", "", "Barranco", null, null, "D", "945628356", "72081959", 4));
+		cargarCliente();
 	}
 	
-	public void adicionar(ClaseCliente x){
-		cliente.add(x);
+	public void adicionar(ClaseCliente  nuevoCliente, boolean graba){
+		cliente.add(nuevoCliente);
+		if(graba)
+			grabarCliente();
 	}
 	
 	public int tamanio(){
@@ -32,9 +39,14 @@ public class ArreCliente {
 	
 	public void eliminar(ClaseCliente x){
 		cliente.remove(x);
+		grabarCliente();
 	}
 	
-	public ClaseCliente buscaID(String codigo){
+	public void actualizarArchivo() {
+		grabarCliente();
+	}
+	
+	public ClaseCliente buscarPorID(String codigo){
 		for(ClaseCliente cliente : cliente){
 			if(cliente.getIdCliente().equals(codigo)){
 				return cliente;
@@ -55,4 +67,90 @@ public class ArreCliente {
 		    return nuevoCodigo;
 		}
 	}
+	
+	
+	public void grabarCliente() {
+		try {
+			PrintWriter pw;
+			String linea;
+			ClaseCliente cliente;
+			pw = new PrintWriter(new FileWriter("clientes.txt"));
+			for (int i = 0; i < tamanio(); i++) {
+				cliente = obtener(i);
+				String dato1 = cliente.getIdCliente() + ";";
+				String dato2 = cliente.getNombres() + ";";
+				String dato3 = cliente.getApellidoPaterno() + ";";
+				String dato4 = cliente.getApellidoMaterno() + ";";
+				String dato5 = cliente.getDireccion() + ";";
+				String dato6 = cliente.getEstadoCivil() + ";";
+				String dato7 = cliente.fechaNacimiento() + ";";
+				String dato8 = cliente.fechaAfilacion() + ";";
+				String dato9 = cliente.getTelefono() + ";";
+				String dato10 = cliente.getDni() + ";";
+				String dato11 = cliente.getTipoDelCliente() + ";";
+
+				linea = dato1 + 
+						dato2 + 
+						dato3 + 
+						dato4 + 
+						dato5 + 
+						dato6 + 
+						dato7 + 
+						dato8 +
+						dato9 + 
+						dato10 + 
+						dato11;
+				pw.println(linea);
+			}
+			pw.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	public void cargarCliente() {
+		try {
+			BufferedReader br;
+			String linea;
+			String[] datos;
+
+			ClaseCliente cliente;
+			br = new BufferedReader(new FileReader("clientes.txt"));
+			while ((linea = br.readLine()) != null) {
+				datos = linea.split(";");
+				
+				String idCliente = datos[0];
+				String nombres = datos[1];
+				String apepaternos = datos[2];
+				String apematernos = datos[3];
+				String dirreccion = datos[4];
+				int estadoCivil = Integer.parseInt(datos[5]);
+				Date fechaNacimiento = fechaComoDate(datos[6]);
+				Date fechaAfilacion = fechaComoDate(datos[7]);
+				String telefono = datos[8];
+				String dni = datos[9];
+				int tipoCliente = Integer.parseInt(datos[10]);
+				cliente = new ClaseCliente(idCliente, nombres, apepaternos, apematernos, dirreccion, fechaNacimiento, fechaAfilacion, estadoCivil, telefono, dni, tipoCliente);
+				adicionar(cliente, false);
+			}
+			br.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	public Date fechaComoDate(String fechaText) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date fechaComoDate = null;
+		try {
+			fechaComoDate = formatter.parse(fechaText);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return fechaComoDate;
+	}
+	
+	
 }
