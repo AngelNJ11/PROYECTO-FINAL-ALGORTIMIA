@@ -13,7 +13,8 @@ public class ClaseArtista{
 	private ClaseGenero genero; 
 	private boolean estado;
 	
-	public ClaseArtista(String idArtista, String nombreArtistico, Date fechaRegistro, ClaseGenero genero, boolean estado) {
+	public ClaseArtista(String idArtista, String nombreArtistico, Date fechaRegistro, ClaseGenero genero,
+			boolean estado) {
 		this.idArtista = idArtista;
 		this.nombreArtistico = nombreArtistico;
 		this.fechaRegistro = fechaRegistro;
@@ -62,9 +63,6 @@ public class ClaseArtista{
 		String fechaComoCadena = sdf.format(fechaRegistro);
 		return fechaComoCadena;
 	}
-
-
-	
 	
 
 }

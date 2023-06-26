@@ -223,7 +223,7 @@ public class manteArtista extends JDialog implements ActionListener {
 	}
 	
 	public void actionPerformedbtnBuscar(ActionEvent e) {
-		consultarArtista1();
+		consultarPiqueo();
 
 	}
 	
@@ -247,9 +247,9 @@ public class manteArtista extends JDialog implements ActionListener {
 		
 	}
 
-	void adicionarArtista() {
+	void adicionarPiqueo() {
 		
-		/*String idArtista = area.generarCodigoCorrelativo(leerCodigo());
+		String idArtista = area.generarCodigoCorrelativo(leerCodigo());
 		String nombre = leerNombre();
 
 		
@@ -260,11 +260,11 @@ public class manteArtista extends JDialog implements ActionListener {
 		Artista nuevoArtista = new Artista(idArtista, nombre, genero, fechaRegistro, estado);
 
 		arrArtistas.adicionar(nuevoArtista, true);
-	*/
+	
 
 	}
 	
-	/*void modificarArtista() {
+	void modificarPiqueo() {
 		try {
 			ClaseArtista x = area.buscaID(leerCodigo());
 			if(x != null){
@@ -289,9 +289,9 @@ public class manteArtista extends JDialog implements ActionListener {
 		}catch (Exception e) {
 			error("pipipipip", txtIdArtista);
 			}
-	}*/
+	}
 	
-	void consultarArtista1(){
+	void consultarPiqueo(){
 		try {
 		    String codigo = leerCodigo();
 		    ClaseArtista x = area.buscaID(codigo);
@@ -319,7 +319,7 @@ public class manteArtista extends JDialog implements ActionListener {
 		}
 	}
 	
-	void eLiminarArtista(){
+	void eLiminarPiqueo(){
 		try {
 			String codigo = leerCodigo();
 			ClaseArtista x = area.buscaID(codigo);
@@ -361,7 +361,7 @@ public class manteArtista extends JDialog implements ActionListener {
 	void limpieza(){
 		txtIdArtista.setText("");
 		txtNomArtista.setText("");
-		cboGenero.getSelectedIndex();
+		txtdGenero.setText("");
 		txtFechaRegisto.requestFocus();
 	}
 	
@@ -369,7 +369,7 @@ public class manteArtista extends JDialog implements ActionListener {
 	void habilitarEntradas(boolean sino) {
 		if (tipoOperacion == ADICIONAR){
 			txtNomArtista.setEditable(sino);
-			cboGenero.getSelectedIndex(sino);
+			txtdGenero.setEditable(sino);
 			txtFechaRegisto.setEnabled(sino);
 			chcHabilitado.setEnabled(sino);
 		}
