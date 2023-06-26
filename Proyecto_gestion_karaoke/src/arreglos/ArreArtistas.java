@@ -1,8 +1,16 @@
 package arreglos;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import clases.ClaseArtista;
+import clases.ClasePiqueo;
 
 
 public class ArreArtistas {
@@ -13,10 +21,7 @@ public class ArreArtistas {
 	public ArreArtistas() {
 		
 		artista = new ArrayList <ClaseArtista> ();
-		adicionar(new ClaseArtista("ART001", "Camilo", null, null, true));
-		adicionar(new ClaseArtista("ART002", "Bacilos", null, null, true));
-		adicionar(new ClaseArtista("ART003", "Vicentico", null, null, true));
-		adicionar(new ClaseArtista("ART004", "Mana", null, null, true));
+
 
 	}
 	
@@ -55,5 +60,63 @@ public class ArreArtistas {
 		    String nuevoCodigo = "BEB" + String.format("%03d", correlativo); 
 		    return nuevoCodigo;
 		}
+	}
+	
+	/*private void grabarArtista(){
+		try{
+			PrintWriter pw;
+			String linea;
+			ClaseArtista x;
+			pw = new PrintWriter(new FileWriter("artista.txt"));
+			for(int i=0; i<tamanio(); i++) {
+				x = obtener(i);
+				linea = x.getIdPiqueo() + ";" +
+						x.getNombre() + ";" +
+						x.getTipoPiqueo() + ";" +
+						x.getPrecio() + ";" +
+						x.isEstado();
+				pw.println(linea);
+			}
+			pw.close();
+		}
+		catch (Exception e) {
+			
+		}
+	}*/
+	/*private void cargarPiqueos() {
+		try {
+			BufferedReader br;
+			String linea;
+			String[] s;
+			String idPiqueo, nombre;
+			int tipoPiqueo;
+			double precio;
+			boolean estado;
+			br = new BufferedReader(new FileReader("piqueos.txt"));
+			while ((linea=br.readLine()) != null) {
+				s = linea.split(";");
+				idPiqueo =(s[0].trim());
+				nombre =(s[1].trim());
+				tipoPiqueo=Integer.parseInt(s[2].trim());
+				precio=Double.parseDouble(s[3].trim());
+				estado=Boolean.parseBoolean(s[4].trim());
+				adicionar(new ClasePiqueo(idPiqueo, nombre, tipoPiqueo, precio, estado));
+			}
+			br.close();	
+		}
+		catch (Exception e) {
+		}
+	}*/
+	
+	
+	public Date fechaComoDate(String fechaText) {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
+		Date fechaComoDate = null;
+		try {
+			fechaComoDate = formatter.parse(fechaText);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return fechaComoDate;
 	}
 }

@@ -272,6 +272,7 @@ public class manteUsuario extends JFrame implements ActionListener {
 			case ELIMINAR:
 				eliminarPersona();
 		}
+		are.actualizarArchivo();
 	}
 	public void actionPerformedbtnOpciones(ActionEvent e) {
 	

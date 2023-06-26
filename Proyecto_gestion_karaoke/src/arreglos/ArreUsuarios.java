@@ -1,5 +1,9 @@
 package arreglos;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import clases.ClaseUsuarios;
@@ -10,28 +14,26 @@ public class ArreUsuarios {
 
 	public ArreUsuarios(){
 		usuarios = new ArrayList<ClaseUsuarios>();
-		adicionar(new ClaseUsuarios("USU001", "Arue", "Palma", "Casavarde", 0, "aruepalma", "arue123", 1));
-		adicionar(new ClaseUsuarios("USU002", "Gustavo", "Osorio", "Hernandez", 1, "gosoher", "1234", 0));
-		adicionar(new ClaseUsuarios("USU003", "Jennifer", "Vilcapuma", "Chevarria", 2, "jvilche", "1234", 1));
-		adicionar(new ClaseUsuarios("USU004", "Rosa", "Ugarte", "Villafuerte", 2, "rugavil", "1234", 0));
-		adicionar(new ClaseUsuarios("USU005", "Felipe", "Hurtado", "Solis", 1, "fhursol", "1234", 1));
-		adicionar(new ClaseUsuarios("USU006", "jaun", "mendes", "Lopez", 2, "juan12", "12345",0));
+		cargarUsuario();
+		
 	}
 	
 	public void adicionar(ClaseUsuarios x){
 		usuarios.add(x);
+		grabarUsuarios();
 	}
 	
 	public int tamanio(){
 		return usuarios.size();
 	}
 	
-	public ClaseUsuarios obtener(int posicion){
-		return usuarios.get(posicion);
+	public ClaseUsuarios obtener(int i){
+		return usuarios.get(i);
 	}
 	
 	public void eliminar(ClaseUsuarios x){
 		usuarios.remove(x);
+		grabarUsuarios();
 	}
 	
 	public ClaseUsuarios buscacod(String codigo){
@@ -58,9 +60,6 @@ public class ArreUsuarios {
 	}
 
 	
-	
-
-	
 	public String generarCodigoCorrelativo(String codigoAnterior) {
 		if (tamanio() == 0) {
 			return "USU001";
@@ -69,6 +68,63 @@ public class ArreUsuarios {
 		    int correlativo = Integer.parseInt(codigo) + 1; 
 		    String nuevoCodigo = "USU" + String.format("%03d", correlativo); 
 		    return nuevoCodigo;
+		}
+	}
+	public void actualizarArchivo() {
+		grabarUsuarios();
+	}
+	
+	private void grabarUsuarios(){
+		try{
+			PrintWriter pw;
+			String linea;
+			ClaseUsuarios x;
+			pw = new PrintWriter(new FileWriter("Usuarios.txt"));
+			for(int i=0; i<tamanio(); i++) {
+				x = obtener(i);
+				linea = x.getIdUsuario() + ";" +
+						x.getNombres() + ";" +
+						x.getApellidoPaterno() + ";" +
+						x.getApellidoMaternoo() + ";" +
+						x.getTipoEmpleado() + ";" +
+						x.getLogin() + ";" +
+						x.getPassword() + ";" +
+						x.getTurno();
+				pw.println(linea);
+			}
+			pw.close();
+		}
+		catch (Exception e) {
+			
+		}
+	}
+	
+	
+	
+	private void cargarUsuario(){
+		try {
+			BufferedReader br;
+			String linea;
+			String[] s;
+			String idUsuario, nombre, appa, apma, login, password;
+			int tipoemp;
+			int turno;
+			br = new BufferedReader(new FileReader("Usuarios.txt"));
+			while ((linea=br.readLine()) != null) {
+				s = linea.split(";");
+				idUsuario =(s[0].trim());
+				nombre =(s[1].trim());
+				appa =(s[2].trim());
+				apma =(s[3].trim());
+				tipoemp=Integer.parseInt(s[4].trim());
+				login =(s[5].trim());
+				password =(s[6].trim());
+				turno = Integer.parseInt(s[7].trim());
+				adicionar(new ClaseUsuarios(idUsuario, nombre, appa, apma, tipoemp, login, password, turno));
+			}
+			br.close();	
+		}
+		catch (Exception e) {
 		}
 	}
 
