@@ -1,5 +1,6 @@
 package clases;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ClaseCliente {
@@ -12,8 +13,8 @@ public class ClaseCliente {
 	private  String direccion;
 	private  Date fechaNacimiento;
 	private  Date fechaAfilacion;
-	//S = soltero  C = Casado  V = Viudo D = Divorciado  N = No especificada 
-	private  String estadoCivil;
+	//0 = soltero  1 = Casado  2 = Viudo 3 = Divorciado  4 = No especificada 
+	private  int estadoCivil;
 	private  String telefono;
 	private  String dni;
 	//0 = Estandar  1 = Bronce  2 = Plata 3 = Oro  4 = Diamante
@@ -31,7 +32,7 @@ public class ClaseCliente {
 	
 
 	public ClaseCliente(String idCliente, String nombres, String apellidoPaterno, String apellidoMaterno,
-			String direccion, Date fechaNacimiento, Date fechaAfilacion, String estadoCivil, String telefono,
+			String direccion, Date fechaNacimiento, Date fechaAfilacion, int estadoCivil, String telefono,
 			String dni, int tipoDelCliente) {
 		this.idCliente = idCliente;
 		this.nombres = nombres;
@@ -139,13 +140,13 @@ public class ClaseCliente {
 
 
 
-	public String getEstadoCivil() {
+	public int getEstadoCivil() {
 		return estadoCivil;
 	}
 
 
 
-	public void setEstadoCivil(String estadoCivil) {
+	public void setEstadoCivil(int estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
 
@@ -192,18 +193,20 @@ public class ClaseCliente {
 	}
 	
 	
-	public String estadoCivil(String estado){
+	public String estadoCivil(int estado){
 	    switch (estado) {
-	        case "S":
+	        case 0:
 	        	return "Soltero";
-	        case "C":
+	        case 1:
 	            return  "Casado";
-	        case "V":
+	        case 2:
 	            return "Viudo";
-	        case "D":
+	        case 3:
 	            return "Divorciodo";
-	        default:
+	        case 4:
 	        	return "No especifica";
+	        default:
+	        	return null;
 	    }
 	}
 	public String tipoDeCliente(int tipo){
@@ -223,7 +226,16 @@ public class ClaseCliente {
 	        	return null;
 	    }
 	}
-	
+	public String fechaNacimiento() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String fechaComoCadena = sdf.format(fechaNacimiento);
+		return fechaComoCadena;
+	}
+	public String fechaAfilacion() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String fechaComoCadena = sdf.format(fechaAfilacion);
+		return fechaComoCadena;
+	}
 	
 }
 

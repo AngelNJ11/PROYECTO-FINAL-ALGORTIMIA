@@ -243,7 +243,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		cmbTipoPiqueo.setEnabled(false);
 		chkEstado.setEnabled(false);
 		btnBuscar.setEnabled(false);
-		btnAceptar.setEnabled(true);
+		btnAceptar.setEnabled(false);
 		limpieza();
 	}
 	protected void actionPerformedBtnOpciones(ActionEvent e) {
@@ -290,22 +290,20 @@ public class mantePiqueo extends JDialog implements ActionListener {
 		String nombre =  leerNombre();
 		if(nombre.length() > 0){
 				if(piq.buscaID(codigo) == null)
-									try{
-										int tipo = leerTipo();
-										double precio = leerPrecio();
-										boolean estado = leerEstado();
-										ClasePiqueo piqw = new ClasePiqueo(codigo, nombre, tipo, precio, estado);
-										piq.adicionar(piqw);;
-										listar();
-										limpieza();
-									}
-									catch (Exception e) {
-										mensaje("valo?");
-									}
-								}else
-									error("Nombre no ingresado", txtNombre);
-	
-
+					try{
+						int tipo = leerTipo();
+						double precio = leerPrecio();
+						boolean estado = leerEstado();
+						ClasePiqueo piqw = new ClasePiqueo(codigo, nombre, tipo, precio, estado);
+						piq.adicionar((piqw),false);
+						listar();
+						limpieza();
+						}
+					catch (Exception e) {
+						mensaje("valo?");
+					}
+		}else
+			error("Nombre no ingresado", txtNombre);
 	}
 	
 	void modificarPiqueo() {
@@ -332,7 +330,7 @@ public class mantePiqueo extends JDialog implements ActionListener {
 			
 		}catch (Exception e) {
 			error("pipipipip", txtIdPiqueo);
-			}
+		}
 	}
 	
 	void consultarPiqueo(){

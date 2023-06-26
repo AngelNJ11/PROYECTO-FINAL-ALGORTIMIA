@@ -18,9 +18,10 @@ public class ArrePiqueos {
 		cargarPiqueos();
 	}
 	
-	public void adicionar(ClasePiqueo x) {
-		piqueo.add(x);
-		grabarPiqueos();
+	public void adicionar(ClasePiqueo nuevoCliente, boolean graba){
+		piqueo.add(nuevoCliente);
+		if(graba)
+			grabarPiqueos();
 	}
 	
 	public int tamanio() {
@@ -35,6 +36,7 @@ public class ArrePiqueos {
 		piqueo.remove(x);
 		grabarPiqueos();
 	}
+	
 	
 	public ClasePiqueo buscaID(String codigo){
 		for(ClasePiqueo piqueo : piqueo){
@@ -64,15 +66,20 @@ public class ArrePiqueos {
 		try{
 			PrintWriter pw;
 			String linea;
-			ClasePiqueo x;
+			ClasePiqueo piqueo;
 			pw = new PrintWriter(new FileWriter("piqueos.txt"));
 			for(int i=0; i<tamanio(); i++) {
-				x = obtener(i);
-				linea = x.getIdPiqueo() + ";" +
-						x.getNombre() + ";" +
-						x.getTipoPiqueo() + ";" +
-						x.getPrecio() + ";" +
-						x.isEstado();
+				piqueo = obtener(i);
+				String dato1 = piqueo.getIdPiqueo() + ";";
+				String dato2 = piqueo.getNombre() + ";";
+				String dato3 = piqueo.getTipoPiqueo() + ";";
+				String dato4 = piqueo.getPrecio() + ";";
+				String dato5 = piqueo.isEstado() + ";";
+				linea = dato1 + 
+						dato2 + 
+						dato3 + 
+						dato4 + 
+						dato5;
 				pw.println(linea);
 			}
 			pw.close();
@@ -85,20 +92,24 @@ public class ArrePiqueos {
 		try {
 			BufferedReader br;
 			String linea;
-			String[] s;
+			String[] datos;
+			ClasePiqueo piqueo;
+			
 			String idPiqueo, nombre;
 			int tipoPiqueo;
 			double precio;
 			boolean estado;
 			br = new BufferedReader(new FileReader("piqueos.txt"));
-			while ((linea=br.readLine()) != null) {
-				s = linea.split(";");
-				idPiqueo =(s[0].trim());
-				nombre =(s[1].trim());
-				tipoPiqueo=Integer.parseInt(s[2].trim());
-				precio=Double.parseDouble(s[3].trim());
-				estado=Boolean.parseBoolean(s[4].trim());
-				adicionar(new ClasePiqueo(idPiqueo, nombre, tipoPiqueo, precio, estado));
+			while ((linea = br.readLine()) != null) {
+				datos = linea.split(";");
+				
+				idPiqueo =(datos[0].trim());
+				nombre =(datos[1].trim());
+				tipoPiqueo=Integer.parseInt(datos[2].trim());
+				precio=Double.parseDouble(datos[3].trim());
+				estado=false;
+				piqueo = new ClasePiqueo(idPiqueo, nombre, tipoPiqueo, precio, estado);
+				adicionar(piqueo, false);
 			}
 			br.close();	
 		}

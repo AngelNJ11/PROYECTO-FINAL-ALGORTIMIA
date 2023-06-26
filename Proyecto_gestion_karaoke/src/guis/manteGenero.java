@@ -224,9 +224,7 @@ public class manteGenero extends JDialog implements ActionListener {
 	public void actionPerformedbtnNuevo(ActionEvent e) {
 		tipoOperacion = ADICIONAR;
 		txtIdGenero.setText("" + arg.generarCodigoCorrelativo(arg.obtener(arg.tamanio()-1).getIdGenero()));
-		habilitarEntradas(true);
-		habilitarBotones(false);
-		limpieza();
+		
 	}
 	public void actionPerformedbtnConsultar(ActionEvent e) {
 		tipoOperacion = CONSULTAR;
@@ -305,7 +303,7 @@ public class manteGenero extends JDialog implements ActionListener {
 				txtEpoca.setText(x.getEpoca()+"");
 				cmbEstado.setSelectedIndex(0);
 				if (tipoOperacion == MODIFICAR) {
-					habilitarEntradaModificar(true);
+					habilitarEntradas(true);
 					txtIdGenero.setEditable(false);
 					btnBuscar.setEnabled(false);
 					btnAceptar.setEnabled(true);
@@ -382,20 +380,13 @@ public class manteGenero extends JDialog implements ActionListener {
 	
 	
 	void habilitarEntradas(boolean sino) {
-		if (tipoOperacion == ADICIONAR){
+		if ((tipoOperacion == ADICIONAR) || (tipoOperacion == MODIFICAR)){
 			txtDescripcion.setEditable(sino);
 			txtEpoca.setEditable(sino);
 			cmbEstado.setEnabled(sino);
 		}
 	}
 	
-	void habilitarEntradaModificar(boolean sino){
-		if (tipoOperacion == MODIFICAR){
-			txtDescripcion.setEditable(sino);
-			txtEpoca.setEditable(sino);
-			cmbEstado.setEnabled(sino);
-		}
-	}
 	
 	void habilitarBotones(boolean sino) {
 		if (tipoOperacion == ADICIONAR){
