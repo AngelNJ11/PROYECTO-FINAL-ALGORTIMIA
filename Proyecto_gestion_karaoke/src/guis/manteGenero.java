@@ -19,7 +19,6 @@ import arreglos.ArreGeneros;
 import clases.ClaseGenero;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 
 public class manteGenero extends JDialog implements ActionListener {
 
@@ -41,6 +40,10 @@ public class manteGenero extends JDialog implements ActionListener {
 	private JButton btnNuevo;
 	private JButton btnAceptar;
 	private JButton btnConsultar;
+	private JCheckBox chkEstado;
+	private JScrollPane scrollPane;
+	private JTable tbtResultado;
+	private JComboBox<Object> cboEpoca;
 	
 	private int tipoOperacion;
 	
@@ -151,10 +154,7 @@ public class manteGenero extends JDialog implements ActionListener {
 		tbtResultado = new JTable();
 		scrollPane.setViewportView(tbtResultado);
 		
-		cboEpoca = new JComboBox<String>();
-		cboEpoca.setEnabled(false);
-		cboEpoca.setModel(new DefaultComboBoxModel<String>
-		(new String[] {"1970", "1980", "1990", "2000", "2010", "2020"}));
+		cboEpoca = new JComboBox<Object>();
 		cboEpoca.setBounds(120, 57, 120, 22);
 		contentPanel.add(cboEpoca);	
 		
@@ -166,15 +166,13 @@ public class manteGenero extends JDialog implements ActionListener {
 		tbtResultado.setModel(modelo);
 		modelo.setRowCount(0);
 		ajustarAnchoColumnas();
+		cargarEpocas();
 		listar();
 	}
 	
 	
 	ArreGeneros arg =  new ArreGeneros();
-	private JCheckBox chkEstado;
-	private JScrollPane scrollPane;
-	private JTable tbtResultado;
-	private JComboBox<String> cboEpoca;
+	
 
 	
 	
@@ -379,15 +377,11 @@ public class manteGenero extends JDialog implements ActionListener {
 	
 	
 	void listar() {
-		ClaseGenero x;
 		modelo.setRowCount(0);
-		for (int i=0; i<arg.tamanio(); i++) {
-			x = arg.obtener(i);
-			Object[] fila = { 
-							x.getIdGenero(),
-							x.getDescripcion(),
-							epocagen(x.getEpoca()),
-					        x.estadoTipo()};
+		ClaseGenero genero;
+		for (int i = 0; i < arg.tamanio(); i++) {
+			genero = arg.obtener(i);
+			Object[] fila = { genero.getIdGenero(), genero.getDescripcion(), genero.getEpoca(), genero.estadoTipo() };
 			modelo.addRow(fila);
 		}
 	}
@@ -438,13 +432,10 @@ public class manteGenero extends JDialog implements ActionListener {
 	String leerDescripcion() {
 		return txtDescripcion.getText().trim();
 	}
-	int leerEpoca(){
-		return cboEpoca.getSelectedIndex();
+	private int leerEpoca() {
+		return Integer.parseInt(cboEpoca.getSelectedItem().toString());
 	}
-	String epocagen(int i) {
-		return cboEpoca.getItemAt(i);
-	}
-	
+
 	private boolean leerEstado() {
 		return chkEstado.isSelected();
 	}
@@ -462,5 +453,14 @@ public class manteGenero extends JDialog implements ActionListener {
 	
 	int confirmar(String s) {
 		return JOptionPane.showConfirmDialog(this, s, "Alerta", 0, 1, null);
+	}
+	
+	void cargarEpocas() {
+		int epoca = 1970;
+		cboEpoca.addItem("[Seleccione]");
+		while (epoca <= 2020) {
+			cboEpoca.addItem(epoca);
+			epoca += 10;
+		}
 	}
 }

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="javax.swing.JDialog"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
 <fullyQualifiedTypeName name="arreglos.ArreCanciones"/>
 <fullyQualifiedTypeName name="arreglos.ArreBebidas"/>
@@ -10,4 +9,9 @@
 <fullyQualifiedTypeName name="javax.swing.DefaultComboBoxModel"/>
 <fullyQualifiedTypeName name="arreglos.ArreUsuarios"/>
 <fullyQualifiedTypeName name="clases.ClaseUsuarios"/>
+<fullyQualifiedTypeName name="arreglos.ArreGeneros"/>
+<fullyQualifiedTypeName name="arreglos.ArreArtistas"/>
+<fullyQualifiedTypeName name="clases.ClaseArtista"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="clases.ClaseGenero"/>
 </qualifiedTypeNameHistroy>

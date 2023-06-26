@@ -63,7 +63,7 @@ public class manteCancion extends JDialog implements ActionListener {
 	 */
 	public manteCancion() {
 		setTitle("Cancion");
-		setBounds(100, 100, 910, 442);
+		setBounds(100, 100, 920, 442);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

@@ -13,15 +13,16 @@ public class ClaseArtista{
 	private ClaseGenero genero; 
 	private boolean estado;
 	
-	public ClaseArtista(String idArtista, String nombreArtistico, Date fechaRegistro, ClaseGenero genero, boolean estado) {
+	public ClaseArtista(String idArtista, String nombreArtistico, java.util.Date fecha, ClaseGenero genero, boolean estado) {
 		this.idArtista = idArtista;
 		this.nombreArtistico = nombreArtistico;
-		this.fechaRegistro = fechaRegistro;
+		this.fechaRegistro = (Date) fecha;
 		this.genero = genero;
 		this.estado = estado;
 	}
-	
-	
+
+
+
 	public String getIdArtista() {
 		return idArtista;
 	}

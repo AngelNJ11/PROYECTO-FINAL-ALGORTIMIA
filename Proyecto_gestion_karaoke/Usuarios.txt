@@ -1,0 +1,12 @@
+<<<<<<< HEAD
+USU002;asdasd;asdasd;asdasda;0;asdasd;asdasda;0
+USU003;sdasd;asdasd;ada;0;asdas;dad;0
+USU004;asdasd;asdasd;adadad;0;add;adad;0
+USU005;fsdfs;dfsdf;sdfsdfsf;0;dsdf;sfsf;0
+USU006;dfsfsfdsf;sdfs;dfsdfs;0;fsdfs;fsfs;0
+USU007;sdfsdfsdfs;dfsddfsf;sfsfdsfsdfsdfsdfs;0;dfsdfsd;fsdfsdfs;0
+USU008;sfadas;asdasd;asd;0;dsasd;asdasd;0
+=======
+USU001;Arue;Palma;Casavarde;0;aruepalma;arue123;1
+USU002;Angel;Navarro; ;0;angel;angel123;0
+>>>>>>> e7ccbb8064ec2fb36f28b3cc4eadec23b2914c7f

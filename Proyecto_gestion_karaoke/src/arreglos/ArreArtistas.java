@@ -43,6 +43,9 @@ public class ArreArtistas {
 		artista.remove(x);
 		grabarArtista();
 	}
+	public void actualizarArtista() {
+		grabarArtista();
+	}
 	
 	public ClaseArtista buscaID(String codigo){
 		for(ClaseArtista artista : artista){
