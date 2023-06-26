@@ -462,7 +462,7 @@ public class manteArtista extends JDialog implements ActionListener {
 		return txtNomArtista.getText().trim();
 	}
 	ClaseGenero leerGenero() {
-		String item = area.get;
+		String item = cboGenero.getSelectedItem().toString();
 		String idGenero = item.split(":")[0];
 		ClaseGenero genero = arrGeneros.buscaID(idGenero);
 		return genero;
