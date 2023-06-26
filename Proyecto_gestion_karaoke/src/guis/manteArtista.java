@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import arreglos.ArreArtistas;
+import arreglos.ArreGeneros;
 import clases.ClaseArtista;
 import clases.ClaseGenero;
 import clases.ClasePiqueo;
@@ -52,6 +53,7 @@ public class manteArtista extends JDialog implements ActionListener {
 	private JCheckBox chcHabilitado;
 	private DefaultTableModel modelo;
 	private JComboBox<String> cboGenero;
+	
 
 	
 	// Tipo de operaci�n a procesar: Adicionar, Consultar, Modificar o Eliminar
@@ -192,6 +194,8 @@ public class manteArtista extends JDialog implements ActionListener {
 	
 	
 		ArreArtistas area = new ArreArtistas();
+		ArreGeneros arrGeneros = new ArreGeneros();
+
 		
 	public void actionPerformed(ActionEvent e) {
 		
@@ -270,7 +274,7 @@ public class manteArtista extends JDialog implements ActionListener {
 			if(x != null){
 				try{
 					String nombre = leerNombre();
-					double precio = leerPrecio();
+					String genero = 
 					int tipo = leerTipo();
 					boolean estado = leerEstado();
 					x.setNombre(nombre);
@@ -458,9 +462,9 @@ public class manteArtista extends JDialog implements ActionListener {
 		return txtNomArtista.getText().trim();
 	}
 	ClaseGenero leerGenero() {
-		String item = cm.getSelectedItem().toString();
+		String item = area.get;
 		String idGenero = item.split(":")[0];
-		ClaseGenero genero = arrGeneros.buscarPorCodigo(idGenero);
+		ClaseGenero genero = arrGeneros.buscaID(idGenero);
 		return genero;
 	}
 	
