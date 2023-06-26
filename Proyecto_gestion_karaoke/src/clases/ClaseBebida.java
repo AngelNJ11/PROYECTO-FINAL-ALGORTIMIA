@@ -72,8 +72,8 @@ public class ClaseBebida {
 
 	
 
-	public String tipodeBebida(){
-		switch (tipoBebida) {
+	public String tipodeBebida(int tipo){
+		switch (tipo) {
 		case 0:
 			return "Cerveza";
 		case 1:
@@ -86,17 +86,15 @@ public class ClaseBebida {
 			return "Frutado";
 		case 5:
 			return "Combinaci�n preparada";
-		default:
+		case 6:
 			return "Agua embotellada";
+		default:
+			return null;
 		}
 	}
 	
-	public String estado(boolean estado){	
-		if (estado) {
-			return "Habilitado";	
-		}
-		else{
-			return "Inhabilitado";
-		}
+	public String estadoBebida() {
+		return estado ? "Habilitado" : "Inhabilitado";
+		
 	}
 }
