@@ -1,1 +1,0 @@
-BEB001;aa;1;CocaCola;1.99;true
