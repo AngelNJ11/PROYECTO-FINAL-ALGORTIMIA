@@ -261,7 +261,7 @@ public class manteArtista extends JDialog implements ActionListener {
 		ClaseGenero genero = leerGenero();
 		Date fechaRegistro = new Date();
 		boolean estado = leerEstado();
-		ClaseArtista nuevoArtista = new ClaseArtista(idArtista, nombre, genero, fechaRegistro, estado);
+		ClaseArtista nuevoArtista = new ClaseArtista(idArtista, nombre, fechaRegistro, genero, estado);
 
 		area.adicionar(nuevoArtista, true);
 	

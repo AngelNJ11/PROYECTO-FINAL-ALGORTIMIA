@@ -1,5 +1,9 @@
 package arreglos;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,110 +11,132 @@ import java.util.Date;
 
 import clases.ClaseArtista;
 import clases.ClaseGenero;
-import helpers.ManejoArchivos;
+
 
 public class ArreArtistas {
-	// Atributo privado
-	private ArrayList<ClaseArtista> artistaList;
-	private ManejoArchivos manejoArchivos;
-	private String nombreArchivo;
 
-	// Constructor
+	
+	private ArrayList <ClaseArtista> artista;
+
 	public ArreArtistas() {
-		artistaList = new ArrayList<ClaseArtista>();
-		manejoArchivos = new ManejoArchivos();
-		nombreArchivo = "artistas.txt";
-		cargarArtistas();
-	}
+		
+		artista = new ArrayList <ClaseArtista> ();
+		cargarArtista();
 
-	public void adicionar(ClaseArtista nuevoUsuario, boolean graba) {
-		artistaList.add(nuevoUsuario);
+	}
+	
+	public void adicionar(ClaseArtista x, boolean graba) {
+		artista.add(x);
 		if (graba)
 			grabarArtista();
 	}
 
 	public int tamanio() {
-		return artistaList.size();
+		return artista.size();
 	}
-
-	public ClaseArtista obtener(int posicion) {
-		return artistaList.get(posicion);
+	
+	public ClaseArtista obtener(int i) {
+		return artista.get(i);
 	}
-
-	public ClaseArtista buscarPorCodigo(String codigo) {
-		for (ClaseArtista artista : artistaList) {
-			if (artista.getIdArtista().equals(codigo)) {
+	
+	public void eliminar(ClaseArtista x){
+		artista.remove(x);
+		grabarArtista();
+	}
+	public void actualizarArtista() {
+		grabarArtista();
+	}
+	
+	public ClaseArtista buscaID(String codigo){
+		for(ClaseArtista artista : artista){
+			if(artista.getIdArtista().equals(codigo)){
 				return artista;
 			}
 		}
 		return null;
 	}
-
-	public String ultimoCodigo() {
-		int ultimoIndice = tamanio() - 1;
-		if (ultimoIndice < 0)
-			return "ART000";
-		ClaseArtista artista = obtener(ultimoIndice);
-		if (artista != null)
-			return artista.getIdArtista();
+	
+	public ClaseArtista buscarPorNombre(String nombre) {
+		for(ClaseArtista artista : artista){
+			if(artista.getIdArtista().equals(nombre)){
+				return artista;
+			}
+		}
 		return null;
 	}
+	
 
-	public void grabarArtista() {
-		String linea;
-		ArrayList<String> datos = new ArrayList<String>();
-		for (ClaseArtista artista : artistaList) {
-			String dato1 = artista.getIdArtista() + ";";
-			String dato2 = artista.getNombreArtistico() + ";";
-			String dato3 = artista.getGenero().getIdGenero() + ";";
-			String dato4 = artista.fechaComoCadena() + ";";
-			String dato5 = artista.isEstado() + ";";
-			linea = dato1 + dato2 + dato3 + dato4 + dato5;
-			datos.add(linea);
-		}
-
-		try {
-			manejoArchivos.grabarData(datos, nombreArchivo);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+	public String generarCodigoCorrelativo(String codigoAnterior) {
+		if (tamanio() == 0) {
+			return "BEB001";
+		}else {
+			String codigo = codigoAnterior.substring(3);
+		    int correlativo = Integer.parseInt(codigo) + 1; 
+		    String nuevoCodigo = "BEB" + String.format("%03d", correlativo); 
+		    return nuevoCodigo;
 		}
 	}
-
-	public void cargarArtistas() {
-		String[] datos;
-		ClaseArtista artista;
-		ArrayList<String> lineas;
-		ArreGeneros arrGeneros = new ArreGeneros();
-		try {
-			lineas = manejoArchivos.cargarData(nombreArchivo);
-			if (lineas != null)
-				for (String linea : lineas) {
-					datos = linea.split(";");
-					String idArtista = datos[0];
-					String nombreArtistico = datos[1];
-					String idGenero = datos[2];
-					ClaseGenero genero = arrGeneros.buscaID(idGenero);
-					Date fechaRegistro = fechaComoDate(datos[3]);
-					boolean estado = Boolean.parseBoolean(datos[4]);
-					artista = new ClaseArtista(idArtista, nombreArtistico, fechaRegistro, genero, estado);
-					adicionar(artista, false);
-				}
-		} catch (Exception e) {
-			// TODO: handle exception
+	
+	private void grabarArtista(){
+		try{
+			PrintWriter pw;
+			String linea;
+			ClaseArtista x;
+			pw = new PrintWriter(new FileWriter("artista.txt"));
+			for(int i=0; i<tamanio(); i++) {
+				x = obtener(i);
+				linea = x.getIdArtista() + ";" +
+						x.getNombreArtistico() + ";" +
+						x.getFechaRegistro() + ";" +
+						x.getGenero() + ";" +
+						x.isEstado();
+				pw.println(linea);
+			}
+			pw.close();
+		}
+		catch (Exception e) {
+			
 		}
 	}
-
-	public Date fechaComoDate(String fechaText) {
+	
+	private void cargarArtista() {
+		try {
+			BufferedReader br;
+			String linea;
+			String [] datos;
+			ClaseArtista artista;
+			ArreGeneros aregen =  new ArreGeneros();
+			br = new BufferedReader(new FileReader("piqueos.txt"));
+			while ((linea=br.readLine()) != null) {
+				datos = linea.split(";");
+				String idArtista =(datos[0].trim());
+				String nombre =(datos[1].trim());
+				Date fecha = fechaComoDate(datos[2].trim());
+				String idGenero = datos[3];
+				ClaseGenero genero = aregen.buscaID(idGenero);
+				boolean estado = Boolean.parseBoolean(datos[4]);
+				artista =  new ClaseArtista(idArtista, nombre,  (java.sql.Date) fecha, genero, estado);
+				adicionar(artista,false);
+			}
+			br.close();	
+		}
+		catch (Exception e) {
+			
+		}
+	}
+	
+	
+	
+	public Date fechaComoDate(String datos) {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss a");
 		Date fechaComoDate = null;
 		try {
-			fechaComoDate = formatter.parse(fechaText);
+			fechaComoDate = formatter.parse(datos);
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return fechaComoDate;
 	}
 
-}
 
+}
